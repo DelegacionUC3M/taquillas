@@ -1,0 +1,389 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
+@font-face {
+	font-family: 'icons';
+	src:url('fonts/icons.eot?-xuph9k');
+	src:url('fonts/icons.eot?#iefix-xuph9k') format('embedded-opentype'),
+		url('fonts/icons.woff?-xuph9k') format('woff'),
+		url('fonts/icons.ttf?-xuph9k') format('truetype'),
+		url('fonts/icons.svg?-xuph9k#icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	font-family: 'icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-print:before {
+	content: "\31";
+}
+.icon-debate:before {
+	content: "\64";
+}
+.icon-fill:before {
+	content: "\32";
+}
+.icon-agroup:before {
+	content: "\33";
+}
+.icon-map:before {
+	content: "\34";
+}
+.icon-clock:before {
+	content: "\35";
+}
+.icon-comment:before {
+	content: "\36";
+}
+.icon-user:before {
+	content: "\37";
+}
+.icon-signin:before {
+	content: "\38";
+}
+.icon-signout:before {
+	content: "\39";
+}
+.icon-back:before {
+	content: "\61";
+}
+.icon-facebook:before {
+	content: "\62";
+}
+.icon-twitter:before {
+	content: "\63";
+}
+
+@blue: #066394;
+@blue-light: #bad5e2;
+@grey: #2b2b2b;
+@grey-light: #e3e3e3;
+@grey-back: #e1e1e1;
+
+
+html {
+	font-family: 'Roboto', sans-serif;
+	background: #e1e1e1;
+	color: @grey;
+}
+
+a {
+	outline: none;
+	text-decoration: none;
+	color: @blue;
+	// border-bottom: 1px solid @blue;
+
+	&:active, &:visited {
+		color: @blue;
+	}
+}
+
+.wrapper {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.print {
+	display: none;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+	padding: 6px 8px;
+	border-radius: 5px;
+	background: #f6f6f6;
+	border: 1px solid #c4c4c4;
+	color: #555454;
+	transition: all 0.4s;
+	font-weight: 300;
+
+	&:hover, &:focus {
+		border: 1px solid #555454;
+	}
+}
+
+input, button, select, textarea {
+	outline: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+button, a.button {
+	display: block;
+	background: @blue;
+	color: #fff;
+	position: relative;
+	border-radius: 5px;
+	padding: 10px;
+	text-decoration: none;
+	border: none; 
+	border-bottom: 2px solid #004a6f;
+	transition: all 0.4s;
+	font-family: 'Roboto', sans-serif;
+	line-height: 1;
+	font-weight: 400;
+
+	&:active {
+		margin-top: 2px;
+		border-bottom: 0px;
+	}
+
+	&:before {
+		margin-right: 10px;
+	}
+
+}
+
+h1, h2, h3 {
+	font-weight: 300;
+}
+
+header {
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+	padding: 19px 0;
+
+	h1 {
+		font-size: 2.7em;
+		color: @blue;
+		margin: 0;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	img {
+		margin-left: 15px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	#user {
+		float: right;
+		font-size: 0.95em;
+		margin-top: 15px;
+
+		a {
+			padding: 8px 23px;
+			border-radius: 5px;
+			border: 1px solid @blue-light;
+			color: #006191;
+
+			&.logout {
+				border: none;
+			}
+		}
+	}
+}
+
+
+html, body {
+	height: 100%;
+}
+
+.main {
+	min-height: 500px;
+	min-height: 60vh;
+	min-height: ~"calc(100% - 93px - 194px)";
+
+	h2 {
+		font-size: 1.7em;
+		max-height: 38px;
+
+		a {
+			float: right;
+			font-size: 0.55em;
+			margin-left: 10px;
+		}
+	}
+
+	h3 {
+		text-align: center;
+		font-size: 1.6em;
+	}
+
+	p.info {
+		background: #fedeb2;
+		border: 1px solid #c4c4c4;
+		border-radius: 5px;
+		font-size: 0.8em;
+		padding: 10px 15px;
+
+		&.error {
+			background: #FEB2B2;
+			width: 90%;
+			margin: 10px auto;
+			font-weight: bold;
+		}
+
+		&.hide {
+			display: none;
+		}
+	}
+
+	&.inicio, &.login {
+		background: linear-gradient(rgba(0, 97, 145, 0.65), rgba(0, 97, 145, 0.65)), url('/debate/assets/img/Geta.jpg') center;
+		background-size: cover;
+		color: #fff;
+		text-align: center;
+		box-sizing: border-box;
+		display: table;
+		width: 100%;
+		border-collapse: separate;
+
+		& > div {
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+		h2, h3 {
+			border-bottom: none;
+			color: #fff;
+		}
+
+		h2 {
+			font-size: 2em;
+			margin: 0 0 30px;
+		}
+
+		p {
+			margin: 15px 0;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	&.inicio {
+  		border-spacing: 0 65px;
+
+		li {
+			list-style: none;
+			display: inline-block;
+			width: 50%;
+			padding: 0 30px;
+			box-sizing: border-box;
+
+			p { 
+				text-align: justify;
+			}
+		}
+	}
+
+	&.login {
+  		border-spacing: 0 80px;
+
+		p.error {
+			color: #FF2F2F;
+			font-weight: bold;
+		}
+
+		form {
+			margin: 20px 0;
+		}
+
+		form.error {
+			input[type="text"], input[type="password"] {
+				border-color: rgba(128, 0, 0, 0.75) !important;
+			}
+		}
+
+		input[type="text"], input[type="password"] {
+			display: block;
+			margin: 0 auto;
+			width: 300px;
+			padding: 12px 15px;
+			background: rgba(255, 255, 255, 0.8);
+			border-color: rgba(0, 0, 0, 0.55);
+			box-sizing: border-box;
+		}
+
+		input[type="text"] {
+			border-radius: 5px 5px 0 0;
+		}
+
+		input[type="password"] {
+			border-radius: 0 0 5px 5px;
+			border-top: none;
+		}
+
+		button {
+			width: 300px;
+			box-sizing: border-box;
+			padding:  12px 15px;
+			text-shadow: -1px 0 4px rgba(0, 0, 0, 0.55);
+			margin: 30px auto 0;
+			box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.45);
+			border-width: 3px;
+
+			&:active {
+				margin-top: 33px;
+			}
+		}
+	}
+
+}
+
+footer {
+	font-size: 0.9em;
+	background: #fff;
+	box-shadow: 0 0 6px 0 @grey;
+	padding: 15px 0;
+
+	#rsociales {
+		margin: 20px 0;	
+		text-align: center;
+
+		a {
+			border-bottom: solid 1px @blue-light;
+		}
+	}
+
+	#copy {
+		border-top: 1px solid @grey-light;
+		text-align: center;
+		padding: 20px 0;
+	}
+
+	h2 {
+		margin: 0;
+		color: @blue;
+	}
+
+	i {
+		margin: 0 5px 0 15px; 
+	}
+
+	i, a, span {	
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	span {
+		max-width: 500px;
+		text-align: left;
+	}
+}
+
+
+@media (max-width: 1060px) {
+	
+}
+
+@media (max-width: 670px) {
+
+}
+
+@media (max-width: 470px) {
+
+}
