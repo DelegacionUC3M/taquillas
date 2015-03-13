@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User object, data is from UC3M's LDAP
+ * Objeto usuario, los datos se obtienen del LDAP de la UC3M
  */
 class User {
 

@@ -22,7 +22,7 @@ class UsuarioSancionado {
 			$search = 'SELECT * FROM sanciones WHERE';
 			foreach ($attr as $key -> $value) {
 				if($cont == count($attributes)-1){
-					$search .= ' '.$key.'=:'.$key.';';
+					$search .= ' '.$key.'=:'.$key;
 				}
 				else{
 					$search .= ' '.$key.'=:'.$key.' AND';
