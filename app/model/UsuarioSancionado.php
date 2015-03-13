@@ -22,7 +22,7 @@ class UsuarioSancionado {
 			$search = 'SELECT * FROM sanciones WHERE';
 			foreach ($attr as $key -> $value) {
 				if($cont == count($attributes)-1){
-					$search .= ' '.$key.'=:'.$key;
+					$search .= ' '.$key.'=:'.$key.';';
 				}
 				else{
 					$search .= ' '.$key.'=:'.$key.' AND';
@@ -44,7 +44,7 @@ class UsuarioSancionado {
 	}
 
 	/**
-	 * Inserta un usuario sancionado en la tabla sancionados
+	 * Inserta un usuario en la tabla sancionados
 	 * @return void
 	 */
 	public function insert() {
@@ -53,12 +53,12 @@ class UsuarioSancionado {
 	}
 
 	/**
-	 * Elimina un usuario sancioando de la tabla sancionos
+	 * Elimina un usuario sancionado de la tabla sanciones
 	 * @return void
 	 */
 	public function delete() {
 		$db = new DB;
-		$db->run('DELETE FROM sanciones WHERE user_id=?',array($this->user_id));
+		$db->run('DELETE FROM sanciones WHERE user_id=?;',array($this->user_id));
 	}
 }
 

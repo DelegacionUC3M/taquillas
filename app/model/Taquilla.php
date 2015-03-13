@@ -22,14 +22,14 @@ class Taquilla {
 		$db = new DB;
 		$search;
 		if (empty($attributes)){
-			$db->run('SELECT * FROM taquillas');
+			$db->run('SELECT * FROM taquillas;');
 		}
 		else{
 			$cont = 0;
 			$search = 'SELECT * FROM taquillas WHERE';
 			foreach ($attr as $key -> $value) {
 				if($cont == count($attributes)-1){
-					$search .= ' '.$key.'=:'.$key;
+					$search .= ' '.$key.'=:'.$key.';';
 				}
 				else{
 					$search .= ' '.$key.'=:'.$key.' AND';
@@ -56,7 +56,7 @@ class Taquilla {
 	 */
 	public function save (){
 		$db = new DB;
-		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?', array($this->estado,$this->user_id, $this->fecha, $this->id));
+		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?;', array($this->estado,$this->user_id, $this->fecha, $this->id));
 	}
 }
 

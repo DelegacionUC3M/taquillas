@@ -11,9 +11,9 @@ class User {
 	public $email;
 
 	/**
-	 * Find a person by NIA
-	 * @param  string $nia
-	 * @return User
+	 * Encuentra una persona por NIA
+	 * @param  string $nia 	NIA por el que buscar persona
+	 * @return User 
 	 */
 	public static function findByNIA($nia) {
 		$ldap = new LDAP;
@@ -34,8 +34,8 @@ class User {
 	}
 
 	/**
-	 * Find a person by IDU
-	 * @param  string $idu
+	 * Encuentra a una persona por IDU
+	 * @param  string $idu 	IDU por el que buscar persona
 	 * @return User
 	 */
 	public static function findByIDU($idu) {
