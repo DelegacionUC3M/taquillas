@@ -31,7 +31,7 @@ class DB {
 	 * Database to be connected to
 	 * @var [type]
 	 */
-	private $dbs 	= SQL_DB;
+	private $dbs;
 
 	/**
 	 * PDO Object
@@ -44,7 +44,8 @@ class DB {
 	 */
 	protected $stmt;
 
-	function __construct() {
+	function __construct($sqlDb = SQL_DB) {
+		$dbs = $sqlDb;
 		$this->db = new PDO($this->drive.':host='.$this->host.';dbname='.$this->dbs.';charset=utf8', $this->user, $this->pass);
 		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);

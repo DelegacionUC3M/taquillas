@@ -4,14 +4,14 @@
 
 		/**
 		 *Comprueba la identidad del usuario y si es correcta realiza una llamada
-		 * a la función panel.
+		 * a la función reserva.
 		 * En caso de no validarse se redirige al inicio.
 		 * 
 		 * @return void
 		 */
 		function index (){
 			if ($this->security(false)) {
-				$this->panel();
+				$this->condiciones();
 			}
 			else {
 				$this->render('inicio');
@@ -24,7 +24,7 @@
 		 * 
 		 * @return void
 		 */
-		function panel() {
+		function login() {
 			if ($this->security(false)){
 				header('Location: /taquillas/inicio');
 			}
@@ -40,7 +40,7 @@
 								header('Location: ' . $_GET['url']);
 							}
 							else{
-								header('Location: /taquillas/inicio/panel');
+								header('Location: /taquillas/inicio/reserva');
 							}
 						}
 						else {
@@ -65,11 +65,28 @@
 		 * 
 		 * @return void
 		 */
-		function logout (){
-			session_start();
+		function logout () {
 			session_destroy();
 			session_regenerate_id(true);
 			header('Location: /taquillas/inicio');
+		}
+
+		/**
+		 * Valida la sesión del usuario y carga el reserva con las distintas opciones
+		 *
+		 * @return void
+		 */
+		function condiciones() {
+			if ($this->security(false)){
+				header('Location: /taquillas/inicio');
+			}
+			else {
+
+			}
+		}
+
+		function reservar() {
+			
 		}
 	}
 
