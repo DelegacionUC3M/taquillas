@@ -55,5 +55,4 @@ class User {
 			return null;
 		}
 	}
-	
 }

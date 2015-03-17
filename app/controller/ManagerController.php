@@ -23,11 +23,40 @@
 		}
 
 		function bloquear() {
+			if (!$this->security(false)) {
+				header('Location: /taquillas/inicio');
+			} else {
+				if ($_POST['bloqueo']){
+					if ($_POST['confirmar_bloqueo']){
+						//llamar funcion bloqueo
+					}
 
+				}
+			}
+		}
+
+		function desbloquear() {
+			if (!$this->security(false)) {
+				header('Location: /taquillas/inicio');
+			} else {
+				if (isset($_POST['desbloqueo'])){
+					if (isset($_POST['confirmar_desbloqueo'])){
+						//llamar funcion desbloqueo
+					}
+
+				}
+			}
 		}
 
 		function resetear(){
-
+			if (!$this->security(false)) {
+				header('Location: /taquillas/inicio');
+			} else {
+				if (isset($_POST['resetear'])){
+					if (isset($_POST['confirmar_reseteo'])){
+						Taquilla::resetearTaquilla();
+					}
+				}
+			}
 		}
-	}
 ?>

@@ -19,7 +19,7 @@ class Taquilla {
 	 * @return arrayt $taquillas 	array con el resultado de la búsqueda.
 	 */
 	public static function findByAttributes($attributes = array()) {
-		$db = new DB;
+		$db = new DB(SQL_DB);
 		$search;
 		if (empty($attributes)){
 			$db->run('SELECT * FROM taquillas');
@@ -29,10 +29,19 @@ class Taquilla {
 			$search = 'SELECT * FROM taquillas WHERE';
 			foreach ($attributes as $key -> $value) {
 				if($cont == count($attributes)-1){
-					$search .= ' '.$key.'=:'.$key;
+					if (is_null($value){
+						$search .= ' '.$key.'IS NULL';
+					} else {
+						$search .= ' '.$key.'=:'.$key;
+					}
 				}
 				else{
-					$search .= ' '.$key.'=:'.$key.' AND';
+					if (is_null($value){
+						$search .= ' '.$key.'IS NULL AND';
+					} else {
+						$search .= ' '.$key.'=:'.$key.' AND';
+					}
+					
 				}
 				$cont++;
 			}
@@ -54,9 +63,32 @@ class Taquilla {
 	 * Actualiza los valores de la taquilla.
 	 * @return void
 	 */
-	public function save (){
-		$db = new DB;
-		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?;', array($this->estado,$this->user_id, $this->fecha, $this->id));
+	public function save() {
+		$db = new DB(SQL_DB);
+		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?', array($this->estado,$this->user_id, $this->fecha, $this->id));
+	}
+	
+	public function resetearTaquilla() {
+		$db = new DB(SQL_DB);
+		$year = new DB(SQL_DB):
+		$year->run('SELECT extract(year FROM (SELECT current_date))+1');
+		$nombreTabla = 'taquillas'.$year;
+
+		$db->run('CREATE TABLE '.$nombreTabla.' ( 
+			id serial PRIMARY KEY,
+	        num_taquilla integer,
+	        campus_id smallint,
+	        edificio_id smallint,
+	        planta_id smallint,
+	        zona_id char(2),
+	        tipo_id varchar(20) NOT NULL,
+	        estado_id smallint DEFAULT 1,
+	        user_id integer,
+	        fecha date,
+	        UNIQUE (num_taquilla, campus_id, edificio_id))');
+
+		$db->run('INSERT INTO '.$nombreTabla. ' SELECT * FROM taquillas');
+		$db->run();
 	}
 }
 

@@ -12,7 +12,7 @@ class UsuarioSancionado {
 	 * @return array  $sanciones 	array con el resultado de la búsqueda.       
 	 */
 	public static function findByAttributes($attributes = array()) {
-		$db = new DB;
+		$db = new DB(SQL_DB);
 		$search;
 		if (empty($attributes)){
 			$db->run('SELECT * FROM sanciones');
@@ -48,7 +48,7 @@ class UsuarioSancionado {
 	 * @return void
 	 */
 	public function insert() {
-		$db = new DB;
+		$db = new DB(SQL_DB);
 		$db->run('INSERT INTO sanciones VALUES user_id=?, fecha_sancion=?, taquilla_id=?', array($this->user_id,$this->fecha_sancion, $this->taquilla_id));
 	}
 
@@ -57,7 +57,7 @@ class UsuarioSancionado {
 	 * @return void
 	 */
 	public function delete() {
-		$db = new DB;
+		$db = new DB(SQL_DB);
 		$db->run('DELETE FROM sanciones WHERE user_id=?;',array($this->user_id));
 	}
 }
