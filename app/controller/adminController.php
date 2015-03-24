@@ -10,7 +10,7 @@
 		 * @return void
 		 */
 		function index () {
-			if ($this->security(false)) {
+			if ($this->security(false) && $_SESSION['user']->rol>=50) {
 				$this->panel();
 			}
 			else {
@@ -18,10 +18,21 @@
 			}
 		}
 
+		function panel(){
+			if (!$this->security(false) && $_SESSION['user']->rol>=50) {
+				header('Location: /taquillas/inicio');
+				
+			}
+			else {
+				$this->render('panel');
+			}
+		}
+		
 		function listar () {
-			if (!$this->security(false)) {
+			if (!$this->security(false) && $_SESSION['user']->rol>=50) {
 				header('Location: /taquillas/inicio');
 			} else {
+				$this->render('listado');
 				if (isset($_POST['busqueda']) {
 					$search = array();
 					if (!empty([$_POST['campus']])) {
@@ -39,28 +50,30 @@
 					}
 					//Taquillas resultantes de la busqueda
 					$listado = Taquillas::findByAttributes($search);
-					$this->render('lista',array('lista'=>$listado));
+					$this->render('listado',array('lista'=>$listado));
 				}
 			}
 		}
 
 		function asignar() {
-
+			$this->render('asignar');
 		}
 
 		function cobrar() {
-			
+			$this->render('cobrar');
 		}
 
 		function gestion() {
+			$this->render('');
 
 		}
 
 		function firma() {
-
+			$this->render('firma');
 		}
 
 		function stats() {
+			$this->render('estadisticas');
 
 		}
 

@@ -86,10 +86,21 @@
 			}
 		}
 
+		function panel(){
+			if (!$this->security(false)) {
+				header('Location: /taquillas/inicio');
+				
+			}
+			else {
+				$this->render('panel');
+			}
+		}
+
 		function reservar() {
 			if (!$this->security(false)) {
 				header('Location: /taquillas/inicio');
 			} else {
+				$this->render('reserva');
 				if(isset([$_POST['formulario']])) {
 					if(!empty([$_POST['campus']]) && !empty([$_POST['edificio']]) && !empty([$_POST['planta']]) && !empty([$_POST['zona']]) && !empty([$_POST['tipo']]) && !empty([$_POST['user_id']]) ) {
 						
@@ -104,7 +115,7 @@
 								'planta' => $_POST['planta'];
 								'zona' => $_POST['zona'];
 								'tipo' => $_POST['tipo'];
-								if (!is_null($_POST['id_taquilla']){
+								if (!empty($_POST['id_taquilla']){
 									'id' => $_POST['id_taquilla'];
 									}
 								'user_id' => NULL;
@@ -114,7 +125,7 @@
 							//Encuentra taquillas libres
 							if (!empty($taqDisponibles)) {
 								//Si se ha buscado por id se le asigna
-								if (!is_null($_POST['id_taquilla']) {
+								if (!empty($_POST['id_taquilla']) {
 									$reserva = new Taquilla;
 									$reserva = $taqDisponibles[0];
 									$reserva->user_id = $_SESSION['user']->nia;
@@ -129,17 +140,17 @@
 								}
 							} else {
 								//No hay taquillas libres
-								$this->render('reservar',array('error'=>'No hay taquillas libres'));
+								$this->render('reserva',array('error'=>'No hay taquillas libres'));
 							}
 
 						} else {
 							//Si el usuario ya tiene alguna taquilla
-							$this->render('reservar',array('error'=>'¡No puedes reservar mas de una taquilla!'));
+							$this->render('reserva',array('error'=>'¡No puedes reservar mas de una taquilla!'));
 						}
 					}
 					else{
 						//Algún campo vacío
-						$this->render('reservar',array('error'=>'Todos los campos son obligatorios'));
+						$this->render('reserva',array('error'=>'Todos los campos son obligatorios'));
 					}
 				}
 			}
