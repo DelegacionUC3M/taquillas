@@ -21,11 +21,19 @@ class UsuarioSancionado {
 			$cont = 0;
 			$search = 'SELECT * FROM sanciones WHERE';
 			foreach ($attributes as $key -> $value) {
-				if($cont == count($attributes)-1){
-					$search .= ' '.$key.'=:'.$key;
-				}
-				else{
-					$search .= ' '.$key.'=:'.$key.' AND';
+				if($cont == count($attributes)-1) {
+					if (is_null($value)) {
+						$search .= ' '.$key.' IS NULL';
+					} else {
+						$search .= ' '.$key.'=:'.$key;
+					}
+				} else {
+					if (is_null($value)) { 
+						$search .= ' '.$key.' IS NULL AND';
+					} else {
+						$search .= ' '.$key.'=:'.$key.' AND';
+					}
+					
 				}
 				$cont++;
 			}
@@ -47,7 +55,7 @@ class UsuarioSancionado {
 	 * Inserta un usuario en la tabla sancionados
 	 * @return void
 	 */
-	public function insert() {
+	public function save() {
 		$db = new DB(SQL_DB);
 		$db->run('INSERT INTO sanciones VALUES user_id=?, fecha_sancion=?, taquilla_id=?', array($this->user_id,$this->fecha_sancion, $this->taquilla_id));
 	}

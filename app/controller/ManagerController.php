@@ -19,6 +19,7 @@
 		}
 
 		function gestionUsuarios() {
+			
 
 		}
 
@@ -28,7 +29,7 @@
 			} else {
 				if ($_POST['bloqueo']){
 					if ($_POST['confirmar_bloqueo']){
-						//llamar funcion bloqueo
+						Taquillas::bloquearApp();
 					}
 
 				}
@@ -41,7 +42,7 @@
 			} else {
 				if (isset($_POST['desbloqueo'])){
 					if (isset($_POST['confirmar_desbloqueo'])){
-						//llamar funcion desbloqueo
+						Taquillas::desbloquearApp();
 					}
 
 				}

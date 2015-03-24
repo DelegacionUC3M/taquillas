@@ -16,28 +16,26 @@ class Taquilla {
 	/**
 	 * Encuentra usuarios sancionados segun los atributos pasados por array. En caso de pasar un array vacío funciona como un findAll.
 	 * @param  array  $attributes 	array que incluye los parámetros de búsquedas. Las key del array deben ser: 'id' o 'num_taquilla' o 'campus' o 'edificio' o 'planta' o 'zona' o 'tipo' o 'estado' o 'user_id' o 'fecha'.
-	 * @return arrayt $taquillas 	array con el resultado de la búsqueda.
+	 * @return array  $taquillas 	array con el resultado de la búsqueda.
 	 */
 	public static function findByAttributes($attributes = array()) {
 		$db = new DB(SQL_DB);
 		$search;
-		if (empty($attributes)){
+		if (empty($attributes)) {
 			$db->run('SELECT * FROM taquillas');
-		}
-		else{
+		} else {
 			$cont = 0;
 			$search = 'SELECT * FROM taquillas WHERE';
 			foreach ($attributes as $key -> $value) {
-				if($cont == count($attributes)-1){
-					if (is_null($value){
-						$search .= ' '.$key.'IS NULL';
+				if($cont == count($attributes)-1) {
+					if (is_null($value)) {
+						$search .= ' '.$key.' IS NULL';
 					} else {
 						$search .= ' '.$key.'=:'.$key;
 					}
-				}
-				else{
-					if (is_null($value){
-						$search .= ' '.$key.'IS NULL AND';
+				} else {
+					if (is_null($value)) { 
+						$search .= ' '.$key.' IS NULL AND';
 					} else {
 						$search .= ' '.$key.'=:'.$key.' AND';
 					}
@@ -68,6 +66,8 @@ class Taquilla {
 		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?', array($this->estado,$this->user_id, $this->fecha, $this->id));
 	}
 	
+
+	
 	public function resetearTaquilla() {
 		$db = new DB(SQL_DB);
 		$year = new DB(SQL_DB):
@@ -88,7 +88,15 @@ class Taquilla {
 	        UNIQUE (num_taquilla, campus_id, edificio_id))');
 
 		$db->run('INSERT INTO '.$nombreTabla. ' SELECT * FROM taquillas');
-		$db->run();
+		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado!=1 AND user_id IS NOT NULL AND fecha IS NOT NULL');
+	}
+
+	public function bloquearApp() {
+		BLOQUEO = 1;
+	}
+
+	public function desbloquearApp() {
+		BLOQUEO = 0;
 	}
 }
 
