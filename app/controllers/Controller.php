@@ -11,7 +11,7 @@
 			if (isset($_SESSION['user']) && isset($_SESSION['user']->uid) && !empty($_SESSION['user']->uid)) {
 				return true;
 			}
-			if ($redirect = true) {
+			if ($redirect == true) {
 				header ('Location: /taquillas/inicio/login?url='.urlencode($_SERVER['REQUEST_URI']));
 				die();
 			}
@@ -30,7 +30,7 @@
 			}
 
 			$title = isset($title) ? $title : 'Reserva de taquillas - Delegacion UC3M';
-			$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+			$user = isset($_SESSION['user']) ? $_SESSION['user'] : NULL;
 
 			include ABSPATH . 'app/views/header.php';
 			include ABSPATH . 'app/views/' . $view . '.php';
@@ -49,7 +49,7 @@
 		public static function error($code=404) {
 			if ($code == 404){
 				header('HTTP/1.0 404 Not Found');
-				$error = 'La pagina solicitada no existe :´('
+				$error = 'La pagina solicitada no existe :´(';
 			}
 			else if ($code == 401){
 				header('HTTP/1.0 401 Unauthorized');
@@ -57,7 +57,7 @@
 			}
 
 			$title = isset($title) ? $title : 'Reserva de taquillas - Delegacion UC3M | ERROR';
-			$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+			$user = isset($_SESSION['user']) ? $_SESSION['user'] : NULL;
 
 			include ABSPATH . 'app/views/header.php';
 			include ABSPATH . 'app/views/error.php';

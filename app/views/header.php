@@ -26,9 +26,9 @@
                     <?php
 			         if($user) { ?>
                         <span>Hola, <?= $user->cn; ?> </span>
-                        <a class="logout" href="/taquillas/taquilla/logout">Salir</a>
+                        <a class="logout" href="/taquillas/inicio/logout">Salir</a>
                     <?php } else { ?>
-                        <a href="/taquillas/taquilla/login">Entrar</a>
+                        <a href="/taquillas/inicio/login">Entrar</a>
                     <?php } ?>
                 </div>
                 <a href="/taquillas/inicio"> <h1>Taquillas</h1> </a>

@@ -1,0 +1,37 @@
+ErrorDocument 404 /error
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} (.*)
+
+RewriteRule ^(.*)/(.*)/([0-9]+)/$ ?c=$1&a=$2&id=$3&%1
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} (.*)
+
+RewriteRule ^(.*)/(.*)/([0-9]+)$ ?c=$1&a=$2&id=$3&%1
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} (.*)
+
+RewriteRule ^(.*)/(.*)/$ ?c=$1&a=$2&%1
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} (.*)
+
+RewriteRule ^(.*)/(.*)$ ?c=$1&a=$2&%1
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} (.*)
+
+RewriteRule ^(.*)$ ?c=$1&%1

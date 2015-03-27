@@ -4,6 +4,7 @@ require_once('config.php');
 session_start();
 
 function __autoload($class) {
+
 	str_replace(array('.', '/'), '' , $class);
 	if (file_exists('app/controllers/'.$class.'.php')) {
 		include ('app/controllers/'.$class.'.php');
@@ -11,8 +12,8 @@ function __autoload($class) {
 		include ('app/models/'.$class.'.php');
 	} else if (file_exists('app/views/'.$class.'.php')) {
 		include ('app/views/'.$class.'.php');
-	} else if (file_exists('app/component/'.$class.'.php')) {
-		include ('app/component/'.$class.'.php');
+	} else if (file_exists('app/components/'.$class.'.php')) {
+		include ('app/components/'.$class.'.php');
 	}
 
 	if (!class_exists($class)) {

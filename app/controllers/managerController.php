@@ -1,6 +1,6 @@
 <?php
 
-	class ManagerController extends Controller {
+	class managerController extends Controller {
 
 		/**
 		 *Comprueba la identidad del usuario y si es correcta realiza una llamada
@@ -9,7 +9,7 @@
 		 * 
 		 * @return void
 		 */
-		function index (){
+		function indexAction(){
 			if ($this->security(false) && $_SESSION['user']->rol>=100) {
 				$this->panel();
 			}
@@ -18,7 +18,7 @@
 			}
 		}
 
-		function panel(){
+		function panelAction(){
 			if (!$this->security(false) && $_SESSION['user']->rol>=100) {
 				header('Location: /taquillas/inicio');
 				
@@ -28,12 +28,12 @@
 			}
 		}
 
-		function gestionUsuarios() {
+		function gestionUsuariosAction() {
 			$this->render('gestionUsuarios');
 
 		}
 
-		function bloquear() {
+		function bloquearAction() {
 			if (!$this->security(false) && $_SESSION['user']->rol>=100) {
 				header('Location: /taquillas/inicio');
 			} else {
@@ -47,7 +47,7 @@
 			}
 		}
 
-		function desbloquear() {
+		function desbloquearAction() {
 			if (!$this->security(false) && $_SESSION['user']->rol>=100) {
 				header('Location: /taquillas/inicio');
 			} else {
@@ -61,7 +61,7 @@
 			}
 		}
 
-		function resetear(){
+		function resetearAction(){
 			if (!$this->security(false) && $_SESSION['user']->rol>=100) {
 				header('Location: /taquillas/inicio');
 			} else {
