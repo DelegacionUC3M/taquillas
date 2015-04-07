@@ -49,7 +49,7 @@
   			<label>Doble</label>
   			<input type="radio" name="doble" value="doble"><br>!-->
 
-  			<button type="submit" value="Reservar taquilla">
+  			<button type="submit" value="reserva">Reservar taquilla</button>
 
 		</form>
 </div>

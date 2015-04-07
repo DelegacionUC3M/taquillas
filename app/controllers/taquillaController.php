@@ -1,14 +1,16 @@
 <?php
 
+	class taquillaController extends Controller {
+
 	function panelAction(){
 		if ($this->security(true)) {
 			$this->render('panel');
 		}
 	}
 
-	function reservarActions() {
+	function reservarAction() {
 		if ($this->security(true)) {
-			$this->render('reserva');
+			$error;
 			if(isset($_POST['formulario'])) {
 				if(!empty($_POST['campus']) && !empty($_POST['edificio']) && !empty($_POST['planta']) && !empty($_POST['zona']) && !empty($_POST['tipo']) && !empty($_POST['user_id']) ) {
 					
@@ -48,20 +50,21 @@
 							}
 						} else {
 							//No hay taquillas libres
-							$this->render('reserva',array('error'=>'No hay taquillas libres'));
+							$error = 'No hay taquillas libres';
 						}
 
 					} else {
 						//Si el usuario ya tiene alguna taquilla
-						$this->render('reserva',array('error'=>'¡No puedes reservar mas de una taquilla!'));
+						$error = '¡No puedes reservar mas de una taquilla!';
 					}
 				}
 				else{
 					//Algún campo vacío
-					$this->render('reserva',array('error'=>'Todos los campos son obligatorios'));
+					$error = 'Todos los campos son obligatorios';
 				}
 			}
+			$this->render('reserva',array('error'=>$error));
 		}
 	}
-
+}
 ?>

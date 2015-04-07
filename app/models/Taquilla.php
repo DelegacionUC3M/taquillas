@@ -70,8 +70,7 @@ class Taquilla {
 	
 	public function resetearTaquilla() {
 		$db = new DB(SQL_DB);
-		$year = new DB(SQL_DB):
-		$year->run('SELECT extract(year FROM (SELECT current_date))+1');
+		$year = //año con php
 		$nombreTabla = 'taquillas'.$year;
 
 		$db->run('CREATE TABLE '.$nombreTabla.' ( 
@@ -88,15 +87,43 @@ class Taquilla {
 	        UNIQUE (num_taquilla, campus_id, edificio_id))');
 
 		$db->run('INSERT INTO '.$nombreTabla. ' SELECT * FROM taquillas');
-		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado!=1 AND user_id IS NOT NULL AND fecha IS NOT NULL');
+		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3');
 	}
 
 	public function bloquearApp() {
-		BLOQUEO = 1;
+		//write BLOQUEO = 1;
 	}
 
 	public function desbloquearApp() {
-		BLOQUEO = 0;
+		//write BLOQUEO = 0;
+	}
+
+	public function attrBusqueda(){
+		$db = new DB(SQL_DB);
+		//$list contiene los campus ordenados de menor a mayor: 0,1,2...
+		$list = $db->run('SELECT DISTINCT campus FROM taquillas ORDER BY campus ASC');
+
+		//$list contiene en la pos 0, 1, 2... un array con los distintos edificios que posee ese campus.
+		foreach($list as $edf){
+			$list[$edf] = $db->run('SELECT DISTINCT edificio FROM taquillas WHERE campus='.$edf);
+		}
+		
+		//$list contendrá que cada edificio sus plantas correspondientes
+		foreach($list as $edf){
+			foreach($list[$edf] as $plt){
+				$list[$edf][$plt] = $db->run('SELECT DISTINCT planta FROM taquillas WHERE campus='.$edf.' AND edificio='.$plt);
+			}
+		}
+
+		//$list tiene que contener en cada planta sus letras.
+		foreach($list as $edf){
+			foreach($list[$edf] as $plt){
+				foreach($list[$edf][$plt] as $zn){
+					$list[$edf][$plt][$zn] = $db->run('SELECT DISTINCT zona FROM taquillas WHERE campus='.$edf.' AND edificio='.$plt.' AND zona='.$zn);
+				}
+			}
+		}
+
 	}
 }
 
