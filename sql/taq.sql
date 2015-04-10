@@ -15,16 +15,16 @@ CREATE TABLE taquillas (
 
 CREATE TABLE taquillas2013_2014 (
 	id serial PRIMARY KEY,
-        num_taquilla integer,
-        campus smallint NOT NULL,
-        edificio smallint NOT NULL,
-        planta smallint NOT NULL,
-        zona char(2) NOT NULL,
-        tipo varchar(20) NOT NULL,
-        estado smallint DEFAULT 1,
-        user_id integer,
-        fecha date,
-        UNIQUE (num_taquilla, campus_id, edificio_id)
+	num_taquilla integer,
+	campus smallint NOT NULL,
+	edificio smallint NOT NULL,
+	planta smallint NOT NULL,
+	zona char(2) NOT NULL,
+	tipo varchar(20) NOT NULL,
+	estado smallint DEFAULT 1,
+	user_id integer,
+	fecha date,
+	UNIQUE (num_taquilla, campus_id, edificio_id)
 );
 
 CREATE TABLE sanciones (

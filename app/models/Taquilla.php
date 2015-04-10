@@ -13,10 +13,24 @@ class Taquilla {
 	public $user_id;
 	public $fecha;
 
+	
+	public function __construct($id=NULL, $num_taquilla=NULL, $campus=NULL, $edificio=NULL, $planta=NULL, $zona=NULL, $tipo=NULL, $estado=NULL, $user_id=NULL, $fecha=NULL){
+		$this->id = $id;
+		$this->num_taquilla = $num_taquilla;
+		$this->campus = $campus;
+		$this->edificio = $edificio;
+		$this->$planta = $planta;
+		$this->$zona = $zona;
+		$this->tipo = $tipo;
+		$this->estado = $estado;
+		$this->user_id = $user_id;
+		$this->fecha = $fecha;
+	}
+
 	/**
 	 * Encuentra usuarios sancionados segun los atributos pasados por array. En caso de pasar un array vacío funciona como un findAll.
-	 * @param  array  $attributes 	array que incluye los parámetros de búsquedas. Las key del array deben ser: 'id' o 'num_taquilla' o 'campus' o 'edificio' o 'planta' o 'zona' o 'tipo' o 'estado' o 'user_id' o 'fecha'.
-	 * @return array  $taquillas 	array con el resultado de la búsqueda.
+	 * @param  array 	$attributes 	array que incluye los parámetros de búsquedas. Las key del array deben ser: 'id' o 'num_taquilla' o 'campus' o 'edificio' o 'planta' o 'zona' o 'tipo' o 'estado' o 'user_id' o 'fecha'.
+	 * @return array 	$taquillas		array con el resultado de la búsqueda.
 	 */
 	public static function findByAttributes($attributes = array()) {
 		$db = new DB(SQL_DB);
@@ -70,7 +84,7 @@ class Taquilla {
 	
 	public function resetearTaquilla() {
 		$db = new DB(SQL_DB);
-		$year = //año con php
+		$year = date ('Y');
 		$nombreTabla = 'taquillas'.$year;
 
 		$db->run('CREATE TABLE '.$nombreTabla.' ( 
@@ -92,26 +106,91 @@ class Taquilla {
 
 	public function bloquearApp() {
 		//write BLOQUEO = 1;
+		//Se coloca el puntero al final del archivo, se borra la linea y se reescribe modificando el valor de BLOQUEO
+		$conf = fopen('config.php', 'r+');
+		$contenido = fread($conf,filesize('config.php'));
+		fclose($conf);
+		 
+		// Separar linea por linea
+		$contenido = explode(';',$contenido);
+		 
+		// Modificar linea de BLOQUEAR, que es la última
+		$contenido[count($contenido)-1] = "define('BLOQUEAR',1);";
+		 
+		// Se deja como estaba
+		$contenido = implode(';\n',$contenido);
+		 
+		// Guardar Archivo
+		$conf = fopen('config.php','w');
+		fwrite($conf,$contenido);
+		fclose($conf);
 	}
 
 	public function desbloquearApp() {
 		//write BLOQUEO = 0;
+		//Se coloca el puntero al final del archivo, se borra la linea y se reescribe modificando el valor de BLOQUEO
+		$conf = fopen('config.php', 'r+');
+		$contenido = fread($conf,filesize('config.php'));
+		fclose($conf);
+		 
+		// Separar linea por linea
+		$contenido = explode(';',$contenido);
+		 
+		// Modificar linea de BLOQUEAR, que es la última
+		$contenido[count($contenido)-1] = "define('BLOQUEAR',0);";
+		 
+		// Se deja como estaba
+		$contenido = implode(';\n',$contenido);
+		 
+		// Guardar Archivo
+		$conf = fopen('config.php','w');
+		fwrite($conf,$contenido);
+		fclose($conf);
 	}
 
 	public function attrBusqueda(){
 		$db = new DB(SQL_DB);
-		//$list contiene los campus ordenados de menor a mayor: 0,1,2...
-		$list = $db->run('SELECT DISTINCT campus FROM taquillas ORDER BY campus ASC');
+
+		$db->run('SELECT DISTINCT campus,edificio,planta,zona FROM taquillas');
+		$aux = $db->data();
+		$list = array();
+		foreach($aux as $pepe){
+			//Posición $list[i] con los campus
+			if (!isset($list[$pepe['campus']])){
+				$list[$pepe['campus']] = array();
+			}
+			//Posición $list[campus][i] con los edificios del campus
+			if (!isset($list[$pepe['campus']][$pepe['campus']['edificio']])){
+				$list[$pepe['campus']][$pepe['campus']['edificio'] = array();
+			}
+			//Posición $List[campus][edificio][i] con las plantas de los edificios
+			if (!isset($list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']])){
+				$list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']] = array();
+			}
+			//Posición $list[campus][edificio][planta][i] con las zonas de la planta del edificio
+			if (!isset($list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']][$pepe['campus']['edificio']['planta']['zona']])){
+				$list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']][$pepe['campus']['edificio']['planta']['zona']] = $pepe['campus']['edificio']['planta']['zona'];
+			}
+		}
+
+		return $list;
+
+		/*//$list contiene los campus ordenados de menor a mayor: 0,1,2...
+		$db->run('SELECT DISTINCT campus FROM taquillas ORDER BY campus ASC');
+		$aux = $db->data();
+		$list = array();
 
 		//$list contiene en la pos 0, 1, 2... un array con los distintos edificios que posee ese campus.
-		foreach($list as $edf){
-			$list[$edf] = $db->run('SELECT DISTINCT edificio FROM taquillas WHERE campus='.$edf);
+		foreach($aux as $edf){
+			$db->run('SELECT DISTINCT edificio FROM taquillas WHERE campus='.$edf['campus'].' ORDER BY edificio ASC');
+			$list[$edf['campus']] = $db->data();
 		}
 		
 		//$list contendrá que cada edificio sus plantas correspondientes
-		foreach($list as $edf){
-			foreach($list[$edf] as $plt){
-				$list[$edf][$plt] = $db->run('SELECT DISTINCT planta FROM taquillas WHERE campus='.$edf.' AND edificio='.$plt);
+		foreach($list as $campus => $edf){
+			foreach($edf as $plt){
+				$db->run('SELECT DISTINCT planta FROM taquillas WHERE campus='.$campus.' AND edificio='.$plt);
+				$list[$campus][$plt] = $db->data();
 			}
 		}
 
@@ -119,10 +198,11 @@ class Taquilla {
 		foreach($list as $edf){
 			foreach($list[$edf] as $plt){
 				foreach($list[$edf][$plt] as $zn){
-					$list[$edf][$plt][$zn] = $db->run('SELECT DISTINCT zona FROM taquillas WHERE campus='.$edf.' AND edificio='.$plt.' AND zona='.$zn);
+					$db->run('SELECT DISTINCT zona FROM taquillas WHERE campus='.$edf.' AND edificio='.$plt.' AND zona='.$zn);
+					$list[$edf][$plt][$zn] = $db->data();
 				}
 			}
-		}
+		}*/
 
 	}
 }

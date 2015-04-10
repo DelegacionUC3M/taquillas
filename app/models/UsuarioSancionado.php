@@ -6,6 +6,12 @@ class UsuarioSancionado {
 	public $fecha_sancion;
 	public $taquilla_id;
 
+
+	public function __construct ($user_id = NULL, $fecha_sancion = NULL, $taquilla_id = NULL){
+		$this->user_id = $user_id;
+		$this->fecha_sancion = $fecha_sancion;
+		$this->taquilla_id = $taquilla_id;
+	}
 	/**
 	 * Encuentra usuarios sancionados segun los atributos pasados por array. En caso de pasar un array vacío funciona como un findAll.
 	 * @param  array  $attributes 	array que incluye los parámetros de búsquedas. Las key del array deben ser: 'user_id' o 'fecha_sancion' o 'taquilla_id'.

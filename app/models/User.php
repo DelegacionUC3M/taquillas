@@ -16,8 +16,8 @@ class User {
     	$this->cn = $name;
     	$this->mail = $email;
     	$this->dn = $dn;
-     //   $rol = DBDelegados::getRol($nia);
-     //   $this->rol = !empty($rol) ? $rol : 10;
+       // $rol = DBDelegados::getRol($nia);
+       // $this->rol = !empty($rol) ? $rol : 10;
     	//Pedir a la base de datos si el nia esta en la tabla de usuarios.
     	$cat = explode(",",$dn);
     	$cat = str_replace("ou=", "", $cat[2]);

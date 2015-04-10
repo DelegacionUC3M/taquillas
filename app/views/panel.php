@@ -1,7 +1,7 @@
 <div id='cuerpo'>
 
 	<ul id='opciones'>
-
+		<?php print_r($_SESSION['user']->rol); ?>
 		<li> <a href='/taquillas/taquilla/reservar'> Reserva taquilla </a></li>
 
 		<?php if ($user->rol >=50) { ?>
@@ -17,7 +17,7 @@
 		if ($user->rol >= 100) { ?>
 		<p> Funciones de Manager</p>
 		<li> <a href='/taquillas/manager/gestionUsuarios'> Gestionar Usuarios </a></li> <!-- Añadir/Borrar/Editar usuarios a la app -->
-		<li> <a href='/taquillas/manager/bloquear'> Bloquear Aplicación </a></li>
+		<li> <a href='/taquillas/manager/bloquear'> Bloquear/Liberar Aplicación </a></li>
 		<li> <a href='/taquillas/manager/resetear'> Resetear Aplicación </a></li>
 		<?php } ?>
 
