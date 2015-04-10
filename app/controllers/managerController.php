@@ -6,7 +6,6 @@
 			if ($this->security(true) && $_SESSION['user']->rol>=100) {
 				$this->render('gestionUsuarios');
 			}
-
 		}
 
 		function bloquearAction() {

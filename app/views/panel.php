@@ -1,7 +1,6 @@
 <div id='cuerpo'>
 
 	<ul id='opciones'>
-		<?php print_r($_SESSION['user']->rol); ?>
 		<li> <a href='/taquillas/taquilla/reservar'> Reserva taquilla </a></li>
 
 		<?php if ($user->rol >=50) { ?>
