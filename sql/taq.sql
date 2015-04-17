@@ -10,7 +10,7 @@ CREATE TABLE taquillas (
 	estado smallint DEFAULT 1,
 	user_id integer,
 	fecha date,
-	UNIQUE (num_taquilla, campus_id, edificio_id)
+	UNIQUE (num_taquilla, campus, edificio)
 );
 
 CREATE TABLE taquillas2013_2014 (
@@ -24,11 +24,11 @@ CREATE TABLE taquillas2013_2014 (
 	estado smallint DEFAULT 1,
 	user_id integer,
 	fecha date,
-	UNIQUE (num_taquilla, campus_id, edificio_id)
+	UNIQUE (num_taquilla, campus, edificio)
 );
 
 CREATE TABLE sanciones (
 	user_id integer PRIMARY KEY,
 	fecha_sancion date NOT NULL,
-	taquilla_id integer NOT NULL, 
+	taquilla_id integer NOT NULL 
 );

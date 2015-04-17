@@ -46,9 +46,10 @@ class DB {
 
 	function __construct($sqlDb = SQL_DB) {
 		$dbs = $sqlDb;
-		$this->db = new PDO($this->drive.':host='.$this->host.';dbname='.$this->dbs.';charset=utf8', $this->user, $this->pass);
+		$this->db = new PDO($this->driver.':dbname='.$dbs.';host='.$this->host, $this->user, $this->pass);
 		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$this->db->beginTransaction();
 	}
 
 	/**
@@ -57,9 +58,13 @@ class DB {
 	 * @param  array  $data data to be injected to the query
 	 * @return bool       	true if success
 	 */
-	public function run($sql, $data = array()) {
+	public function run($sql) {
 		$this->stmt = $this->db->prepare($sql);
-		return $this->stmt->execute($data);
+		//if ($this->stmt){
+		//	var_dump($this->stmt);
+		//}
+		//print_r("pepe");
+		return $this->stmt->execute(array());
 	}
 
 	/**

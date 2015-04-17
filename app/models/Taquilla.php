@@ -153,56 +153,27 @@ class Taquilla {
 
 		$db->run('SELECT DISTINCT campus,edificio,planta,zona FROM taquillas');
 		$aux = $db->data();
+
 		$list = array();
-		foreach($aux as $pepe){
+		foreach($aux as $elem){
 			//Posición $list[i] con los campus
-			if (!isset($list[$pepe['campus']])){
-				$list[$pepe['campus']] = array();
+			if (!isset($list[$elem['campus']])){
+				$list[$elem['campus']] = array();
 			}
 			//Posición $list[campus][i] con los edificios del campus
-			if (!isset($list[$pepe['campus']][$pepe['campus']['edificio']])){
-				$list[$pepe['campus']][$pepe['campus']['edificio'] = array();
+			if (!isset($list[$elem['campus']][$elem['edificio']])){
+				$list[$elem['campus']][$elem['edificio']] = array();
 			}
 			//Posición $List[campus][edificio][i] con las plantas de los edificios
-			if (!isset($list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']])){
-				$list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']] = array();
+			if (!isset($list[$elem['campus']][$elem['edificio']][$elem['planta']])){
+				$list[$elem['campus']][$elem['edificio']][$elem['planta']] = array();
 			}
 			//Posición $list[campus][edificio][planta][i] con las zonas de la planta del edificio
-			if (!isset($list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']][$pepe['campus']['edificio']['planta']['zona']])){
-				$list[$pepe['campus']][$pepe['campus']['edificio']][$pepe['campus']['edificio']['planta']][$pepe['campus']['edificio']['planta']['zona']] = $pepe['campus']['edificio']['planta']['zona'];
+			if (!isset($list[$elem['campus']][$elem['edificio']][$elem['planta']][$elem['zona']])){
+				$list[$elem['campus']][$elem['edificio']][$elem['planta']][$elem['zona']] = $elem['zona'];
 			}
 		}
-
 		return $list;
-
-		/*//$list contiene los campus ordenados de menor a mayor: 0,1,2...
-		$db->run('SELECT DISTINCT campus FROM taquillas ORDER BY campus ASC');
-		$aux = $db->data();
-		$list = array();
-
-		//$list contiene en la pos 0, 1, 2... un array con los distintos edificios que posee ese campus.
-		foreach($aux as $edf){
-			$db->run('SELECT DISTINCT edificio FROM taquillas WHERE campus='.$edf['campus'].' ORDER BY edificio ASC');
-			$list[$edf['campus']] = $db->data();
-		}
-		
-		//$list contendrá que cada edificio sus plantas correspondientes
-		foreach($list as $campus => $edf){
-			foreach($edf as $plt){
-				$db->run('SELECT DISTINCT planta FROM taquillas WHERE campus='.$campus.' AND edificio='.$plt);
-				$list[$campus][$plt] = $db->data();
-			}
-		}
-
-		//$list tiene que contener en cada planta sus letras.
-		foreach($list as $edf){
-			foreach($list[$edf] as $plt){
-				foreach($list[$edf][$plt] as $zn){
-					$db->run('SELECT DISTINCT zona FROM taquillas WHERE campus='.$edf.' AND edificio='.$plt.' AND zona='.$zn);
-					$list[$edf][$plt][$zn] = $db->data();
-				}
-			}
-		}*/
 
 	}
 }

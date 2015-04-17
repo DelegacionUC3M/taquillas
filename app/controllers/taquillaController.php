@@ -66,5 +66,13 @@
 			$this->render('reserva',array('error'=>$error));
 		}
 	}
+
+	function getEdificiosAction(){
+		header('Content-Type: application/json');
+
+		$edf = Taquilla::attrBusqueda();
+		echo json_encode($edf);
+	}
+
 }
 ?>
