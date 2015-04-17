@@ -170,8 +170,15 @@ class Taquilla {
 			}
 			//Posición $list[campus][edificio][planta][i] con las zonas de la planta del edificio
 			if (!isset($list[$elem['campus']][$elem['edificio']][$elem['planta']][$elem['zona']])){
-				$list[$elem['campus']][$elem['edificio']][$elem['planta']][$elem['zona']] = $elem['zona'];
+				$zona = trim($elem['zona'],' ');
+				$list[$elem['campus']][$elem['edificio']][$elem['planta']][$zona] = $zona;
 			}
+		}
+		foreach($list as $elem -> $key){
+			foreach($elem as $aux){
+				
+			}
+
 		}
 		return $list;
 

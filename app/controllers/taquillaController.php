@@ -10,7 +10,7 @@
 
 	function reservarAction() {
 		if ($this->security(true)) {
-			$error;
+			$error ='';
 			if(isset($_POST['formulario'])) {
 				if(!empty($_POST['campus']) && !empty($_POST['edificio']) && !empty($_POST['planta']) && !empty($_POST['zona']) && !empty($_POST['tipo']) && !empty($_POST['user_id']) ) {
 					

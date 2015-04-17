@@ -1,5 +1,5 @@
 <div>
 	<div id='cuerpo'>
-		blablabal
+		Inicio
 	</div>
 </div>

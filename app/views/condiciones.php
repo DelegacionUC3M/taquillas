@@ -1,7 +1,7 @@
 <div id='cuerpo'>
 
 	<div id='condis'>
-	blabla
+	Condiciones
 	</div>
 	
 	<div id='botón'>
