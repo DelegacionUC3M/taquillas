@@ -3,8 +3,9 @@
 		<form action='/taquillas/taquilla/reserva' name='formulario' method='post'>
 			
 			<select name='campus'>
-	<!--		<option name='CSSJJ' value='1'> CSSJJ </option>
-				<option name='Leganes' value='2'> Leganés </option>!-->
+				<option name='vacio' value='0'></option>
+				<option name='CSSJJ' value='1'> CSSJJ </option>
+				<option name='Leganes' value='2'> Leganés </option>
 			</select>
 
 			<select name='edificio'>
