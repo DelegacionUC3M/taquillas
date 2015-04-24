@@ -214,6 +214,7 @@ class Taquilla {
 				unset($list[$key][$key2]);
 			}
 		}
+		
 		return $list;
 
 	}

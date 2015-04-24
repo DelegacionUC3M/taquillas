@@ -3,15 +3,24 @@
 	<div id='filtros'>
 	<form action='/taquillas/admin/listar' name='busqueda' method='post'>
 		
-		<select name='campus'> </select>
-		<select name='edificio'> </select>
-		<select name='planta'> </select>
-		<select name='zona'> </select>
+		<select id='campus' name='campus'>
+				<option name='vacio' value='0'></option>
+				<option name='CSSJJ' value='1'> CSSJJ </option>
+				<option name='Leganes' value='2'> Leganés </option>
+			</select>
+
+			<select id='edificio' name='edificio'></select>
+
+			<select id='planta' name='planta'></select>
+
+			<select id='zona' name='zona'></select>
+			
+			<div id='tipoTaquilla'></div>
 <!--	<label>Simple</label>
 			<input type='radio' name='simple' value='simple'><br>
 			<label>Doble</label>
 			<input type='radio' name='doble' value='doble'><br> !-->
-		<button type='submit' value='Búsqueda'>
+		<button type='submit' value='Búsqueda'> Listar</button>
 	</form>
 	</div>
 
