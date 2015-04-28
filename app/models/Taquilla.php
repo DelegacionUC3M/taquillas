@@ -51,8 +51,8 @@ class Taquilla {
 		$this->num_taquilla = $num_taquilla;
 		$this->campus = $campus;
 		$this->edificio = $edificio;
-		$this->$planta = $planta;
-		$this->$zona = $zona;
+		$this->planta = $planta;
+		$this->zona = $zona;
 		$this->tipo = $tipo;
 		$this->estado = $estado;
 		$this->user_id = $user_id;
@@ -77,13 +77,13 @@ class Taquilla {
 					if (is_null($value)) {
 						$search .= ' '.$key.' IS NULL';
 					} else {
-						$search .= ' '.$key.'=:'.$key;
+						$search .= ' '.$key.'='.$value;
 					}
 				} else {
 					if (is_null($value)) { 
 						$search .= ' '.$key.' IS NULL AND';
 					} else {
-						$search .= ' '.$key.'=:'.$key.' AND';
+						$search .= ' '.$key.'='.$value.' AND';
 					}
 					
 				}

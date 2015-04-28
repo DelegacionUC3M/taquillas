@@ -58,13 +58,9 @@ class DB {
 	 * @param  array  $data data to be injected to the query
 	 * @return bool       	true if success
 	 */
-	public function run($sql) {
+	public function run($sql,$data = array()) {
 		$this->stmt = $this->db->prepare($sql);
-		//if ($this->stmt){
-		//	var_dump($this->stmt);
-		//}
-		//print_r("pepe");
-		return $this->stmt->execute(array());
+		return $this->stmt->execute($data);
 	}
 
 	/**

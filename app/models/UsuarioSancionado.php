@@ -31,13 +31,13 @@ class UsuarioSancionado {
 					if (is_null($value)) {
 						$search .= ' '.$key.' IS NULL';
 					} else {
-						$search .= ' '.$key.'=:'.$key;
+						$search .= ' '.$key.'='.$key;
 					}
 				} else {
 					if (is_null($value)) { 
 						$search .= ' '.$key.' IS NULL AND';
 					} else {
-						$search .= ' '.$key.'=:'.$key.' AND';
+						$search .= ' '.$key.'='.$key.' AND';
 					}
 					
 				}
