@@ -89,6 +89,7 @@ class Taquilla {
 				}
 				$cont++;
 			}
+			$search .= ' ORDER BY edificio';
 			$db->run($search);
 		}
 		$taquillas = array();
@@ -109,6 +110,7 @@ class Taquilla {
 	 */
 	public function save() {
 		$db = new DB(SQL_DB);
+		print_r($this->estado.", ".$this->user_id.", ".$this->fecha.", ".$this->id);
 		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?', array($this->estado,$this->user_id, $this->fecha, $this->id));
 	}
 	

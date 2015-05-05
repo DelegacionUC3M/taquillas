@@ -49,7 +49,6 @@ class DB {
 		$this->db = new PDO($this->driver.':dbname='.$dbs.';host='.$this->host, $this->user, $this->pass);
 		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$this->db->beginTransaction();
 	}
 
 	/**

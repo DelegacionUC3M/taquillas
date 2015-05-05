@@ -9,7 +9,7 @@
 		<p> Nombre: <?php echo $_SESSION['user']->cn ?></p>
 		<p> NIA: <?php echo $_SESSION['user']->uid ?></p>
 		<p> Correo: <?php echo $_SESSION['user']->uid."@alumnos.uc3m.es"?></p>
-		<p> Campus: <?php 
+		<p> Campus: <?php
 		if ($reserva->campus == 1){
 			echo "Getafe";
 		} else if ($reserva->campus == 2){

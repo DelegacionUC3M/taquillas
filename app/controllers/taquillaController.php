@@ -72,7 +72,6 @@
 			$error ='';
 			if(isset($_POST['confirmar'])) {
 				if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) && isset($_POST['num_taquilla']) ) {
-					print_r($_POST);
 					$edificio = explode(' ', $_POST['edificio']);
 					$busqueda = array(
 						'num_taquilla' => $_POST['num_taquilla'],
@@ -86,7 +85,6 @@
 
 					$taqDisponibles = Taquilla::findByAttributes($busqueda);
 					//Encuentra taquillas libres
-			
 					$reserva = new Taquilla;
 					$reserva = $taqDisponibles[0];
 					$reserva->user_id = $_SESSION['user']->uid;

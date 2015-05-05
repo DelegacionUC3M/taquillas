@@ -14,7 +14,7 @@ $(function() {
 			if($('#campus').val() == 2){
 				$('#tipoTaquilla').html('<label>Simple 4€</label><input type="radio" name="tipo" value="simple"><br><label>Doble 6€</label><input type="radio" name="tipo" value="doble"><br>');
 			}
-			else{
+			else if ($('#campus').val() == 1){
 				$('#tipoTaquilla').html('<label>Simple 6€</label><input type="radio" name="tipo" value="simpleccssjj"><br>');
 			}
 			$('#edificio').click(function(){
