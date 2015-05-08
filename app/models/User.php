@@ -11,7 +11,7 @@ class User {
 	public $email;
 	public $rol;
 
-	public function __construct($nia,$name,$email,$dn) {
+	public function __construct($nia = NULL, $name = NULL, $email = NULL,$dn = NULL) {
     	$this->uid = $nia;
     	$this->cn = $name;
     	$this->mail = $email;
@@ -19,9 +19,13 @@ class User {
        // $rol = DBDelegados::getRol($nia);
         $this->rol = !empty($rol) ? $rol : 10;
     	//Pedir a la base de datos si el nia esta en la tabla de usuarios.
-    	$cat = explode(",",$dn);
-    	$cat = str_replace("ou=", "", $cat[2]);
-    	$this->category = $cat;
+        if (!is_null($dn)){
+	    	$cat = explode(",",$dn);
+	    	print_r($cat);
+	    	$cat = str_replace("ou=", "", $cat[2]);
+	    	print_r($cat);
+	    	$this->category = $cat;
+    	}
     }
 
 	/**

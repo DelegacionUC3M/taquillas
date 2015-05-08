@@ -15,7 +15,7 @@
 
 			<select id='zona' name='zona'></select>
 
-		<button type='submit' name='busqueda'> Listar</button>
+		<button id='listaBoton' type='submit' name='busqueda'> Listar</button>
 	</form>
 	</div>
 
@@ -37,13 +37,14 @@
 				if ($nombreViejo != $taquilla->edificio){
 					$nombreViejo = $taquilla->edificio;
 					?> <li> ~ ~ ~ ~ ~ ~ <?php 
-						$nombre = new Taquilla;
-						$nombre->rellenar();
-						echo $nombre->nombreEdificios[$taquilla->campus][$taquilla->edificio];
+						//$nombre = new Taquilla;
+						//$nombre->rellenar();
+						//echo $nombre->nombreEdificios[$taquilla->campus][$taquilla->edificio];
+						echo Taquilla::$nombreEdificios[$taquilla->campus][$taquilla->edificio];
 					?> ~ ~ ~ ~ ~ ~ </li> <?php 
 				}
 				?>
-			<ul>
+			<ul id='listaTaq'>
 				<li> <?php echo $taquilla->num_taquilla?></li> 
 				<li> <?php echo $taquilla->planta?> </li>
 				<li> <?php echo $taquilla->zona?> </li>
@@ -56,34 +57,6 @@
 			<?php } }
 		?>
 		</ul>
-	<!--	<table>
-			<tr id='encabezado'>
-				<td> Numero </td> 
-				<td> Planta </td>
-				<td> Zona </td>
-				<td> Tipo </td>
-				<td> Estado </td>
-				<td> Dueño </td>
-				<td> Fecha </td>
-				<td> Modificar </td> 
-			</tr>
-		<?php if (!empty($lista)) {
-			foreach ($lista as $taquilla){
-				?>
-			<tr>
-				<td> <?php echo $taquilla->num_taquilla?> </td> 
-				<td> <?php echo $taquilla->planta?> </td>
-				<td> <?php echo $taquilla->zona?> </td>
-				<td> <?php echo $taquilla->tipo?> </td>
-				<td> <?php echo $taquilla->estado?> </td>
-				<td> <?php echo $taquilla->user_id?> </td>
-				<td> <?php echo $taquilla->fecha?> </td>
-				<td> Modificar </td> 
-			</tr>
-			<?php } }
-		?>-->
-			<!-- Habría que luego rellenarla con las taquillas resultantes de la busqueda -->
-		</table>
 	</div>
 	
 </div>

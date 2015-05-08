@@ -12,39 +12,24 @@ class Taquilla {
 	public $estado;
 	public $user_id;
 	public $fecha;
-	public $nombreEdificios;
-
-	public function rellenar(){
-		$this->nombreEdificios = array();
-		//CAMPUS 1 - CCSSJJ
-		// 4. Edif. Gómez de la Serna 
-		// 5. Edif. Giner de los Ríos 
-		// 6. Edif. Normante 
-		// 7. Edif. Foronda  
-		// 9. Edif. Adolfo Posada 
-		// 10. Edif. Campomanes 
-		// 12. Biblioteca María Moliner 
-		// 15. Edif. López Aranguren
-		$this->nombreEdificios[1][4] = '4 - Gómez de la Serna';
-		$this->nombreEdificios[1][5] = '5 - Giner de los Ríos';
-		$this->nombreEdificios[1][6] = '6 - Normante';
-		$this->nombreEdificios[1][7] = '7 - Foronda';
-		$this->nombreEdificios[1][9] = '9 - Adofo Posada';
-		$this->nombreEdificios[1][10] = '10 - Campomanes';
-		$this->nombreEdificios[1][12] = '12 - María Moliner';
-		$this->nombreEdificios[1][15] = '15 - López Aranguren';
-
-		//CAMPUS 2 - EPS
-		//1. Agustin de Betancourt
-		//2. Sabatini
-		//4. Torres Quevedo
-		//7. Juan Benet
-		$this->nombreEdificios[2][1] = '1 - Agustin de Betancourt';
-		$this->nombreEdificios[2][2] = '2 - Sabatini';
-		$this->nombreEdificios[2][4] = '4 - Torres Quevedo';
-		$this->nombreEdificios[2][7] = '7 - Juan Benet';
-	}
-	
+	public static $nombreEdificios = array(
+		1 => array(
+			4 => '4 - Gómez de la Serna',
+			5 => '5 - Giner de los Ríos',
+			6 => '6 - Normante',
+			7 => '7 - Foronda',
+			9 => '9 - Adofo Posada',
+			10 => '10 - Campomanes',
+			12 => '12 - María Moliner',
+			15 => '15 - López Aranguren',
+		),
+		2 => array(
+			1 => '1 - Agustin de Betancourt',
+			2 => '2 - Sabatini',
+			4 => '4 - Torres Quevedo',
+			7 => '7 - Juan Benet',
+			),
+		);
 	
 	public function __construct($id=NULL, $num_taquilla=NULL, $campus=NULL, $edificio=NULL, $planta=NULL, $zona=NULL, $tipo=NULL, $estado=NULL, $user_id=NULL, $fecha=NULL){
 		$this->id = $id;
@@ -209,10 +194,9 @@ class Taquilla {
 			}
 		}
 
-		Taquilla::rellenar();
 		foreach($list as $key => $camp) {
 			foreach($camp as $key2 => $edf) {
-				$list[$key][$this->nombreEdificios[$key][$key2]] = $list[$key][$key2];
+				$list[$key][Taquilla::$nombreEdificios[$key][$key2]] = $list[$key][$key2];
 				unset($list[$key][$key2]);
 			}
 		}
