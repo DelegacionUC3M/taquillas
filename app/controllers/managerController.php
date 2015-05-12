@@ -11,6 +11,7 @@
 		function bloquearAction() {
 			if ($this->security(true) && $_SESSION['user']->rol>=100) {
 				if (isset($_POST['confirmar_bloqueo'])) {
+					print_r("ENTRA bloqearAction");
 					Taquilla::bloquearApp();
 				}
 				$this->render('bloquear');
@@ -22,7 +23,7 @@
 				if (isset($_POST['confirmar_desbloqueo'])) {
 					Taquilla::desbloquearApp();
 				}
-				$this->render('desbloquear');
+				$this->render('bloquear');
 			}
 		}
 

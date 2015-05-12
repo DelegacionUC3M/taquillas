@@ -127,6 +127,7 @@ class Taquilla {
 	}
 
 	public function bloquearApp() {
+		print_r("METODO bloquear app");
 		//write BLOQUEO = 1;
 		//Se coloca el puntero al final del archivo, se borra la linea y se reescribe modificando el valor de BLOQUEO
 		$conf = fopen('config.php', 'r+');
