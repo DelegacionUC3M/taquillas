@@ -19,9 +19,9 @@
 			Zona: <?php echo $datos->zona ?><br>
 			Núm. Taquilla: <?php echo $datos->num_taquilla?><br>
 			Tipo: <?php echo $datos->tipo ?><br>
-			Estado: <input name='estado' value=<?php if (!is_null($datos->estado)){ echo $datos->estado; } ?>> <br>
+			Estado: <input type='number' min='1' max='4' name='estado' value=<?php if (!is_null($datos->estado)){ echo $datos->estado; } ?>> <br>
 			Dueño: <input name='user_id' value=<?php if (!is_null($datos->user_id)){ echo $datos->user_id; } ?>> <br>
-			Fecha: <input name='fecha' value=<?php if (!is_null($datos->fecha)){ echo $datos->fecha; } ?>> <br>
+			Fecha: <input type='date' name='fecha' value=<?php if (!is_null($datos->fecha)){ echo $datos->fecha; } ?>> <br>
 
 			<button id='modificar' type="submit" value="gestion" name='gestion'> Modificar </button>
 			<a href='/taquillas/admin/listar'> Atrás </a>

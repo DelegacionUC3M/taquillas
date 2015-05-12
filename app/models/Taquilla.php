@@ -12,6 +12,10 @@ class Taquilla {
 	public $estado;
 	public $user_id;
 	public $fecha;
+	public static $nombreCampus = array(
+		1 => 'CCSSJJ',
+		2 => 'EPS'
+		);
 	public static $nombreEdificios = array(
 		1 => array(
 			4 => '4 - Gómez de la Serna',
@@ -53,7 +57,7 @@ class Taquilla {
 		$db = new DB(SQL_DB);
 		$search;
 		if (empty($attributes)) {
-			$db->run('SELECT * FROM taquillas');
+			$db->run('SELECT * FROM taquillas ORDER BY campus, edificio');
 		} else {
 			$cont = 0;
 			$search = 'SELECT * FROM taquillas WHERE';
@@ -74,7 +78,7 @@ class Taquilla {
 				}
 				$cont++;
 			}
-			$search .= ' ORDER BY edificio';
+			$search .= ' ORDER BY campus, edificio';
 			$db->run($search);
 		}
 		$taquillas = array();

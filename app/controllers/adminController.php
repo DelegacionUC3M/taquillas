@@ -19,25 +19,12 @@
 						$search['tipo'] = "'".$_POST['tipo']."'";
 					}
 					//Taquillas resultantes de la busqueda
-					var_dump($search);
 					$listado = Taquilla::findByAttributes($search);
 					$this->render('listado',array('lista'=>$listado));
 				}
 				else{
 					$this->render('listado');
 				}
-			}
-		}
-
-		function asignarAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
-				$this->render('asignar');
-			}
-		}
-
-		function cobrarAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
-				$this->render('cobrar');
 			}
 		}
 
@@ -60,8 +47,11 @@
 						if(is_null(User::findByNIA($_POST['user_id']))) {
 							$cambio = 'Usuario no encontrado';
 						}
-						if(empty($_POST['fecha'])){
+						if(empty($_POST['fecha'])) {
 							$cambio .= 'Necesaria una fecha si tiene dueño la taquilla';
+						}
+						if (!is_null(Taquilla::findByAttributes(array('id' => $_POST['user_id'])))) {
+							$cambio .= 'Un usuario no puede tener más de 1 taquilla';
 						}
 					}
 
@@ -83,7 +73,7 @@
 					//Comprobación de la fecha
 					if (!empty($_POST['fecha'])) {
 						print_r("FECHA ".$_POST['fecha']);
-						if (($_POST['estado'] != 2) && ($_POST['estado'] != 3)){
+						if (($_POST['estado'] != 2) && ($_POST['estado'] != 3)) {
 							$cambio .= 'Para que tenga fecha la taquilla debe estar ocupada/reservada';
 						}
 						if (empty($_POST['user_id'])) {
@@ -95,14 +85,78 @@
 						print_r("hola check GUAI ");
 						$taquilla = Taquilla::findByAttributes(array('id' => $id));
 						$datos = $taquilla[0];
-						$datos->user_id = $_POST['user_id'];
+						$usr = $_POST['user_id'];
+						$fecha = $_POST['fecha'];
+						if (empty($usr)){
+							print_r("ENTRA NULL USR");
+							$usr = NULL;
+						}
+						if (empty($fecha)){
+							print_r("ENTRA NULL FECHA");
+							$fecha = NULL;
+						}
+						$datos->user_id = $usr;
 						$datos->estado = $_POST['estado'];
-						$datos->fecha = $_POST['fecha'];
+						$datos->fecha = $fecha;
 						$datos->save();
 						$cambio .= 'Cambios realizados correctamente';
 					}					
 				}
 				$this->render('modificarTaq',array('datos'=>$datos, 'cambio' => $cambio));
+			}
+		}
+
+		function gestionTaqAction() {
+			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+				if (isset($_POST['busqueda'])) {
+					$search = array();
+					
+					if (!empty($_POST['campus'])) {
+						$search['campus'] = $_POST['campus'];
+					} if (!empty($_POST['edificio'])) {
+						$edificio = explode(' ', $_POST['edificio']);
+						$search['edificio'] = $edificio[0];
+					} if (!empty($_POST['planta'])) {
+						$search['planta'] = $_POST['planta'];
+					} if (!empty($_POST['zona'])){
+						$search['zona'] = "'".$_POST['zona']."'";
+					} if (!empty($_POST['tipo'])){
+						$search['tipo'] = "'".$_POST['tipo']."'";
+					} if (!empty($_POST['id'])){
+						$search['id'] = $_POST['id'];
+					} if (!empty($_POST['user_id'])){
+						$search['user_id'] = $_POST['user_id'];
+					} if (!empty($_POST['num_taquilla'])){
+						$search['num_taquilla'] = $_POST['num_taquilla'];
+					} if (!empty($_POST['fecha'])){
+						$search['fecha'] = "'".$_POST['fecha']."'";
+					} if (!empty($_POST['estado'])){
+						$search['estado'] = $_POST['estado'];
+					}
+					//Taquillas resultantes de la busqueda
+					$listado = Taquilla::findByAttributes($search);
+					$error = "";
+					if (empty($listado)){
+						$error = "Esta taquilla no existe.";
+					}
+					$this->render('gestionTaquillas', array('lista' => $listado, 'error' => $error));
+				}
+				else{
+					$this->render('gestionTaquillas');
+				}
+				
+			}
+		}
+
+		function asignarAction() {
+			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+				$this->render('asignar');
+			}
+		}
+
+		function cobrarAction() {
+			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+				$this->render('cobrar');
 			}
 		}
 
@@ -117,34 +171,6 @@
 				$this->render('estadisticas');
 			}
 		}
-
-/*function listarAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
-				$this->render('listado');
-			}
-		}
-
-		function getListaAction(){
-			header('Content-Type: application/json');
-			if (isset($_POST['busqueda'])) {
-				$search = array();
-				if (!empty($_POST['campus'])) {
-					$search['campus'] = $_POST['campus'];
-				} if (!empty($_POST['edificio'])) {
-					$edificio = explode(' ', $_POST['edificio']);
-					$search['edificio'] = $edificio[0];
-				} if (!empty($_POST['planta'])) {
-					$search['planta'] = $_POST['planta'];
-				} if (!empty($_POST['zona'])){
-					$search['zona'] = "'".$_POST['zona']."'";
-				} if (!empty($_POST['tipo'])){
-					$search['tipo'] = "'".$_POST['tipo']."'";
-				}
-				//Taquillas resultantes de la busqueda
-				$listado = Taquilla::findByAttributes($search);
-				echo json_encode($listado);
-			}
-		}*/
 	}
 ?>
 

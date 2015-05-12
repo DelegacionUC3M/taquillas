@@ -33,15 +33,12 @@
 						$ldap = new LDAP;
 						$ldap->run('uid=' . $_POST['nia']);
 						$user = $ldap->data()[0];
-					//	print_r($user);
 						$ldapUser = $ldap->login($user['dn'],$_POST['password']);
 					
 						if($ldapUser) {
 							$user = new User($user['uid'][0], $user['cn'][0],$user['uc3mcorreoalias'][0], $user['dn']);
 							$user->rol = 100;
 							$_SESSION['user'] = $user;
-
-						//	var_dump($user); die();
 
 							if (isset($_GET['url'])) {
 								header('Location: /taquillas/inicio'. $_GET['url']);

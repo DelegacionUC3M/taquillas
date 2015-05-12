@@ -10,7 +10,7 @@
 
 		function bloquearAction() {
 			if ($this->security(true) && $_SESSION['user']->rol>=100) {
-				if ($_POST['confirmar_bloqueo']){
+				if (isset($_POST['confirmar_bloqueo'])) {
 					Taquilla::bloquearApp();
 				}
 				$this->render('bloquear');
@@ -19,7 +19,7 @@
 
 		function desbloquearAction() {
 			if ($this->security(true) && $_SESSION['user']->rol>=100) {
-				if (isset($_POST['confirmar_desbloqueo'])){
+				if (isset($_POST['confirmar_desbloqueo'])) {
 					Taquilla::desbloquearApp();
 				}
 				$this->render('desbloquear');
@@ -28,7 +28,7 @@
 
 		function resetearAction(){
 			if ($this->security(true) && $_SESSION['user']->rol>=100) {
-				if (isset($_POST['confirmar_reseteo'])){
+				if (isset($_POST['confirmar_reseteo'])) {
 					Taquilla::resetearTaquilla();
 				}
 				$this->render('resetear');

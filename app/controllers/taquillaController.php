@@ -3,9 +3,10 @@
 	class taquillaController extends Controller {
 
 	function panelAction(){
-		if ($this->security(true)) {
+		if ($this->security(false)) {
 			$this->render('panel');
 		}
+		$this->render('inicio');
 	}
 
 	function reservarAction() {
