@@ -6,7 +6,7 @@
 		<?php if ($user->rol >=50) { ?>
 		<p> Funciones de Administrador </p>
 		<li> <a href='/taquillas/admin/listar'> Listar taquillas </a></li>
-		<li> <a href='/taquillas/admin/cobrar'> Asignar y cobrar taquillas </a></li>
+		<li> <a href='/taquillas/admin/asignar'> Asignar y cobrar taquillas </a></li>
 		<li> <a href='/taquillas/admin/gestionTaq'> Gestionar Taquillas </a></li>
 	<!--<li> <a href='/taquillas/admin/sancionar'> Sancionar usuarios </a></li>-->
 		<li> <a href='/taquillas/admin/estadisticas'> Estadísticas </a></li>

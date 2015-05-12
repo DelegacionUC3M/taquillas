@@ -1,13 +1,13 @@
 <div>
-
+	<p class="error">
 	<?php if(!empty($error)){
 		echo $error;
 	}
 	?>
+	</p>
 	<div id='filtros'>
 	<form action='/taquillas/admin/gestionTaq' method='post'>
-			
-			Id Taquilla: <input name='id' value=> <br>
+
 			Campus: <select id='campus' name='campus'>
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>

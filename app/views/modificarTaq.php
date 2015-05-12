@@ -1,10 +1,10 @@
 <div>
-
+	<p class="error">
 	<?php if(isset($datos)){ 
 			if (isset($cambio)){
 				?> <div id='mensaje'><?php echo $cambio ?></div> 
 	<?php  }  ?>
-
+	</p>
 		<form action='?' method='post'>
 			Campus: <?php if ($datos->campus == 1){
 								echo "Getafe";

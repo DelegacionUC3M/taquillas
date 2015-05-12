@@ -1,7 +1,8 @@
 <div>
-		<p class="error"> <?php if (!empty($error)) print_r($error); ?> </p>
-		
-		<form action='/taquillas/taquilla/reservar' method='post'>
+	<p class="error">
+	<?php if (!empty($error)) print_r($error); ?>
+	</p>
+		<form action='/taquillas/admin/asignar' method='post'>
 			
 			Campus: <select id='campus' name='campus'>
 				<option name='vacio'></option>
@@ -16,9 +17,9 @@
 			Zona: <select id='zona' name='zona'></select><br>
 
 			<div id='tipoTaquilla'></div>
-
-			<div> Num. Taquilla (Opcional) <input name='num_taquilla' value=></div><br>
-  			<button id='reserva' type='submit' value='reserva' name='formulario'>Reservar taquilla</button>
+			<div> NIA <input type='text' name='user_id' value=''></div>
+			<div> Num. Taquilla (Opcional) <input name='num_taquilla' value=></div>
+  			<button id='reserva' type='submit' name='asignar'>Asignar Taquilla</button>
 
 		</form>
 </div>

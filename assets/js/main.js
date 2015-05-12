@@ -33,9 +33,6 @@ $(function() {
 });
 
 
-function listadoTaquilla(lista){
-}
-
 function generarEdificios(edificios) {
 	var campus = $('#campus').val();
 	var resultado = "<option name='vacio'></option>\n";

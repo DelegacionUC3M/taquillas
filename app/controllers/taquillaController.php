@@ -26,6 +26,7 @@
 							'planta' => $_POST['planta'],
 							'zona' => "'".$_POST['zona']."'",
 							'tipo' => "'".$_POST['tipo']."'",
+							'estado' => 1,
 							'user_id' => NULL,
 							);
 						if (!empty($_POST['num_taquilla'])){
@@ -34,7 +35,7 @@
 						$taqDisponibles = Taquilla::findByAttributes($busqueda);
 						//Encuentra taquillas libres
 						if (!empty($taqDisponibles)) {
-			
+							$reserva;
 							//Si se ha buscado por id se le asigna
 							if (!empty($_POST['num_taquilla'])) {
 								$reserva = new Taquilla;
@@ -72,26 +73,24 @@
 		if ($this->security(true)) {
 			$error ='';
 			if(isset($_POST['confirmar'])) {
-				if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) && isset($_POST['num_taquilla']) ) {
-					$edificio = explode(' ', $_POST['edificio']);
+				if (isset($_GET['id'])){
 					$busqueda = array(
-						'num_taquilla' => $_POST['num_taquilla'],
-						'campus' => $_POST['campus'],
-						'edificio' => $edificio[0],
-						'planta' => $_POST['planta'],
-						'zona' => "'".$_POST['zona']."'",
-						'tipo' => "'".$_POST['tipo']."'",
-						'user_id' => NULL,
+						'id' => $_GET['id']
 						);
-
 					$taqDisponibles = Taquilla::findByAttributes($busqueda);
 					//Encuentra taquillas libres
 					$reserva = new Taquilla;
 					$reserva = $taqDisponibles[0];
 					$reserva->user_id = $_SESSION['user']->uid;
 					$reserva->fecha = date("d-m-Y");
+					$reserva->estado = 2;
 					$reserva->save();
-					$this->render('confirmar',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva));
+					if ($_SESSION['user']->rol < 50){
+						$this->render('confirmar',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva));
+					}
+					else if ($_SESSION['user']->rol > 50){
+						$this->render('confirmarAsig',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva));
+					}
 
 				} else {
 					$error = 'Ups, algo salió mal, reserva de nuevo una taquilla';
