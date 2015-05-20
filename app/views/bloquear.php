@@ -13,9 +13,9 @@
 
 		<div> Al realizar click en el siguiente botón estarás desbloqueando la aplicación</div>
 
-		<button id='desbloqueo' method='post' name='desbloqueo'>DESBLOQUEAR</button>
+		<button id='desbloqueo'>DESBLOQUEAR</button>
 		Hay que esconderlo mediante CSS
-		<form action='/taquillas/manager/desbloquear' method='post'>
+		<form action='/taquillas/manager/bloquear' method='post'>
 		<button id='confirmar_desbloqueo' type='submit' name='confirmar_desbloqueo'>CONFIRMAR</button>
 		</form>
 		

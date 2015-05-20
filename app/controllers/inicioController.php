@@ -81,7 +81,9 @@
 		 * @return void
 		 */
 		function condicionesAction() {
-			if ($this->security(true)) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true)) {
 				$this->render('condiciones');
 			}
 		}

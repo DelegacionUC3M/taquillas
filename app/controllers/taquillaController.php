@@ -10,7 +10,9 @@
 	}
 
 	function reservarAction() {
-		if ($this->security(true)) {
+		if (BLOQUEAR == 1){
+			$this->render('appBloqueada');
+		} else if ($this->security(true)) {
 			$error ='';
 			if(isset($_POST['formulario'])) {
 				if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) ) {
@@ -70,7 +72,9 @@
 	}
 
 	function confirmarAction() {
-		if ($this->security(true)) {
+		if (BLOQUEAR == 1){
+			$this->render('appBloqueada');
+		} else if ($this->security(true)) {
 			$error ='';
 			if(isset($_POST['confirmar'])) {
 				if (isset($_GET['id'])){

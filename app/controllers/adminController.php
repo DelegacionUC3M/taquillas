@@ -3,7 +3,9 @@
 	class adminController extends Controller {
 		
 		function listarAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				if (isset($_POST['busqueda'])) {
 					$search = array();
 					if (!empty($_POST['campus'])) {
@@ -29,7 +31,9 @@
 		}
 
 		function gestionAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$id;
 				$datos;
 				$cambio = "";
@@ -98,7 +102,9 @@
 		}
 
 		function gestionTaqAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				if (isset($_POST['busqueda'])) {
 					$search = array();
 					
@@ -138,7 +144,9 @@
 		}
 
 		function asignarAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$error = "";
 				if (isset($_POST['asignar'])){
 					if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) && isset($_POST['user_id'])) {
@@ -207,7 +215,9 @@
 		}
 
 		function cobrarAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$error = '';
 				$confirm = '';
 				$taq;
@@ -217,7 +227,6 @@
 							'id' => $_GET['id']
 							);
 						$taq = Taquilla::findByAttributes($busq)[0];
-						var_dump($taq);
 						$taq->estado = 3;
 						$taq->user_id = $_POST['user_id'];
 						if (empty($taq->fecha)){
@@ -235,13 +244,17 @@
 		}
 
 		function firmaAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$this->render('firma');
 			}
 		}
 
 		function statsAction() {
-			if ($this->security(true) && $_SESSION['user']->rol>=50) {
+			if (BLOQUEAR == 1){
+				$this->render('appBloqueada');
+			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$this->render('estadisticas');
 			}
 		}

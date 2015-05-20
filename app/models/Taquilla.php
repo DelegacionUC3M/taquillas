@@ -111,23 +111,22 @@ class Taquilla {
 
 		$db->run('CREATE TABLE '.$nombreTabla.' ( 
 			id serial PRIMARY KEY,
-	        num_taquilla integer,
-	        campus_id smallint,
-	        edificio_id smallint,
-	        planta_id smallint,
-	        zona_id char(2),
-	        tipo_id varchar(20) NOT NULL,
-	        estado_id smallint DEFAULT 1,
-	        user_id integer,
-	        fecha date,
-	        UNIQUE (num_taquilla, campus_id, edificio_id))');
+			num_taquilla integer,
+			campus smallint,
+			edificio smallint NOT NULL,
+			planta smallint NOT NULL,
+			zona char(2) NOT NULL,
+			tipo varchar(20) NOT NULL,
+			estado smallint DEFAULT 1,
+			user_id integer,
+			fecha date,
+			UNIQUE (num_taquilla, campus, edificio))');
 
-		$db->run('INSERT INTO '.$nombreTabla. ' SELECT * FROM taquillas');
+		$db->run('INSERT INTO '.$nombreTabla.' SELECT * FROM taquillas');
 		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3');
 	}
 
 	public function bloquearApp() {
-		print_r("METODO bloquear app");
 		//write BLOQUEO = 1;
 		//Se coloca el puntero al final del archivo, se borra la linea y se reescribe modificando el valor de BLOQUEO
 		$conf = fopen('config.php', 'r+');
@@ -136,12 +135,10 @@ class Taquilla {
 		 
 		// Separar linea por linea
 		$contenido = explode(';',$contenido);
-		 
 		// Modificar linea de BLOQUEAR, que es la última
-		$contenido[count($contenido)-1] = "define('BLOQUEAR',1);";
-		 
+		$contenido[count($contenido)-2] = "\ndefine('BLOQUEAR',1)";
 		// Se deja como estaba
-		$contenido = implode(';\n',$contenido);
+		$contenido = implode(';',$contenido);
 		 
 		// Guardar Archivo
 		$conf = fopen('config.php','w');
@@ -158,12 +155,10 @@ class Taquilla {
 		 
 		// Separar linea por linea
 		$contenido = explode(';',$contenido);
-		 
 		// Modificar linea de BLOQUEAR, que es la última
-		$contenido[count($contenido)-1] = "define('BLOQUEAR',0);";
-		 
+		$contenido[count($contenido)-2] = "\ndefine('BLOQUEAR',0)";
 		// Se deja como estaba
-		$contenido = implode(';\n',$contenido);
+		$contenido = implode(';',$contenido);
 		 
 		// Guardar Archivo
 		$conf = fopen('config.php','w');
