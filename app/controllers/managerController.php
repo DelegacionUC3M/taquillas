@@ -2,6 +2,11 @@
 
 	class managerController extends Controller {
 
+		/**
+		 * Renderiza la vista de gestionUsuarios
+		 * 
+		 * @return void
+		 */
 		function gestionUsuariosAction() {
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');
@@ -10,6 +15,12 @@
 			}
 		}
 
+		/**
+		 * Encuentra a todos los usuarios y renderiza la vista 
+		 * listarUsuarios pasandole la lista
+		 * 
+		 * @return void
+		 */
 		function listarAction() {
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');
@@ -19,15 +30,20 @@
 			}
 		}
 
+		/**
+		 * Permite añadir un nuevo usuario a la BD.
+		 * 
+		 * @return void
+		 */
 		function anadirUsuarioAction() {
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=100) {
 				$error = "";
 				if (isset($_POST['anadirUsuario'])) {
-					if(is_null(DBDelegados::findByNIA($_POST['nia']))) {
+					if(is_null(DBDelegados::existsNIA($_POST['nia']))) {
 						$error = 'Usuario no encontrado';
-					} else if (!is_null(DBDelegados::findByNIAPermisos($_POST['nia']))) {
+					} else if (!is_null(DBDelegados::getIdByNIA($_POST['nia']))) {
 						$error = 'Usuario ya existente en la tabla permisos';
 					} else {
 						DBDelegados::anadirUsuario($_POST['nia'], $_POST['rol']);
@@ -38,6 +54,11 @@
 			}
 		}
 
+		/**
+		 * Permite modificar el rol de un usuario
+		 * 
+		 * @return void
+		 */
 		function modificarUsuarioAction() {
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');
@@ -57,6 +78,11 @@
 			}
 		}
 
+		/**
+		 * Bloquea/Desbloquea la aplicación
+		 * 
+		 * @return void
+		 */
 		function bloquearAction() {
 			if ($this->security(true) && $_SESSION['user']->rol>=100) {
 				if (isset($_POST['confirmar_bloqueo'])) {
@@ -69,6 +95,11 @@
 			}
 		}
 
+		/**
+		 * Resetea la BD, preparandola para el nuevo año.
+		 * 
+		 * @return void
+		 */
 		function resetearAction(){
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');

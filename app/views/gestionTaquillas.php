@@ -8,14 +8,14 @@
 	<div id='filtros'>
 	<form action='/taquillas/admin/gestionTaq' method='post'>
 
-			Campus: <select id='campus' name='campus'>
+			Campus: <select id='campus' name='campus'> 
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>
 				<option name='Leganes' value='2'> Leganés </option>
-			</select>
-			Edificio: <select id='edificio' name='edificio'></select>
-			Planta: <select id='planta' name='planta'></select>
-			Zona: <select id='zona' name='zona'></select>
+			</select><br>
+			Edificio: <select id='edificio' name='edificio'></select><br>
+			Planta: <select id='planta' name='planta'></select><br>
+			Zona: <select id='zona' name='zona'></select><br>
 			Tipo: <input name='tipo' value=> <br>
 			Estado: <input type='number' min='1' max='4' name='estado' value=> <br>
 			Dueño: <input name='user_id' value=> <br>

@@ -24,7 +24,7 @@
 			Fecha: <input type='date' name='fecha' value=<?php if (!is_null($datos->fecha)){ echo $datos->fecha; } ?>> <br>
 
 			<button id='modificar' type="submit" value="gestion" name='gestion'> Modificar </button>
-			<a href='/taquillas/admin/listar'> Atrás </a>
+			<a href='/taquillas/admin/gestionTaq'> Atrás </a>
 			</form>
 
 

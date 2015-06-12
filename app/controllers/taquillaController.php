@@ -2,6 +2,11 @@
 
 	class taquillaController extends Controller {
 
+	/**
+	 * Renderiza el panel
+	 * 
+	 * @return void
+	 */
 	function panelAction(){
 		if ($this->security(false)) {
 			$this->render('panel');
@@ -9,6 +14,11 @@
 		$this->render('inicio');
 	}
 
+	/**
+	 * Permite reservar una taquilla.
+	 * 
+	 * @return void
+	 */
 	function reservarAction() {
 		if (BLOQUEAR == 1){
 			$this->render('appBloqueada');
@@ -71,6 +81,11 @@
 		}
 	}
 
+	/**
+	 * Confirma la reserva de la taquilla y actualiza los datos en la BD.
+	 * 
+	 * @return void
+	 */
 	function confirmarAction() {
 		if (BLOQUEAR == 1){
 			$this->render('appBloqueada');
@@ -103,6 +118,12 @@
 			$this->render('confirmar',array('error'=>$error));
 		}
 	}
+
+	/**
+	 * Devuelve un JSON con la lista de edificios
+	 * 
+	 * @return void
+	 */
 	function getEdificiosAction(){
 		header('Content-Type: application/json');
 

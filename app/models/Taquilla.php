@@ -103,7 +103,11 @@ class Taquilla {
 	}
 	
 
-	
+	/**
+	 * Resetea la taquilla. La prepara para el curso siguiente
+	 * 
+	 * @return void
+	 */
 	public function resetearTaquilla() {
 		$db = new DB(SQL_DB);
 		$year = date ('Y');
@@ -126,6 +130,11 @@ class Taquilla {
 		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3');
 	}
 
+	/**
+	 * Bloquea la App de forma que no se pueda acceder
+	 * 
+	 * @return void
+	 */
 	public function bloquearApp() {
 		//write BLOQUEO = 1;
 		//Se coloca el puntero al final del archivo, se borra la linea y se reescribe modificando el valor de BLOQUEO
@@ -146,6 +155,11 @@ class Taquilla {
 		fclose($conf);
 	}
 
+	/**
+	 * Desbloquea la App para que la gente pueda volver a acceder.
+	 * 
+	 * @return void
+	 */
 	public function desbloquearApp() {
 		//write BLOQUEO = 0;
 		//Se coloca el puntero al final del archivo, se borra la linea y se reescribe modificando el valor de BLOQUEO
@@ -166,6 +180,11 @@ class Taquilla {
 		fclose($conf);
 	}
 
+	/**
+	 * Genera un array con toda la jerarquía de los campus
+	 * 
+	 * @return array $list array con la jerarquía generada.
+	 */
 	public function attrBusqueda() {
 		$db = new DB(SQL_DB);
 
@@ -202,6 +221,40 @@ class Taquilla {
 		
 		return $list;
 
+	}
+
+	/**
+	 * Genera un array con las taquillas agrupadas según su estado.
+	 * Es posible filtrar por campus y estado
+	 * 
+	 * @return array $list array con el nº de taquillas encontradas
+	 */
+	public function stats($campus = NULL, $estado = NULL){
+		header('Content-Type: application/json');
+		$db= new DB(SQL_DB);
+		$query = 'SELECT estado, count(*) as total FROM taquillas';
+		if (!is_null($campus)) {
+			$query .= ' WHERE campus=?';
+			if (!is_null($estado)) {
+				$query .= ' AND estado=? GROUP BY estado';
+				$db->run($query, array($campus, $estado));
+			}
+			else{
+				$query .= ' GROUP BY estado';
+				$db->run($query, array($campus));
+			}
+		}
+		else if (!is_null($estado)) {
+			$query .= ' WHERE estado=? GROUP BY estado';
+			$db->run($query, array($estado));
+		}
+		else{
+			$query .= ' GROUP BY estado';
+			$db->run($query);
+		}
+		$taq = $db->data();
+		return $taq;
+		
 	}
 }
 

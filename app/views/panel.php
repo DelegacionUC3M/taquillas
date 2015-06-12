@@ -8,7 +8,7 @@
 		<li> <a href='/taquillas/admin/listar'> Listar taquillas </a></li>
 		<li> <a href='/taquillas/admin/asignar'> Asignar y cobrar taquillas </a></li>
 		<li> <a href='/taquillas/admin/gestionTaq'> Gestionar Taquillas </a></li>
-	<!--<li> <a href='/taquillas/admin/sancionar'> Sancionar usuarios </a></li>-->
+		<li> <a href='/taquillas/admin/intercambiar'> Intercambiar Taquillas </a></li>
 		<li> <a href='/taquillas/admin/stats'> Estadísticas </a></li>
 		<li> <a href='/taquillas/admin/firma'> Firma </a></li>
 		<?php } 
