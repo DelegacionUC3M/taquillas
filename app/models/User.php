@@ -5,27 +5,24 @@
  */
 class User {
 
-	public $name;
-	public $nia;
-	public $idu;
-	public $email;
-	public $rol;
+	/** User identifier. **/
+	public $uid; 
+    /** User full name. **/
+    public $cn; 
+    /** User email account.**/
+    public $mail; 
+    /** User LDAP path.**/
+    public $dn;
+    /** User rol (10 student, 100 admin) **/
+    public $rol;
 
-	public function __construct($nia = NULL, $name = NULL, $email = NULL,$dn = NULL) {
+	public function __construct($nia = NULL, $cn = NULL, $mail = NULL,$dn = NULL) {
     	$this->uid = $nia;
-    	$this->cn = $name;
-    	$this->mail = $email;
+    	$this->cn = $cn;
+    	$this->mail = $mail;
     	$this->dn = $dn;
-       // $rol = DBDelegados::getRol($nia);
+       	$rol = DBDelegados::getRol($nia);
         $this->rol = !empty($rol) ? $rol : 10;
-    	//Pedir a la base de datos si el nia esta en la tabla de usuarios.
-        if (!is_null($dn)){
-	    	$cat = explode(",",$dn);
-	    	print_r($cat);
-	    	$cat = str_replace("ou=", "", $cat[2]);
-	    	print_r($cat);
-	    	$this->category = $cat;
-    	}
     }
 
 	/**
@@ -39,38 +36,28 @@ class User {
 
 		if ($ldap->count() > 0) {
 			$result = $ldap->data()[0];
-
-			$user = new User;
-			$user->name = $result['cn'][0];
-			$user->nia = $result['uid'][0];
-			$user->idu = $result['uc3midu'][0];
-			$user->email = $result['mail'][0];
+			$user = new User($result['uid'][0], $result['cn'][0], $result['mail'][0], $result['dn']);
 			return $user;
 		} else {
 			return null;
 		}
 	}
 
-	/**
-	 * Encuentra a una persona por IDU
-	 * @param  string $idu 	IDU por el que buscar persona
-	 * @return User
-	 */
+	/*
+	  Encuentra a una persona por IDU
+	  @param  string $idu 	IDU por el que buscar persona
+	 @return User
+	 
 	public static function findByIDU($idu) {
 		$ldap = new LDAP;
 		$ldap->run('uc3midu=' . $idu, array('uid', 'cn', 'uc3midu', 'mail'));
 
 		if ($ldap->count() > 0) {
 			$result = $ldap->data()[0];
-
-			$user = new User;
-			$user->name = $result['cn'][0];
-			$user->nia = $result['uid'][0];
-			$user->idu = $result['uc3midu'][0];
-			$user->email = $result['mail'][0];
+			$user = new User($result['uid'][0], $result['cn'][0], $result['mail'][0], $result['dn']);
 			return $user;
 		} else {
 			return null;
 		}
-	}
+	} */
 }

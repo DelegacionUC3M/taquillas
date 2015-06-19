@@ -1,6 +1,4 @@
 <?php
-	include 'app/components/fpdf/fpdf.php';
-	include 'app/components/pdf.php';
 
 	class adminController extends Controller {
 		
@@ -171,34 +169,58 @@
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$error = '';
+				$confirm = '';
+				$taq1 = null;
+				$taq2 = null;
 				if (isset($_POST['intercambiar'])) {
-					//Taquilla del usuario 1
-					print_r($_POST);
-					$taq1 = Taquilla::findByAttributes(array('user_id' => $_POST['user1']));
-					print_r($taq1);
-					//Taquilla del usuario 2
-					$taq2 = Taquilla::findByAttributes(array('user_id' => $_POST['user2']));
-					print_r($taq2);
-					//Se comprueba que ambos tengan taquillas
-					if (is_null($taq1[0])) {
-						$error = 'El usuario 1 no tiene taquilla';
-						$this->render('intercambiar',array('error' => $error));
+					if ((empty($_POST['taquilla1']) || empty($_POST['taquilla2'])) && (empty($_POST['user1']) || empty($_POST['user2']))  ) {
+						$error = 'Deben seleccionarse una taquilla de cada usuario';
 					}
-					if (is_null($taq2[0])) {
-						$error = 'El usuario 2 no tiene taquilla';
-						$this->render('intercambiar',array('error' => $error));
+					else if (!empty($_POST['taquilla1']) || !empty($_POST['taquilla2'])) {
+						//Taquilla del usuario 1
+						$taq1 = Taquilla::findByAttributes(array('id' => $_POST['taquilla1']));
+						//Taquilla del usuario 2
+						$taq2 = Taquilla::findByAttributes(array('id' => $_POST['taquilla2']));
+						if (is_null($taq1[0])) {
+							$error = 'El usuario 1 no tiene taquilla';
+							$this->render('intercambiar',array('error' => $error));
+						}
+						if (is_null($taq2[0])) {
+							$error = 'El usuario 2 no tiene taquilla';
+							$this->render('intercambiar',array('error' => $error));
+						}
+
+						var_dump($taq1[0]->user_id);
 					}
+					else {
+						//Taquilla del usuario 1
+						$taq1 = Taquilla::findByAttributes(array('user_id' => $_POST['user1']));
+						//Taquilla del usuario 2
+						$taq2 = Taquilla::findByAttributes(array('user_id' => $_POST['user2']));
+						//Se comprueba que ambos tengan taquillas
+						if (is_null($taq1[0])) {
+							$error = 'El usuario 1 no tiene taquilla';
+							$this->render('intercambiar',array('error' => $error));
+						}
+						if (is_null($taq2[0])) {
+							$error = 'El usuario 2 no tiene taquilla';
+							$this->render('intercambiar',array('error' => $error));
+						}
+					}
+
 					//Se intercambian los usuarios y se guarda
-					$aux = $taq1[0]['user_id'];
-					$taq1[0]['user_id'] = $taq2[0]['user_id'];
-					$taq2[0]['user_id'] = $aux;
-					$taq1[0]['fecha'] = date("d-m-Y");
-					$taq2[0]['fecha'] = date("d-m-Y");
-					$taq1->save();
-					$taq2->save();
-					$error = 'Intercambio realizado correctamente';
+					if (count($taq1) == 1 && count($taq2) == 1){
+						$aux = $taq1[0]->user_id;
+						$taq1[0]->user_id = $taq2[0]->user_id;
+						$taq2[0]->user_id = $aux;
+						$taq1[0]->fecha = date("d-m-Y");
+						$taq2[0]->fecha = date("d-m-Y");
+						$taq1[0]->save();
+						$taq2[0]->save();
+						$confirm = 'Intercambio realizado correctamente';
+					}
 				}
-				$this->render('intercambiar',array('error' => $error));
+				$this->render('intercambiar',array('error' => $error, 'confirm' => $confirm, 'usuario1' => $taq1, 'usuario2' => $taq2));
 			}
 		}
 
@@ -211,60 +233,56 @@
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
-				$error = "";
+				$error = '';
 				if (isset($_POST['asignar'])){
 					if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) && isset($_POST['user_id'])) {
-						$busqueda = array('user_id' => $_POST['user_id']);
+						$busqueda = array('user_id' => $_POST['user_id'], 'estado' => 2);
 						$taqDisponibles = Taquilla::findByAttributes($busqueda);
-						//Puede que ya exista una reserva por lo tanto puede haber 1 o 0.
-						if (count($taqDisponibles) < 2) {
-							//No hay reserva
-							if(count($taqDisponibles) == 0) {
-								$edificio = explode(' ', $_POST['edificio']);
-								$busqueda = array(
-									'campus' => $_POST['campus'],
-									'edificio' => $edificio[0],
-									'planta' => $_POST['planta'],
-									'zona' => "'".$_POST['zona']."'",
-									'tipo' => "'".$_POST['tipo']."'",
-									'estado' => 1,
-									'user_id' => NULL,
-									);
-								if (!empty($_POST['num_taquilla'])){
-									$busqueda['num_taquilla'] = $_POST['num_taquilla'];
-								}
-								$taqDisponibles = Taquilla::findByAttributes($busqueda);
-								//Encuentra taquillas libres
-								if (!empty($taqDisponibles)) {
-									//Si se ha buscado por id se le asigna
-									if (!empty($_POST['num_taquilla'])) {
-										$reserva = new Taquilla;
-										$reserva = $taqDisponibles[0];
-										$reserva->user_id = $_POST['user_id'];
-									} else {
-										//Si no se busca por id es aleatorio
-										$aleatorio = rand (0,count($taqDisponibles)-1);
-										$reserva = new Taquilla;
-										$reserva = $taqDisponibles[$aleatorio];
-										$reserva->user_id = $_POST['user_id'];
-									}
-									$this->render('confirmarAsig',array('reserva'=>$reserva));
+						//No hay reserva
+						if(count($taqDisponibles) == 0) {
+							$edificio = explode(' ', $_POST['edificio']);
+							$busqueda = array(
+								'campus' => $_POST['campus'],
+								'edificio' => $edificio[0],
+								'planta' => $_POST['planta'],
+								'zona' => "'".$_POST['zona']."'",
+								'tipo' => "'".$_POST['tipo']."'",
+								'estado' => 1,
+								'user_id' => NULL,
+								);
+							if (!empty($_POST['num_taquilla'])){
+								$busqueda['num_taquilla'] = $_POST['num_taquilla'];
+							}
+							$taqDisponibles = Taquilla::findByAttributes($busqueda);
+							//Encuentra taquillas libres
+							if (!empty($taqDisponibles)) {
+								//Si se ha buscado por id se le asigna
+								if (!empty($_POST['num_taquilla'])) {
+									$reserva = new Taquilla;
+									$reserva = $taqDisponibles[0];
+									$reserva->user_id = $_POST['user_id'];
 								} else {
-									//No hay taquillas libres
-									$error = 'No hay taquillas libres';
-									$this->render('asigCobra',array('error' => $error));
+									//Si no se busca por id es aleatorio
+									$aleatorio = rand (0,count($taqDisponibles)-1);
+									$reserva = new Taquilla;
+									$reserva = $taqDisponibles[$aleatorio];
+									$reserva->user_id = $_POST['user_id'];
 								}
-							}
-							//Caso de que ya exista 1 reserva
-							else if ($taqDisponibles[0]->estado == 2) {
-								$reserva = $taqDisponibles[0];
 								$this->render('confirmarAsig',array('reserva'=>$reserva));
-							}
-							else{
-								$error = 'El usuario ya ocupa una taquilla';
+							} else {
+								//No hay taquillas libres
+								$error = 'No hay taquillas libres';
 								$this->render('asigCobra',array('error' => $error));
 							}
-
+						}
+						//Caso de que ya exista 1 o + reservas, se elige la 1º.
+						else if ($taqDisponibles[0]->estado == 2) {
+							$reserva = $taqDisponibles[0];
+							$this->render('confirmarAsig',array('reserva'=>$reserva));
+						}
+						else{
+							$error = 'Ha ocurrido un error';
+							$this->render('asigCobra',array('error' => $error));
 						}
 					} else {
 						//Algún campo vacío
@@ -308,7 +326,7 @@
 					    $campus = $taq->campus;
 					    $edificio = $taq->edificio;
 			            $niu = $taq->user_id;
-			            $alumno = User::findByNIA($niu)->name;
+			            $alumno = User::findByNIA($niu)->cn;
 			            $edificio = Taquilla::$nombreEdificios[$campus][$edificio];
 			            $zona = $taq->zona;
 			            $planta = $taq->planta;
@@ -457,6 +475,7 @@
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$firma = '';
+				$resultado = '';
 				if (isset($_POST['firma'])) {
 					$numero = $_POST['num_taquilla'];
 				    $campus = $_POST['campus'];
@@ -465,10 +484,15 @@
 		            $zona = $_POST['zona'].' ';
 		            $planta = $_POST['planta'];
 		            $tipo = $_POST['tipo'];
-		           	print_r($campus.$edificio.$planta.$zona.$tipo.$numero.$niu);
 		            $firma = sha1($campus.$edificio.$planta.$zona.$tipo.$numero.$niu);
+		            if (strcmp($firma,$_POST['firmaComp']) == 0) {
+		            	$resultado = 'Ambas firmas son iguales';
+		            }
+		            else{
+		            	$resultado = 'Firmas distintas';
+		            }
 				}
-				$this->render('comprobarFirma', array('firma' => $firma));
+				$this->render('comprobarFirma', array('firma' => $firma, 'resultado' => $resultado, 'introducido' => $_POST['firmaComp']));
 			}
 		}
 

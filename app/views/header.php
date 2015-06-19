@@ -12,8 +12,7 @@
         <link rel="stylesheet" href="/taquillas/assets/css/main.css">
         <script src="/taquillas/assets/js/vendor/prefixfree.min.js"></script>
         <script src="/taquillas/assets/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="http://code.highcharts.com/highcharts.js"></script>
-        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        
     </head>
     <body>
         <!--[if lt IE 7]>

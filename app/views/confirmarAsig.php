@@ -33,7 +33,7 @@
 	</form>
 	<form action='/taquillas/admin/cobrar/<?php echo $reserva->id ?>' method='post'>
 		<input type='hidden' name='user_id' value=<?php echo $reserva->user_id?>>
-		<button id='cobrar' type="submit" value="cobrar" name='cobrar'>Asignar y Cobrar</button>
+		<button id='cobrar' type="submit" value="cobrar" name='cobrar' formtarget='_blank' >Asignar y Cobrar</button>
 	</form>
 	
 </div>

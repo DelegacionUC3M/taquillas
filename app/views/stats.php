@@ -1,25 +1,24 @@
 <div>
+	<p id='eps1'> EPS </p>
 
-	<div id='totalEPS'>
-	</div>
-	<div>
-		<p id='ed1eps'>1 - Agustin de Betancourt</p>
-		<p id='ed2eps'>2 - Sabatini</p>
-		<p id='ed4eps'>4 - Torres Quevedo</p>
-		<p id='ed7eps'>7 - Juan Benet</p>
-	</div> 
+	<ul id='eps2'>
+		<li id='totalEPS'>Total EPS</li>
+		<li id='ed1eps'>1 - Agustin de Betancourt</li>
+		<li id='ed2eps'>2 - Sabatini</li>
+		<li id='ed4eps'>4 - Torres Quevedo</li>
+		<li id='ed7eps'>7 - Juan Benet</li>
+	</ul> 
 
-	<div id='totalCSJ'>
-	</div>
-	<div>
-		<p id='ed4csj'>4 - Gómez de la Serna</p>
-		<p id='ed5csj'>5 - Giner de los Ríos</p>
-		<p id='ed6csj'>6 - Normante</p>
-		<p id='ed7csj'>7 - Foronda</p>
-		<p id='ed9csj'>9 - Adofo Posada</p>
-		<p id='ed10csj'>10 - Campomanes</p>
-		<p id='ed12csj'>12 - María Moliner</p>
-		<p id='ed15csj'>15 - López Aranguren</p>
-		
-	</div> 
+	<p id='csj1'> CCSSJJ</p>
+	<ul id='csj2'>
+		<li id='totalCSJ'>Total CCSSJJ</li>
+		<li id='ed4csj'>4 - Gómez de la Serna</li>
+		<li id='ed5csj'>5 - Giner de los Ríos</li>
+		<li id='ed6csj'>6 - Normante</li>
+		<li id='ed7csj'>7 - Foronda</li>
+		<li id='ed9csj'>9 - Adofo Posada</li>
+		<li id='ed10csj'>10 - Campomanes</li>
+		<li id='ed12csj'>12 - María Moliner</li>
+		<li id='ed15csj'>15 - López Aranguren</li>
+	</ul> 
 </div>

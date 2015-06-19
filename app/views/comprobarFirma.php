@@ -13,11 +13,21 @@
 				Dueño: <input name='user_id' value=> <br>
 				Num. Taquilla: <input name='num_taquilla' value=><br>
 				<div id='tipoTaquilla'></div>
+
+				Firma: <input name='firmaComp' value=><br>
 			<button id='firma' type='submit' name='firma'> Generar Firma</button>
 		</form>
-		<p>
+		<p id='mensajeFirma'>
 			<?php if(!empty($firma)) {
 					echo 'La firma generada es: '.$firma;
+				}
+			?> <br> <?php 
+				if (!empty($introducido)) {
+					echo 'La firma introducida es: '.$introducido;
+				}
+			?> <br> <?php 
+				if (!empty($resultado)) {
+					echo $resultado;
 				}
 			?>
 		</p>

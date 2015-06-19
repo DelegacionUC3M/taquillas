@@ -37,7 +37,6 @@
 					
 						if($ldapUser) {
 							$user = new User($user['uid'][0], $user['cn'][0],$user['uc3mcorreoalias'][0], $user['dn']);
-							$user->rol = 100;
 							$_SESSION['user'] = $user;
 
 							if (isset($_GET['url'])) {

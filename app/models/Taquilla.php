@@ -229,24 +229,24 @@ class Taquilla {
 	 * 
 	 * @return array $list array con el nº de taquillas encontradas
 	 */
-	public function stats($campus = NULL, $estado = NULL){
+	public function stats($campus = NULL, $edificio = NULL){
 		header('Content-Type: application/json');
 		$db= new DB(SQL_DB);
 		$query = 'SELECT estado, count(*) as total FROM taquillas';
 		if (!is_null($campus)) {
 			$query .= ' WHERE campus=?';
-			if (!is_null($estado)) {
-				$query .= ' AND estado=? GROUP BY estado';
-				$db->run($query, array($campus, $estado));
+			if (!is_null($edificio)) {
+				$query .= ' AND edificio=? GROUP BY estado';
+				$db->run($query, array($campus, $edificio));
 			}
 			else{
 				$query .= ' GROUP BY estado';
 				$db->run($query, array($campus));
 			}
 		}
-		else if (!is_null($estado)) {
-			$query .= ' WHERE estado=? GROUP BY estado';
-			$db->run($query, array($estado));
+		else if (!is_null($edificio)) {
+			$query .= ' WHERE edificio=? GROUP BY estado';
+			$db->run($query, array($edificio));
 		}
 		else{
 			$query .= ' GROUP BY estado';
@@ -254,7 +254,37 @@ class Taquilla {
 		}
 		$taq = $db->data();
 		return $taq;
+	}
+
+	public function generarSalida($taq){
+		$salida = array(
+			array('Libres',0),
+			array('Reservadas',0),
+			array('Abonadas',0),
+			array('Incidencia',0)
+		);
 		
+        foreach ($taq as $value) {
+            switch ($value['estado']) {
+            	//Libre
+                case 1:
+                    $salida[0][1] = (int) $value['total'];
+                    break;
+                //Reservado
+                case 2:
+                    $salida[1][1] = (int) $value['total'];
+                    break;
+                //Abonado
+                case 3:
+                    $salida[2][1] = (int) $value['total'];
+                    break;
+                //Incidencia
+                case 4:
+                    $salida[3][1] = (int) $value['total'];
+                    break;
+            }
+        }
+        return $salida;
 	}
 }
 

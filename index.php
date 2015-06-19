@@ -14,6 +14,8 @@ function __autoload($class) {
 		include ('app/views/'.$class.'.php');
 	} else if (file_exists('app/components/'.$class.'.php')) {
 		include ('app/components/'.$class.'.php');
+	} else if (file_exists('app/components/fpdf/'.$class.'.php')) {
+		include ('app/components/fpdf/'.$class.'.php');
 	}
 
 	if (!class_exists($class)) {

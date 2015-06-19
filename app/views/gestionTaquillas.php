@@ -17,7 +17,7 @@
 			Planta: <select id='planta' name='planta'></select><br>
 			Zona: <select id='zona' name='zona'></select><br>
 			Tipo: <input name='tipo' value=> <br>
-			Estado: <input type='number' min='1' max='4' name='estado' value=> <br>
+			Estado: <input type='number' min='0' max='4' name='estado' value=> <br>
 			Dueño: <input name='user_id' value=> <br>
 			Fecha: <input type='date' name='fecha' value=> <br>
 			Num. Taquilla: <input name='num_taquilla' value=> <br>
