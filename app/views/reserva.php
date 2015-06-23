@@ -1,23 +1,24 @@
 <div>
-		<p class="error"> <?php if (!empty($error)) print_r($error); ?> </p>
+		<p class="error"> <?php if (!empty($error)) echo $error; ?> </p>
 		
 		<form action='/taquillas/taquilla/reservar' method='post'>
-			
-			Campus: <select id='campus' name='campus'>
-				<option name='vacio'></option>
-				<option name='CSSJJ' value='1'> CSSJJ </option>
-				<option name='Leganes' value='2'> Leganés </option>
-			</select><br>
+			<ul id='formulario'>
+				Campus:
+				<li> <select id='campus' name='campus'>
+					<option name='vacio'></option>
+					<option name='CSSJJ' value='1'> CSSJJ </option>
+					<option name='Leganes' value='2'> Leganés </option>
+				</select></li>
+				Edificio:
+				<li><select id='edificio' name='edificio'></select></li>
+				Planta: 
+				<li><select id='planta' name='planta'></select></li>
+				Zona: 
+				<li><select id='zona' name='zona'></select></li>
 
-			Edificio: <select id='edificio' name='edificio'></select><br>
-
-			Planta: <select id='planta' name='planta'></select><br>
-
-			Zona: <select id='zona' name='zona'></select><br>
-
-			<div id='tipoTaquilla'></div>
-
-			<div> Num. Taquilla (Opcional) <input name='num_taquilla' value=></div><br>
+				<li><div id='tipoTaquilla'></div></li>
+				<div> Num. Taquilla (Opcional)
+				<li><input name='num_taquilla' value=></div></li>
   			<button id='reserva' type='submit' value='reserva' name='formulario'>Reservar taquilla</button>
 
 		</form>

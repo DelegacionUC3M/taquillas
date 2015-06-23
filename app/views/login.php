@@ -1,4 +1,4 @@
-<div id='login'>
+<div id='cuerpo'>
 	<h2>Entrar a Taquillas</h2>
 
 	<p class="error"><?php echo isset($error) ? $error : '' ?></p>

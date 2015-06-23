@@ -7,20 +7,30 @@
 	</p>
 	<div id='filtros'>
 	<form action='/taquillas/admin/gestionTaq' method='post'>
-
-			Campus: <select id='campus' name='campus'> 
+		<ul id='formulario'>
+			Campus: 
+			<li> <select id='campus' name='campus'> 
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>
 				<option name='Leganes' value='2'> Leganés </option>
-			</select><br>
-			Edificio: <select id='edificio' name='edificio'></select><br>
-			Planta: <select id='planta' name='planta'></select><br>
-			Zona: <select id='zona' name='zona'></select><br>
-			Tipo: <input name='tipo' value=> <br>
-			Estado: <input type='number' min='0' max='4' name='estado' value=> <br>
-			Dueño: <input name='user_id' value=> <br>
-			Fecha: <input type='date' name='fecha' value=> <br>
-			Num. Taquilla: <input name='num_taquilla' value=> <br>
+			</select></li>
+			Edificio: 
+			<li> <select id='edificio' name='edificio'></select></li>
+			Planta: 
+			<li> <select id='planta' name='planta'></select></li>
+			Zona: 
+			<li> <select id='zona' name='zona'></select></li>
+			Tipo: 
+			<li> <input name='tipo' value=> </li>
+			Estado: 
+			<li> <input type='number' min='0' max='4' name='estado' value=> </li>
+			Dueño: 
+			<li> <input name='user_id' value=> </li>
+			Fecha: 
+			<li> <input type='date' name='fecha' value=> </li>
+			Num. Taquilla: 
+			<li> <input name='num_taquilla' value=> </li>
+		</ul>
 		<button id='listaBoton' type='submit' name='busqueda'> Listar</button>
 	</form>
 	</div>

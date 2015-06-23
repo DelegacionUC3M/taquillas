@@ -47,6 +47,7 @@
 				$id;
 				$datos;
 				$cambio = "";
+				$error = "";
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
 					$search = array('id'=>$_GET['id']);
@@ -57,35 +58,35 @@
 					//Comprobación del dueño
 					if (!empty($_POST['user_id'])) {
 						if(is_null(User::findByNIA($_POST['user_id']))) {
-							$cambio = 'Usuario no encontrado';
+							$error = 'Usuario no encontrado';
 						}
 						if(empty($_POST['fecha'])) {
-							$cambio .= 'Necesaria una fecha si tiene dueño la taquilla';
+							$error .= 'Necesaria una fecha si tiene dueño la taquilla';
 						}
 						if (!is_null(Taquilla::findByAttributes(array('id' => $_POST['user_id'])))) {
-							$cambio .= 'Un usuario no puede tener más de 1 taquilla';
+							$error .= 'Un usuario no puede tener más de 1 taquilla';
 						}
 					}
 
 					//Comprobación del estado
 					if (!empty($_POST['estado'])) {
 						if (($_POST['estado'] != 1) && ($_POST['estado'] != 2) && ($_POST['estado'] != 3) && ($_POST['estado'] != 4) && ($_POST['estado'] != 5)) {
-							$cambio .= 'Estado no válido';
+							$error .= 'Estado no válido';
 						}
 						if ($_POST['estado'] == 1 && (!empty($_POST['user_id']) || !empty($_POST['fecha'])) ) {
-							$cambio .= 'Si el estado es libre, no puede tener dueño';
+							$error .= 'Si el estado es libre, no puede tener dueño';
 						}
 						if (empty($_POST['user_id']) && ($_POST['estado'] == 2 || $_POST['estado'] == 3)) {
-							$cambio .= 'Es necesario que la taquilla tenga un dueño';
+							$error .= 'Es necesario que la taquilla tenga un dueño';
 						}
 					}
 					//Comprobación de la fecha
 					if (!empty($_POST['fecha'])) {
 						if (($_POST['estado'] != 2) && ($_POST['estado'] != 3)) {
-							$cambio .= 'Para que tenga fecha la taquilla debe estar ocupada/reservada';
+							$error .= 'Para que tenga fecha la taquilla debe estar ocupada/reservada';
 						}
 						if (empty($_POST['user_id'])) {
-							$cambio .= 'Si la taquilla está ocupada/reservada debe tener la fecha de ésta';
+							$error .= 'Si la taquilla está ocupada/reservada debe tener la fecha de ésta';
 						}
 					}
 					//ejecución correcta. Se comprueba que el mensaje de cambio no se ha modificado.
@@ -107,7 +108,7 @@
 						$cambio .= 'Cambios realizados correctamente';
 					}					
 				}
-				$this->render('modificarTaq',array('datos'=>$datos, 'cambio' => $cambio));
+				$this->render('modificarTaq',array('datos'=>$datos, 'cambio' => $cambio, 'error' => $error));
 			}
 		}
 
@@ -268,7 +269,8 @@
 									$reserva = $taqDisponibles[$aleatorio];
 									$reserva->user_id = $_POST['user_id'];
 								}
-								$this->render('confirmarAsig',array('reserva'=>$reserva));
+								$email = User::findByNIA($_POST['user_id'])->mail;
+								$this->render('confirmarAsig',array('reserva'=>$reserva, 'email'=>$email));
 							} else {
 								//No hay taquillas libres
 								$error = 'No hay taquillas libres';

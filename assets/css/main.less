@@ -98,7 +98,7 @@ a {
 	display: none;
 }
 
-input[type="text"], input[type="password"], textarea, select {
+input, textarea, select {
 	padding: 6px 8px;
 	border-radius: 5px;
 	background: #f6f6f6;
@@ -106,6 +106,18 @@ input[type="text"], input[type="password"], textarea, select {
 	color: #555454;
 	transition: all 0.4s;
 	font-weight: 300;
+
+	&:hover, &:focus {
+		border: 1px solid #555454;
+	}
+}
+
+#entrar {
+	padding: 6px 8px;
+	border-radius: 5px;
+	border: 1px solid #c4c4c4;
+	color: #555454;
+	transition: all 0.4s;
 
 	&:hover, &:focus {
 		border: 1px solid #555454;
@@ -143,8 +155,13 @@ button, a.button {
 
 }
 
-h1, h2, h3 {
+h1, h3 {
 	font-weight: 300;
+}
+
+h2 {
+	font-weight: 300;
+	color: @blue;
 }
 
 header {
@@ -189,11 +206,29 @@ html, body {
 	height: 100%;
 }
 
+button {
+	margin: 10px;
+}
+
 .main {
 	min-height: 500px;
 	min-height: 60vh;
 	min-height: ~"calc(100% - 93px - 194px)";
 
+	#cuerpo {
+		width: 80%;
+		position: relative;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		margin: auto;
+	}
+
+	form {
+		margin-left: 5%;
+		text-align: block;
+	}
 	h2 {
 		font-size: 1.7em;
 		max-height: 38px;
@@ -299,7 +334,7 @@ html, body {
 		}
 
 		input[type="text"], input[type="password"] {
-			display: block;
+			display: inline;
 			margin: 0 auto;
 			width: 300px;
 			padding: 12px 15px;
@@ -373,17 +408,4 @@ footer {
 		max-width: 500px;
 		text-align: left;
 	}
-}
-
-
-@media (max-width: 1060px) {
-	
-}
-
-@media (max-width: 670px) {
-
-}
-
-@media (max-width: 470px) {
-
 }

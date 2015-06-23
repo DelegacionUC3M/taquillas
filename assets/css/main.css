@@ -16,7 +16,6 @@
   text-transform: none;
   line-height: 1;
   /* Better Font Rendering =========== */
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -80,8 +79,7 @@ a:visited {
 .print {
   display: none;
 }
-input[type="text"],
-input[type="password"],
+input,
 textarea,
 select {
   padding: 6px 8px;
@@ -92,14 +90,23 @@ select {
   transition: all 0.4s;
   font-weight: 300;
 }
-input[type="text"]:hover,
-input[type="password"]:hover,
+input:hover,
 textarea:hover,
 select:hover,
-input[type="text"]:focus,
-input[type="password"]:focus,
+input:focus,
 textarea:focus,
 select:focus {
+  border: 1px solid #555454;
+}
+#entrar {
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  color: #555454;
+  transition: all 0.4s;
+}
+#entrar:hover,
+#entrar:focus {
   border: 1px solid #555454;
 }
 input,
@@ -135,9 +142,12 @@ a.button:before {
   margin-right: 10px;
 }
 h1,
-h2,
 h3 {
   font-weight: 300;
+}
+h2 {
+  font-weight: 300;
+  color: #066394;
 }
 header {
   background: #fff;
@@ -174,10 +184,26 @@ html,
 body {
   height: 100%;
 }
+button {
+  margin: 10px;
+}
 .main {
   min-height: 500px;
   min-height: 60vh;
   min-height: calc(100% - 93px - 194px);
+}
+.main #cuerpo {
+  width: 80%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.main form {
+  margin-left: 5%;
+  text-align: block;
 }
 .main h2 {
   font-size: 1.7em;
@@ -274,7 +300,7 @@ body {
 }
 .main.login input[type="text"],
 .main.login input[type="password"] {
-  display: block;
+  display: inline;
   margin: 0 auto;
   width: 300px;
   padding: 12px 15px;
@@ -335,13 +361,4 @@ footer span {
 footer span {
   max-width: 500px;
   text-align: left;
-}
-@media (max-width: 1060px) {
-  
-}
-@media (max-width: 670px) {
-  
-}
-@media (max-width: 470px) {
-  
 }

@@ -8,11 +8,9 @@
 	 * @return void
 	 */
 	function panelAction(){
-		if ($this->security(false)) {
+		if ($this->security(true)) {
 			$this->render('panel');
 		}
-
-		$this->render('inicio');
 	}
 
 	/**
@@ -51,13 +49,13 @@
 						if (!empty($_POST['num_taquilla'])) {
 							$reserva = new Taquilla;
 							$reserva = $taqDisponibles[0];
-							$reserva->user_id = $_SESSION['user']->nia;
+							$reserva->user_id = $_SESSION['user']->uid;
 						} else {
 							//Si no se busca por id es aleatorio
 							$aleatorio = rand (0,count($taqDisponibles)-1);
 							$reserva = new Taquilla;
 							$reserva = $taqDisponibles[$aleatorio];
-							$reserva->user_id = $_SESSION['user']->nia;
+							$reserva->user_id = $_SESSION['user']->uid;
 						}
 						$this->render('confirmar',array('reserva'=>$reserva));
 

@@ -12,8 +12,9 @@
 	?>
 	</p>
 	<form action='/taquillas/admin/intercambiar' method='post'>
-		Usuario 1: <input name='user1'> <br>
-		Usuario 2: <input name='user2'> <br>
+		<ul id='intercambiar'>
+			<li> Usuario 1: <input name='user1'></li>
+			<li> Usuario 2: <input name='user2'></li>
 		<div>
 		<?php if (!empty($usuario1)) { ?>
 				<ul id='usuario1'> 

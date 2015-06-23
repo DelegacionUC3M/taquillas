@@ -1,20 +1,26 @@
 <div>
 	<div id='filtros'>
 		<form action='/taquillas/admin/firma' method='post'>
-
-				Campus: <select id='campus' name='campus'>
+			<ul id='formulario'>
+				Campus:
+				<li><select id='campus' name='campus'>
 					<option name='vacio'></option>
 					<option name='CSSJJ' value='1'> CSSJJ </option>
 					<option name='Leganes' value='2'> Leganés </option>
-				</select><br>
-				Edificio: <select id='edificio' name='edificio'></select><br>
-				Planta: <select id='planta' name='planta'></select><br>
-				Zona: <select id='zona' name='zona'></select><br>
-				Dueño: <input name='user_id' value=> <br>
-				Num. Taquilla: <input name='num_taquilla' value=><br>
-				<div id='tipoTaquilla'></div>
+				</select></li>
+				Edificio: 
+				<li> <select id='edificio' name='edificio'></select></li>
+				Planta:
+				<li> <select id='planta' name='planta'></select></li>
+				Zona:
+				<li> <select id='zona' name='zona'></select></li>
+				Dueño:
+				<li> <input name='user_id' value=> </li>
+				Num. Taquilla:
+				<li> <input name='num_taquilla' value=></li>
+				<li><div id='tipoTaquilla'></div></li>
 
-				Firma: <input name='firmaComp' value=><br>
+				Firma: <li><input name='firmaComp' value=></li>
 			<button id='firma' type='submit' name='firma'> Generar Firma</button>
 		</form>
 		<p id='mensajeFirma'>

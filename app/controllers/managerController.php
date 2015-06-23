@@ -40,6 +40,7 @@
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=100) {
 				$error = "";
+				$correcto = "";
 				if (isset($_POST['anadirUsuario'])) {
 					if(is_null(DBDelegados::existsNIA($_POST['nia']))) {
 						$error = 'Usuario no encontrado';
@@ -47,10 +48,10 @@
 						$error = 'Usuario ya existente en la tabla permisos';
 					} else {
 						DBDelegados::anadirUsuario($_POST['nia'], $_POST['rol']);
-						$error = 'Usuario añadido correctamente';
+						$correcto = 'Usuario añadido correctamente';
 					}
 				}
-				$this->render('guardarUsuario', array('error' => $error));
+				$this->render('guardarUsuario', array('error' => $error, 'correcto' => $correcto));
 			}
 		}
 

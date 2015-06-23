@@ -2,16 +2,20 @@
 
 	<div id='filtros'>
 	<form action='/taquillas/admin/listar' method='post'>
-		
-			Campus: <select id='campus' name='campus'>
+		<ul id='formulario'>
+			Campus:
+			<li> <select id='campus' name='campus'>
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>
 				<option name='Leganes' value='2'> Leganés </option>
-			</select>
-			Edificio: <select id='edificio' name='edificio'></select>
-			Planta: <select id='planta' name='planta'></select>
-			Zona: <select id='zona' name='zona'></select>
-
+			</select> </li>
+			Edificio:
+			<li> <select id='edificio' name='edificio'></select> </li>
+			Planta:
+			<li> <select id='planta' name='planta'></select> </li>
+			Zona:
+			<li> <select id='zona' name='zona'></select> </li>
+		</ul>
 		<button id='listaBoton' type='submit' name='busqueda'> Listar</button>
 	</form>
 	</div>

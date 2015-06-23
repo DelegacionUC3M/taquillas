@@ -1,13 +1,19 @@
 <div>
-
-	<?php if (!empty($mensaje)){
-		print_r($mensaje);
-	} ?>
+	<p class='correcto'>
+		<?php if (!empty($mensaje)){
+			echo $mensajes;
+		} ?>
+	</p>
 
 	<form action='/taquillas/manager/modificarUsuario/<?php echo $usuario['id'] ?>' method='post'>
-		Id: <?php echo $usuario['id'] ?><br>
-		App id: <?php echo $usuario['app_id'] ?><br>
-		Rol: <input id='rol' name='rol' value='<?php echo $usuario['rol'] ?>'> <br>
+		<ul id='formulario'>
+			Id:
+			<li> <?php echo $usuario['id'] ?></li>
+			App id:
+			<li> <?php echo $usuario['app_id'] ?></li>
+			Rol: 
+			<li> <input id='rol' name='rol' value='<?php echo $usuario['rol'] ?>'> </li>
+		</ul>
 	<button id='modificarUsuario' type='submit' name='modificarUsuario'>Modificar</button>
 	</form>
 	<form action='/taquillas/manager/modificarUsuario/<?php echo $usuario['id'] ?>' method='post'>

@@ -1,6 +1,6 @@
 <div>
 
-	<?php if (!empty($mensaje)) print_r($mensaje); ?>
+	<?php if (!empty($mensaje)) echo $mensaje; ?>
 
 	<div>Al hacer click limpiarás la base de datos y la prepararás para el año siguiente</div>
 	

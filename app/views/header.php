@@ -28,7 +28,7 @@
                         <span>Hola, <?= $user->cn; ?> </span>
                         <a class="logout" href="/taquillas/inicio/logout">Salir</a>
                     <?php } else { ?>
-                        <a href="/taquillas/inicio/login">Entrar</a>
+                        <a id='entrar' href="/taquillas/inicio/login">Entrar</a>
                     <?php } ?>
                 </div>
                 <a href="/taquillas/taquilla/panel"> <h1>Taquillas</h1> </a>
