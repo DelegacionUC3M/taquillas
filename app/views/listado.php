@@ -1,4 +1,4 @@
-<div id='listado'>
+<div id='cuerpo'>
 
 	<div id='filtros'>
 	<form action='/taquillas/admin/listar' method='post'>

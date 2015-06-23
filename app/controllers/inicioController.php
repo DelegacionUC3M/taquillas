@@ -36,7 +36,7 @@
 						$ldapUser = $ldap->login($user['dn'],$_POST['password']);
 					
 						if($ldapUser) {
-							$user = new User($user['uid'][0], $user['cn'][0],$user['uc3mcorreoalias'][0], $user['dn']);
+							$user = new User($user['uid'][0], $user['cn'][0],$user['mail'][0], $user['dn']);
 							$_SESSION['user'] = $user;
 
 							if (isset($_GET['url'])) {

@@ -1,6 +1,8 @@
-<div>
+<div id='cuerpo'>
 
-	<?php if (!empty($mensaje)) echo $mensaje; ?>
+	<?php if (!empty($mensaje)) { ?>
+		<p class="correcto"> <?php echo $mensaje; ?> </p>
+	<?php } ?>
 
 	<div>Al hacer click limpiarás la base de datos y la prepararás para el año siguiente</div>
 	

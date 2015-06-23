@@ -1,6 +1,6 @@
 
-<div>
-	<?php if(BLOQUEAR==0){ ?>
+<div id='cuerpo'>
+	<?php if(BLOQUEAR==0) { ?>
 		<div> Al realizar click en el siguiente botón estarás bloqueando la aplicación</div>
 
 		<button id='bloqueo'>BLOQUEAR</button>

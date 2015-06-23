@@ -1,7 +1,9 @@
-<div>
-	<p class="error">
-	<?php if (!empty($error)) print_r($error); ?>
-	</p>
+<div id='cuerpo'>
+
+	<?php if (!empty($error)) { ?>
+		<p class="error"> <?php echo $error; ?> </p>
+	<?php } ?>
+	
 		<form action='/taquillas/admin/asignar' method='post'>
 			<ul id='formulario'>
 				Campus: 

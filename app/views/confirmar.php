@@ -1,10 +1,9 @@
 
 <div id='cuerpo'>
-	<p class="correcto">
-	<?php if (!empty($confirm)){
-		print_r($confirm);
-	} ?>
-	</p>
+	<?php if (!empty($confirm)) { ?>
+		<p class="correcto"> <?php echo $confirm; ?> </p>
+	<?php } ?>
+	
 	
 	Nos imaginamos los datos bonitos y eso <br>
 	<ul id='formulario'>

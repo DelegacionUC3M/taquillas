@@ -1,15 +1,9 @@
-<div>
-	<p class="confirm">
-	<?php if(!empty($confirm)){
-		echo $confirm;
-	}
-	?>
-	</p>
-	<p class="error">
-	<?php if(!empty($error)){
-		echo $error;
-	}
-	?>
+<div id='cuerpo'>
+	<?php if (!empty($confirm)) { ?>
+		<p class="correcto"> <?php echo $confirm; ?> </p>
+	<?php } if (!empty($error)) { ?>
+		<p class="error"> <?php echo $error; ?> </p>
+	<?php } ?>
 	</p>
 	<form action='/taquillas/admin/intercambiar' method='post'>
 		<ul id='intercambiar'>

@@ -1,5 +1,4 @@
-<div>
-	<div id='filtros'>
+<div id='cuerpo'>
 		<form action='/taquillas/admin/firma' method='post'>
 			<ul id='formulario'>
 				Campus:
@@ -37,5 +36,4 @@
 				}
 			?>
 		</p>
-	</div>
 </div>

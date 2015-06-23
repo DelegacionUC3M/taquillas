@@ -120,7 +120,7 @@ input, textarea, select {
 	transition: all 0.4s;
 
 	&:hover, &:focus {
-		border: 1px solid #555454;
+		border: 1px solid #104F71;
 	}
 }
 
@@ -129,7 +129,7 @@ input, button, select, textarea {
 	font-family: 'Roboto', sans-serif;
 }
 
-button, a.button {
+button {
 	display: block;
 	background: @blue;
 	color: #fff;
@@ -145,12 +145,7 @@ button, a.button {
 	font-weight: 400;
 
 	&:active {
-		margin-top: 2px;
-		border-bottom: 0px;
-	}
-
-	&:before {
-		margin-right: 10px;
+		background: #104F71;
 	}
 
 }
@@ -245,23 +240,20 @@ button {
 		font-size: 1.6em;
 	}
 
-	p.info {
+	p.error {
 		background: #fedeb2;
 		border: 1px solid #c4c4c4;
 		border-radius: 5px;
 		font-size: 0.8em;
 		padding: 10px 15px;
+	}
 
-		&.error {
-			background: #FEB2B2;
-			width: 90%;
-			margin: 10px auto;
-			font-weight: bold;
-		}
-
-		&.hide {
-			display: none;
-		}
+	p.correcto {
+		background: #B0E0FF;
+		border: 1px solid #c4c4c4;
+		border-radius: 5px;
+		font-size: 0.8em;
+		padding: 10px 15px;
 	}
 
 	&.inicio, &.login {

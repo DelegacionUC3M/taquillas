@@ -1,9 +1,7 @@
-<div>
-	<p class='correcto'>
-		<?php if (!empty($mensaje)){
-			echo $mensajes;
-		} ?>
-	</p>
+<div id='cuerpo'>
+	<?php if (!empty($mensaje)) { ?>
+		<p class="correcto"> <?php echo $mensaje; ?> </p>
+	<?php } ?>
 
 	<form action='/taquillas/manager/modificarUsuario/<?php echo $usuario['id'] ?>' method='post'>
 		<ul id='formulario'>

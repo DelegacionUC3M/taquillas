@@ -1,10 +1,9 @@
-<div>
-	<p class="error">
-	<?php if(!empty($error)){
-		echo $error;
-	}
-	?>
-	</p>
+<div id='cuerpo'>
+
+	<?php if (!empty($error)) { ?>
+		<p class="error"> <?php echo $error; ?> </p>
+	<?php } ?>
+
 	<div id='filtros'>
 	<form action='/taquillas/admin/gestionTaq' method='post'>
 		<ul id='formulario'>

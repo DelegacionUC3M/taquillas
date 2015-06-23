@@ -96,11 +96,12 @@
 					$reserva->fecha = date("d-m-Y");
 					$reserva->estado = 2;
 					$reserva->save();
+					$email =  $_SESSION['user']->mail;
 					if ($_SESSION['user']->rol < 50){
-						$this->render('confirmar',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva));
+						$this->render('confirmar',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva, 'email' => $email));
 					}
 					else if ($_SESSION['user']->rol > 50){
-						$this->render('confirmarAsig',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva));
+						$this->render('confirmarAsig',array('confirm'=>'¡Reserva confirmada!','reserva'=>$reserva, 'email' => $email));
 					}
 
 				} else {

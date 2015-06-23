@@ -1,16 +1,12 @@
 
 <div id='cuerpo'>
-	<p class="error">
-		<?php if (!empty($error)){
-				print_r($error);
-			}  
-		?>
-	</p>
-	<p class='correcto'>
-		<?php if (!empty($confirm)){
-			print_r($confirm);
-		} ?>
-	</p>
+	
+	<?php if (!empty($error)) { ?>
+		<p class="error"> <?php echo $error; ?> </p>
+	<?php } if (!empty($confirm)) { ?>
+		<p class="correcto"> <?php echo $confirm; ?> </p>
+	<?php } ?>
+
 	Nos imaginamos los datos bonitos y eso <br>
 	<ul id='formulario'>
 		<li> Nombre: <?php echo $reserva->user_id ?></li>

@@ -1,14 +1,9 @@
-<div>
-	<p class='error'>
-		<?php if (!empty($error)){
-				echo $error;
-		} ?>
-	</p>
-	<p class='correcto'>
-		<?php if (!empty($correcto)){
-				echo $correcto;
-		} ?>
-	</p>
+<div id='cuerpo'>
+	<?php if (!empty($error)) { ?>
+		<p class="error"> <?php echo $error; ?> </p>
+	<?php } if (!empty($correcto)) { ?>
+		<p class="correcto"> <?php echo $correcto; ?> </p>
+	<?php } ?>
 	<form action='/taquillas/manager/anadirUsuario' method='post'>
 		<ul id='formulario'>
 			NIA:

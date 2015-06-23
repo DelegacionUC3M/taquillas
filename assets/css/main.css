@@ -107,7 +107,7 @@ select:focus {
 }
 #entrar:hover,
 #entrar:focus {
-  border: 1px solid #555454;
+  border: 1px solid #104F71;
 }
 input,
 button,
@@ -116,8 +116,7 @@ textarea {
   outline: 0;
   font-family: 'Roboto', sans-serif;
 }
-button,
-a.button {
+button {
   display: block;
   background: #066394;
   color: #fff;
@@ -132,14 +131,8 @@ a.button {
   line-height: 1;
   font-weight: 400;
 }
-button:active,
-a.button:active {
-  margin-top: 2px;
-  border-bottom: 0px;
-}
-button:before,
-a.button:before {
-  margin-right: 10px;
+button:active {
+  background: #104F71;
 }
 h1,
 h3 {
@@ -218,21 +211,19 @@ button {
   text-align: center;
   font-size: 1.6em;
 }
-.main p.info {
+.main p.error {
   background: #fedeb2;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   font-size: 0.8em;
   padding: 10px 15px;
 }
-.main p.info.error {
-  background: #FEB2B2;
-  width: 90%;
-  margin: 10px auto;
-  font-weight: bold;
-}
-.main p.info.hide {
-  display: none;
+.main p.correcto {
+  background: #B0E0FF;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  font-size: 0.8em;
+  padding: 10px 15px;
 }
 .main.inicio,
 .main.login {

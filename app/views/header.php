@@ -25,7 +25,7 @@
                 <div id="user">
                     <?php
 			         if($user) { ?>
-                        <span>Hola, <?= $user->cn; ?> </span>
+                        <span>Hola, <?php echo ucwords(strtolower($user->cn)); ?> </span>
                         <a class="logout" href="/taquillas/inicio/logout">Salir</a>
                     <?php } else { ?>
                         <a id='entrar' href="/taquillas/inicio/login">Entrar</a>

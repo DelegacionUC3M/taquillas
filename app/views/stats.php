@@ -1,4 +1,4 @@
-<div>
+<div id='cuerpo'>
 	<p id='eps1'> EPS </p>
 
 	<ul id='eps2'>

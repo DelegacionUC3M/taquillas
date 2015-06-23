@@ -1,4 +1,4 @@
-<div>
+<div id='cuerpo'>
 	Gestion Usuarios
 
 	<ul id='opciones'>
