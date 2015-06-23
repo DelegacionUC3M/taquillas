@@ -5,11 +5,11 @@
 
 	<form action='/taquillas/manager/modificarUsuario/<?php echo $usuario['id'] ?>' method='post'>
 		<ul id='formulario'>
-			Id:
+			<b>Id:</b>
 			<li> <?php echo $usuario['id'] ?></li>
-			App id:
+			<b>App id:</b>
 			<li> <?php echo $usuario['app_id'] ?></li>
-			Rol: 
+			<b>Rol:</b> 
 			<li> <input id='rol' name='rol' value='<?php echo $usuario['rol'] ?>'> </li>
 		</ul>
 	<button id='modificarUsuario' type='submit' name='modificarUsuario'>Modificar</button>

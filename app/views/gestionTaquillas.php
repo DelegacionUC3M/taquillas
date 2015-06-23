@@ -4,45 +4,43 @@
 		<p class="error"> <?php echo $error; ?> </p>
 	<?php } ?>
 
-	<div id='filtros'>
 	<form action='/taquillas/admin/gestionTaq' method='post'>
 		<ul id='formulario'>
-			Campus: 
+			<b>Campus: </b>
 			<li> <select id='campus' name='campus'> 
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>
 				<option name='Leganes' value='2'> Leganés </option>
 			</select></li>
-			Edificio: 
+			<b>Edificio: </b>
 			<li> <select id='edificio' name='edificio'></select></li>
-			Planta: 
+			<b>Planta: </b>
 			<li> <select id='planta' name='planta'></select></li>
-			Zona: 
+			<b>Zona: </b>
 			<li> <select id='zona' name='zona'></select></li>
-			Tipo: 
+			<b>Tipo Taquilla:</b>
 			<li> <input name='tipo' value=> </li>
-			Estado: 
+			<b>Estado: </b>
 			<li> <input type='number' min='0' max='4' name='estado' value=> </li>
-			Dueño: 
+			<b>Dueño: </b>
 			<li> <input name='user_id' value=> </li>
-			Fecha: 
+			<b>Fecha: </b>
 			<li> <input type='date' name='fecha' value=> </li>
-			Num. Taquilla: 
+			<b>Num. Taquilla: </b>
 			<li> <input name='num_taquilla' value=> </li>
 		</ul>
 		<button id='listaBoton' type='submit' name='busqueda'> Listar</button>
 	</form>
-	</div>
 
 	<div id='listadoTaquillas'> 
 		<ul id='menuHorizontal'>
-			<li> Numero </li>
-			<li> Planta </li>
-			<li> Zona </li>
-			<li> Tipo </li>
-			<li> Estado </li>
-			<li> Dueño </li>
-			<li> Fecha </li>
+			<li> <b>Numero</b> </li>
+			<li> <b>Planta</b> </li>
+			<li> <b>Zona</b> </li>
+			<li> <b>Tipo</b> </li>
+			<li> <b>Estado</b> </li>
+			<li> <b>Dueño</b> </li>
+			<li> <b>Fecha</b> </li>
 		</ul>
 		<ul id='Vertical'>
 			<?php if (!empty($lista)) {

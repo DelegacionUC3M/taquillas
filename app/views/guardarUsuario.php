@@ -6,9 +6,9 @@
 	<?php } ?>
 	<form action='/taquillas/manager/anadirUsuario' method='post'>
 		<ul id='formulario'>
-			NIA:
+			<b>NIA:</b>
 			<li> <input id='nia' name='nia'></li>
-			Rol:
+			<b>Rol:</b>
 			<li> <input id='rol' name='rol'></li>
 		</ul>
   			<button id='anadir' type='submit' name='anadirUsuario'>Añadir Usuario</button>

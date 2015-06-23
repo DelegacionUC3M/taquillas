@@ -3,17 +3,17 @@
 	<div id='filtros'>
 	<form action='/taquillas/admin/listar' method='post'>
 		<ul id='formulario'>
-			Campus:
+			<b>Campus: </b>
 			<li> <select id='campus' name='campus'>
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>
 				<option name='Leganes' value='2'> Leganés </option>
 			</select> </li>
-			Edificio:
+			<b>Edificio: </b>
 			<li> <select id='edificio' name='edificio'></select> </li>
-			Planta:
+			<b>Planta: </b>
 			<li> <select id='planta' name='planta'></select> </li>
-			Zona:
+			<b>Zona: </b>
 			<li> <select id='zona' name='zona'></select> </li>
 		</ul>
 		<button id='listaBoton' type='submit' name='busqueda'> Listar</button>
@@ -22,13 +22,13 @@
 
 	<div id='listadoTaquillas'> 
 		<ul id='menuHorizontal'>
-			<li> Numero </li>
-			<li> Planta </li>
-			<li> Zona </li>
-			<li> Tipo </li>
-			<li> Estado </li>
-			<li> Dueño </li>
-			<li> Fecha </li>
+			<li> <b>Numero</b> </li>
+			<li> <b>Planta</b> </li>
+			<li> <b>Zona</b> </li>
+			<li> <b>Tipo</b> </li>
+			<li> <b>Estado</b> </li>
+			<li> <b>Dueño</b> </li>
+			<li> <b>Fecha</b> </li>
 		</ul>
 		<ul id='Vertical'>
 			<?php if (!empty($lista)) {

@@ -194,9 +194,17 @@ button {
   bottom: 0;
   margin: auto;
 }
+.main #cuerpo ul #eps2 {
+  display: none;
+}
 .main form {
   margin-left: 5%;
   text-align: block;
+}
+.main form ul li {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: block;
 }
 .main h2 {
   font-size: 1.7em;

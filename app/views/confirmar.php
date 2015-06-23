@@ -7,10 +7,10 @@
 	
 	Nos imaginamos los datos bonitos y eso <br>
 	<ul id='formulario'>
-		<li> Nombre: <?php echo $_SESSION['user']->cn ?></li>
-		<li> NIA: <?php echo $_SESSION['user']->uid ?></li>
+		<li> <b>Nombre:</b> <?php echo $_SESSION['user']->cn ?></li>
+		<li> <b>NIA:<b> <?php echo $_SESSION['user']->uid ?></li>
 		<li> Correo: <?php echo $_SESSION['user']->mail?></li>
-		<li> Campus: <?php
+		<li> <b>Campus:</b> <?php
 		if ($reserva->campus == 1){
 			echo "Getafe";
 		} else if ($reserva->campus == 2){
@@ -18,11 +18,11 @@
 		} else {
 			echo $reserva->campus;
 		} ?></li>
-		<li> Edificio: <?php echo $reserva->edificio ?></li>
-		<li> Planta: <?php echo $reserva->planta ?></li>
-		<li> Zona: <?php echo $reserva->zona ?></li>
-		<li> Tipo: <?php echo $reserva->tipo ?></li>
-		<li> Num. Taquilla: <?php echo $reserva->num_taquilla ?></li>
+		<li> <b>Edificio:</b> <?php echo $reserva->edificio ?></li>
+		<li> <b>Planta:</b> <?php echo $reserva->planta ?></li>
+		<li> <b>Zona:</b> <?php echo $reserva->zona ?></li>
+		<li> <b>Tipo:</b> <?php echo $reserva->tipo ?></li>
+		<li> <b>Num.</b> Taquilla: <?php echo $reserva->num_taquilla ?></li>
 	</ul>
 	<form action='/taquillas/taquilla/confirmar/<?php echo $reserva->id?>' method='post'>
 		<button id='confirmar' type="submit" value="confirmar" name='confirmar'>Confirmar reserva</button>

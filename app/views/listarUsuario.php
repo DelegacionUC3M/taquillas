@@ -1,8 +1,8 @@
 <div id='cuerpo'>
 	<ul id='menuHorizontal'>
-		<li> Id </li>
-		<li> App_id </li>
-		<li> Rol </li>
+		<li> <b>Id</b> </li>
+		<li> <b>App_id</b> </li>
+		<li> <b>Rol</b> </li>
 	</ul>
 	<ul id='Vertical'>
 		<?php if (!empty($lista)) {
