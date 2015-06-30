@@ -1,24 +1,36 @@
 <div id='cuerpo'>
 
-	<div id='filtros'>
-	<form action='/taquillas/admin/listar' method='post'>
+	<?php if (!empty($error)) { ?>
+		<p class="error"> <?php echo $error; ?> </p>
+	<?php } ?>
+
+	<form action='/taquillas/admin/gestionTaq' method='post'>
 		<ul id='formulario'>
 			<b>Campus: </b>
-			<li> <select id='campus' name='campus'>
+			<li> <select id='campus' name='campus'> 
 				<option name='vacio'></option>
 				<option name='CSSJJ' value='1'> CSSJJ </option>
 				<option name='Leganes' value='2'> Leganés </option>
-			</select> </li>
+			</select></li>
 			<b>Edificio: </b>
-			<li> <select id='edificio' name='edificio'></select> </li>
+			<li> <select id='edificio' name='edificio'></select></li>
 			<b>Planta: </b>
-			<li> <select id='planta' name='planta'></select> </li>
+			<li> <select id='planta' name='planta'></select></li>
 			<b>Zona: </b>
-			<li> <select id='zona' name='zona'></select> </li>
+			<li> <select id='zona' name='zona'></select></li>
+			<b>Tipo Taquilla:</b>
+			<li> <input name='tipo' value=> </li>
+			<b>Estado: </b>
+			<li> <input type='number' min='0' max='4' name='estado' value=> </li>
+			<b>Dueño: </b>
+			<li> <input name='user_id' value=> </li>
+			<b>Fecha: </b>
+			<li> <input type='date' name='fecha' value=> </li>
+			<b>Num. Taquilla: </b>
+			<li> <input name='num_taquilla' value=> </li>
 		</ul>
 		<button id='listaBoton' type='submit' name='busqueda'> Listar</button>
 	</form>
-	</div>
 
 	<div id='listadoTaquillas'> 
 		<ul id='menuHorizontal'>
