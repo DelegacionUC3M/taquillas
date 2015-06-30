@@ -19,7 +19,7 @@
 			<b>Zona: </b>
 			<li> <select id='zona' name='zona'></select></li>
 			<b>Tipo Taquilla:</b>
-			<li> <input name='tipo' value=> </li>
+			<li><div id='tipoTaquilla'></div></li>
 			<b>Estado: </b>
 			<li> <input type='number' min='0' max='4' name='estado' value=> </li>
 			<b>Dueño: </b>
