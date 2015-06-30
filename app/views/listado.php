@@ -43,7 +43,7 @@
 			<li> <b>Fecha</b> </li>
 		</ul>
 		<ul id='Vertical'>
-			<?php if (!empty($lista)) {
+			<?php if (isset($lista)) {
 			$i = 0;
 			$nombreViejo = "";
 			$campusViejo = "";
