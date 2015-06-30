@@ -8,8 +8,8 @@
 	Nos imaginamos los datos bonitos y eso <br>
 	<ul id='formulario'>
 		<li> <b>Nombre:</b> <?php echo $_SESSION['user']->cn ?></li>
-		<li> <b>NIA:<b> <?php echo $_SESSION['user']->uid ?></li>
-		<li> Correo: <?php echo $_SESSION['user']->mail?></li>
+		<li> <b>NIA:</b> <?php echo $_SESSION['user']->uid ?></li>
+		<li> <b>Correo:</b> <?php echo $_SESSION['user']->mail?></li>
 		<li> <b>Campus:</b> <?php
 		if ($reserva->campus == 1){
 			echo "Getafe";

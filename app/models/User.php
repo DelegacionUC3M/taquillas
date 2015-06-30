@@ -21,8 +21,10 @@ class User {
     	$this->cn = $cn;
     	$this->mail = $mail;
     	$this->dn = $dn;
-       	$rol = DBDelegados::getRol($nia);
-        $this->rol = !empty($rol) ? $rol : 10;
+       	print_r("antes DBDelegados en User");
+	$rol = DBDelegados::getRol($nia);
+	print_r("Despues DBDelegados");
+	$this->rol = !empty($rol) ? $rol : 10;
     }
 
 	/**

@@ -22,7 +22,6 @@ $(function() {
 				$('#zona').html('');
 
 				$('#planta').click(function(){
-					console.log($('#planta').val());
 					$('#zona').html(generarZonas(edificios));
 				})
 			})
@@ -598,7 +597,7 @@ function generarPlantas(edificios) {
 	var edf = $('#edificio').val();
 	var resultado = "<option name='vacio'></option>\n";
 	for (key in edificios[campus][edf]){
-		resultado += '<option name="planta '+key+'" value="'+key+'""> Planta '+key+' </option>\n';
+		resultado += '<option name="planta '+key+'" value="'+key+'"> Planta '+key+' </option>\n';
 	}
 	return resultado;
 
@@ -610,7 +609,12 @@ function generarZonas(edificios) {
 	var planta = $('#planta').val();
 	var resultado = "<option name='vacio'></option>\n";
 	for (key in edificios[campus][edf][planta]){
-		resultado += '<option name="'+key+'" value='+key+'> Zona '+key+' </option>\n';
+		console.log(key);
+		if (key == '') {
+			resultado += "<option name='sin zonas ' value='null'> Sin zonas </option>\n";
+		} else {
+			resultado += "<option name='zona "+key+"' value="+key+"> Zona "+key+" </option>\n";
+		}
 	}
 	return resultado;
 }

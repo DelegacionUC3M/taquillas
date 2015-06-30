@@ -24,10 +24,7 @@
 		} else if ($this->security(true)) {
 			$error ='';
 			if(isset($_POST['formulario'])) {
-				if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) ) {
-					
-					$busqueda = array('user_id' => $_SESSION['user']->uid);
-					$taqDisponibles = Taquilla::findByAttributes($busqueda);
+				if(isset($_POST['campus']) && isset($_POST['edificio']) && isset($_POST['planta']) && isset($_POST['zona']) && isset($_POST['tipo']) ) {			
 					$edificio = explode(' ', $_POST['edificio']);
 					$busqueda = array(
 						'campus' => $_POST['campus'],

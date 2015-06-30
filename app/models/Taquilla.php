@@ -63,13 +63,13 @@ class Taquilla {
 			$search = 'SELECT * FROM taquillas WHERE';
 			foreach ($attributes as $key => $value) {
 				if($cont == count($attributes)-1) {
-					if (is_null($value)) {
+					if (is_null($value) || $value == "'null'") {
 						$search .= ' '.$key.' IS NULL';
 					} else {
 						$search .= ' '.$key.'='.$value;
 					}
 				} else {
-					if (is_null($value)) { 
+					if (is_null($value) || $value == "'null'") { 
 						$search .= ' '.$key.' IS NULL AND';
 					} else {
 						$search .= ' '.$key.'='.$value.' AND';
@@ -118,8 +118,8 @@ class Taquilla {
 			num_taquilla integer,
 			campus smallint,
 			edificio smallint NOT NULL,
-			planta smallint NOT NULL,
-			zona char(2) NOT NULL,
+			planta smallint DEFAULT 1,
+			zona varchar(2),
 			tipo varchar(20) NOT NULL,
 			estado smallint DEFAULT 1,
 			user_id integer,
@@ -190,7 +190,6 @@ class Taquilla {
 
 		$db->run('SELECT DISTINCT campus,edificio,planta,zona FROM taquillas');
 		$aux = $db->data();
-
 		$list = array();
 		foreach($aux as $elem){
 			//Posición $list[i] con los campus
