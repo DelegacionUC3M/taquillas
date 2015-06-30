@@ -74,6 +74,14 @@ class DBDelegados {
 		return $data;	
 	}
 
+	public function findByApp ($app) {
+		$db = new DB(SQL_DB_DELEGADOS);
+		$db->run('SELECT * FROM permisos WHERE app_id=?',array($app));
+
+		$data = $db->data();
+		return $data;	
+	}
+
 	/**
 	 * Encuentra un delegado por id.
 	 * 

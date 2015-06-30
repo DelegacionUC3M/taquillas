@@ -25,7 +25,7 @@
 			if (BLOQUEAR == 1){
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=100) {
-				$lista = DBDelegados::findAll();
+				$lista = DBDelegados::findByApp(4);
 				$this->render('listarUsuario',array('lista'=>$lista));
 			}
 		}
