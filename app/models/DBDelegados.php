@@ -68,15 +68,7 @@ class DBDelegados {
 	 */
 	public function findAll (){
 		$db = new DB(SQL_DB_DELEGADOS);
-		$db->run('SELECT * FROM permisos');
-
-		$data = $db->data();
-		return $data;	
-	}
-
-	public function findByApp ($app) {
-		$db = new DB(SQL_DB_DELEGADOS);
-		$db->run('SELECT * FROM permisos WHERE app_id=?',array($app));
+		$db->run('SELECT * FROM permisos WHERE app_id=4');
 
 		$data = $db->data();
 		return $data;	
@@ -89,7 +81,7 @@ class DBDelegados {
 	 */
 	public function findById($id){
 		$db = new DB(SQL_DB_DELEGADOS);
-		$db->run('SELECT * FROM permisos WHERE id =?', array($id));
+		$db->run('SELECT * FROM permisos WHERE id =? AND app_id=4', array($id));
 
 		$data = $db->data();
 		if (empty($data)){
