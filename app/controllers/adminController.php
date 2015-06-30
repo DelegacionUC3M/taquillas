@@ -150,9 +150,10 @@
 						$search['num_taquilla'] = $_POST['num_taquilla'];
 						$search['fecha'] = "'".$_POST['fecha']."'";
 						$search['estado'] = $_POST['estado'];
+						//Taquillas resultantes de la busqueda
+						$listado = Taquilla::findByAttributes($search);
 					}
-					//Taquillas resultantes de la busqueda
-					$listado = Taquilla::findByAttributes($search);
+					
 					if (empty($listado)){
 						$error = "Esta taquilla no existe.";
 					}
