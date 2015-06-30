@@ -13,6 +13,7 @@
 			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				if (isset($_POST['busqueda'])) {
 					$error = '';
+					$search;
 					if (empty($_POST['campus']) || empty($_POST['edificio']) || empty($_POST['planta']) 
 						|| empty($_POST['zona']) || empty($_POST['tipo']) || empty($_POST['user_id']) 
 						|| empty($_POST['num_taquilla']) || empty($_POST['fecha']) || empty($_POST['estado']) ) {
