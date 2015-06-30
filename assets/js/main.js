@@ -32,6 +32,7 @@ $(function() {
 	$('#eps1').on('click', function(){
 		$('#eps2').slideToggle('slow',function() {
 			$.get('/taquillas/taquilla/getStatsTotalEPS', function(datos){
+console.log(datos);
 				//Dibujar graficas
 			    $('#totalEPS').highcharts({
 			        chart: {
