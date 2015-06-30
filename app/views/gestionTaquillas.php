@@ -4,7 +4,7 @@
 		<p class="error"> <?php echo $error; ?> </p>
 	<?php } ?>
 
-	<form action='/taquillas/admin/gestionTaq' method='post'>
+	<form action='/taquillas/admin/listar' method='post'>
 		<ul id='formulario'>
 			<b>Campus: </b>
 			<li> <select id='campus' name='campus'> 

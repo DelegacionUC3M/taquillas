@@ -12,22 +12,26 @@
 				$this->render('appBloqueada');
 			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				if (isset($_POST['busqueda'])) {
-					$search = array();
-					if (!empty($_POST['campus'])) {
+					$error = '';
+					if (empty($_POST['campus']) || empty($_POST['edificio']) || empty($_POST['planta']) 
+						|| empty($_POST['zona']) || empty($_POST['tipo']) || empty($_POST['user_id']) 
+						|| empty($_POST['num_taquilla']) || empty($_POST['fecha']) || empty($_POST['estado']) ) {
+						$error = 'Todos los campos son obligatorios';
+					} else {
 						$search['campus'] = $_POST['campus'];
-					} if (!empty($_POST['edificio'])) {
 						$edificio = explode(' ', $_POST['edificio']);
 						$search['edificio'] = $edificio[0];
-					} if (!empty($_POST['planta'])) {
 						$search['planta'] = $_POST['planta'];
-					} if (!empty($_POST['zona'])){
 						$search['zona'] = "'".$_POST['zona']."'";
-					} if (!empty($_POST['tipo'])){
 						$search['tipo'] = "'".$_POST['tipo']."'";
+						$search['user_id'] = $_POST['user_id'];
+						$search['num_taquilla'] = $_POST['num_taquilla'];
+						$search['fecha'] = "'".$_POST['fecha']."'";
+						$search['estado'] = $_POST['estado'];
 					}
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
-					$this->render('listado',array('lista'=>$listado));
+					$this->render('listado',array('lista'=>$listado, 'error'=>$error));
 				}
 				else{
 					$this->render('listado');
