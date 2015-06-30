@@ -135,6 +135,7 @@
 				if (isset($_POST['busqueda'])) {
 					$search = array();
 					$error = "";
+					$listado;
 					if (empty($_POST['campus']) || empty($_POST['edificio']) || empty($_POST['planta']) 
 						|| empty($_POST['zona']) || empty($_POST['tipo']) || empty($_POST['user_id']) 
 						|| empty($_POST['num_taquilla']) || empty($_POST['fecha']) || empty($_POST['estado']) ) {
@@ -152,11 +153,10 @@
 						$search['estado'] = $_POST['estado'];
 						//Taquillas resultantes de la busqueda
 						$listado = Taquilla::findByAttributes($search);
-					}
-					
-					if (empty($listado)){
-						$error = "Esta taquilla no existe.";
-					}
+						if (empty($listado)){
+							$error = "Esta taquilla no existe.";
+						}
+					}					
 					$this->render('gestionTaquillas', array('lista' => $listado, 'error' => $error));
 				}
 				else{
