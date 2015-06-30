@@ -4,7 +4,7 @@
 		<li> <a href='/taquillas/taquilla/reservar'> Reserva taquilla </a></li>
 
 		<?php if ($user->rol >=50) { ?>
-		<p> Funciones de Administrador </p>
+		<h2> Funciones de Administrador </h2>
 		<li> <a href='/taquillas/admin/listar'> Listar taquillas </a></li>
 		<li> <a href='/taquillas/admin/asignar'> Asignar y cobrar taquillas </a></li>
 		<li> <a href='/taquillas/admin/gestionTaq'> Gestionar Taquillas </a></li>
@@ -14,7 +14,7 @@
 		<?php } 
 
 		if ($user->rol >= 100) { ?>
-		<p> Funciones de Manager</p>
+		<h2> Funciones de Manager</h2>
 		<li> <a href='/taquillas/manager/gestionUsuarios'> Gestionar Usuarios </a></li> <!-- Añadir/Borrar/Editar usuarios a la app -->
 		<li> <a href='/taquillas/manager/bloquear'> Bloquear/Liberar Aplicación </a></li>
 		<li> <a href='/taquillas/manager/resetear'> Resetear Aplicación </a></li>
