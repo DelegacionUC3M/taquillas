@@ -1,3 +1,4 @@
 <div id='cuerpo'>
-	La aplicación se encuentra bloqueada hasta el próximo curso.
+	<p class="error"> La aplicación se encuentra bloqueada hasta el próximo curso. </p>
+	
 </div>
