@@ -74,9 +74,6 @@
 						if(empty($_POST['fecha'])) {
 							$error .= 'Necesaria una fecha si tiene dueño la taquilla';
 						}
-						if (!is_null(Taquilla::findByAttributes(array('id' => $_POST['user_id'])))) {
-							$error .= 'Un usuario no puede tener más de 1 taquilla';
-						}
 					}
 
 					//Comprobación del estado
@@ -287,6 +284,7 @@
 						//Caso de que ya exista 1 o + reservas, se elige la 1º.
 						else if ($taqDisponibles[0]->estado == 2) {
 							$reserva = $taqDisponibles[0];
+							$email = User::findByNIA($_POST['user_id'])->mail;
 							$this->render('confirmarAsig',array('reserva'=>$reserva));
 						}
 						else{
