@@ -15,16 +15,26 @@
 					$error = '';
 					$search = array();
 					$listado;
-					$search['campus'] = $_POST['campus'];
-					$edificio = explode(' ', $_POST['edificio']);
-					$search['edificio'] = $edificio[0];
-					$search['planta'] = $_POST['planta'];
-					$search['zona'] = "'".$_POST['zona']."'";
-					$search['tipo'] = "'".$_POST['tipo']."'";
-					$search['user_id'] = $_POST['user_id'];
-					$search['num_taquilla'] = $_POST['num_taquilla'];
-					$search['fecha'] = "'".$_POST['fecha']."'";
-					$search['estado'] = $_POST['estado'];
+					if (!empty($_POST['campus'])) {
+						$search['campus'] = $_POST['campus'];
+					} if (!empty($_POST['edificio'])) {
+						$edificio = explode(' ', $_POST['edificio']);
+						$search['edificio'] = $edificio[0];
+					} if (!empty($_POST['planta'])) {
+						$search['planta'] = $_POST['planta'];
+					} if (!empty($_POST['zona'])){
+						$search['zona'] = "'".$_POST['zona']."'";
+					} if (!empty($_POST['tipo'])){
+						$search['tipo'] = "'".$_POST['tipo']."'";
+					} if (!empty($_POST['user_id'])){
+						$search['user_id'] = $_POST['user_id'];
+					} if (!empty($_POST['num_taquilla'])){
+						$search['num_taquilla'] = $_POST['num_taquilla'];
+					} if (!empty($_POST['fecha'])){
+						$search['fecha'] = "'".$_POST['fecha']."'";
+					} if (!empty($_POST['estado'])){
+						$search['estado'] = $_POST['estado'];
+					}
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
 					
