@@ -195,7 +195,6 @@
 							$this->render('intercambiar',array('error' => $error));
 						}
 
-						var_dump($taq1[0]->user_id);
 					}
 					else {
 						//Taquilla del usuario 1
@@ -285,7 +284,7 @@
 						else if ($taqDisponibles[0]->estado == 2) {
 							$reserva = $taqDisponibles[0];
 							$email = User::findByNIA($_POST['user_id'])->mail;
-							$this->render('confirmarAsig',array('reserva'=>$reserva));
+							$this->render('confirmarAsig',array('reserva'=>$reserva, 'email'=>$email));
 						}
 						else{
 							$error = 'Ha ocurrido un error';
