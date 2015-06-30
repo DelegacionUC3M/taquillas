@@ -3,8 +3,8 @@
 	<?php if (!empty($error)) { ?>
 		<p class="error"> <?php echo $error; ?> </p>
 	<?php } ?>
-
-	<form action='/taquillas/admin/gestionTaq' method='post'>
+	LISTADO
+	<form action='/taquillas/admin/listar' method='post'>
 		<ul id='formulario'>
 			<b>Campus: </b>
 			<li> <select id='campus' name='campus'> 
@@ -54,7 +54,7 @@
 						echo Taquilla::$nombreCampus[$taquilla->campus];
 					?> + + + + + </li><br> <?php 
 				}
-				if ($nombreViejo != $taquilla->edificio){
+				if ($nombreViejo != $taquilla->edificio) {
 					$nombreViejo = $taquilla->edificio;
 					?> <li> ~ ~ ~ ~ ~ ~ <?php 
 						echo Taquilla::$nombreEdificios[$taquilla->campus][$taquilla->edificio];
@@ -62,7 +62,7 @@
 				}
 				?>
 			<ul id='listaTaq'>
-				<li> <?php echo $taquilla->num_taquilla?></li> 
+				<li> <?php echo $taquilla->num_taquilla?> </li> 
 				<li> <?php echo $taquilla->planta?> </li>
 				<li> <?php echo $taquilla->zona?> </li>
 				<li> <?php echo $taquilla->tipo?> </li>
@@ -75,5 +75,4 @@
 		?>
 		</ul>
 	</div>
-	
 </div>

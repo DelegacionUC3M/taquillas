@@ -34,10 +34,10 @@
 						$listado = Taquilla::findByAttributes($search);
 					}
 					
-					$this->render('gestionTaquillas',array('lista'=>$listado, 'error'=>$error));
+					$this->render('listado',array('lista'=>$listado, 'error'=>$error));
 				}
 				else{
-					$this->render('gestionTaquillas');
+					$this->render('listado');
 				}
 			}
 		}
@@ -157,10 +157,10 @@
 					if (empty($listado)){
 						$error = "Esta taquilla no existe.";
 					}
-					$this->render('listado', array('lista' => $listado, 'error' => $error));
+					$this->render('gestionTaquillas', array('lista' => $listado, 'error' => $error));
 				}
 				else{
-					$this->render('listado');
+					$this->render('gestionTaquillas');
 				}
 				
 			}
