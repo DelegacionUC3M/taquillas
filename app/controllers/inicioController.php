@@ -13,7 +13,7 @@
 			if ($this->security(false)) {
 				header('Location: /taquillas/inicio/condiciones');
 			} else {
-				$this->render('inicio');
+				$this->render('inicio', array('section' => 'inicio'));
 			}
 		}
 
@@ -37,7 +37,6 @@
 						
 						print_r($ldapUser);
 						if($ldapUser) {
-							print_r("ENTRA");
 							$user = new User($user['uid'][0], $user['cn'][0],$user['mail'][0], $user['dn']);
 							$_SESSION['user'] = $user;					
 
@@ -50,16 +49,16 @@
 						}
 						else {
 							$error = 'Usuario o contraseña incorrectos';
-							$this->render('login', array('error'=>$error));
+							$this->render('login', array('error'=>$error,'section'=>'login'));
 						}
 					}
 					catch (Exception $e) {
 						$error = 'Ha ocurrido un problema con la autenticación. Intentalo de nuevo';
-						$this->render('login', array('error'=>$error));
+						$this->render('login', array('error'=>$error,'section'=>'login'));
 					}
 				}
 				else {
-					$this->render('login');
+					$this->render('login',array('section'=>'login'));
 				}
 			}
 		}

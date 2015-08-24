@@ -28,7 +28,7 @@
 .icon-print:before {
 	content: "\31";
 }
-.icon-debate:before {
+.icon-taquillas:before {
 	content: "\64";
 }
 .icon-fill:before {
@@ -129,7 +129,7 @@ input, button, select, textarea {
 	font-family: 'Roboto', sans-serif;
 }
 
-button {
+button, #button {
 	display: block;
 	background: @blue;
 	color: #fff;
@@ -203,6 +203,10 @@ html, body {
 
 button {
 	margin: 10px;
+
+	&:before {
+		margin-right: 10px;
+	}
 }
 
 .main {
@@ -223,6 +227,23 @@ button {
 			#eps2 { 
 				display: none;
 			}
+			li {
+				p {
+					margin: 0;
+				}
+
+				select {
+					margin: 3px 0px 0 1em;
+				}
+
+				input {
+					margin: 3px 5px 0 1em;
+				}
+			}
+		}
+
+		button {
+			margin: 2em auto;
 		}
 	}
 
@@ -272,7 +293,7 @@ button {
 
 
 	&.inicio, &.login {
-		background: linear-gradient(rgba(0, 97, 145, 0.65), rgba(0, 97, 145, 0.65)), url('/debate/assets/img/Geta.jpg') center;
+		background: linear-gradient(rgba(0, 97, 145, 0.65), rgba(0, 97, 145, 0.65)), url('/taquillas/assets/img/back.jpg') center;
 		background-size: cover;
 		color: #fff;
 		text-align: center;
@@ -341,7 +362,7 @@ button {
 		}
 
 		input[type="text"], input[type="password"] {
-			display: inline;
+			display: block;
 			margin: 0 auto;
 			width: 300px;
 			padding: 12px 15px;

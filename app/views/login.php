@@ -1,5 +1,10 @@
 <div id='cuerpo'>
 	<h2>Entrar a Taquillas</h2>
+	<p>
+		Está intentando acceder a un área protegida.
+		<br>
+		Introduzca su usuario y contraseña:
+	</p>
 
 	<?php if (!empty($error)) { ?>
 		<p class="error"> <?php echo $error; ?> </p>

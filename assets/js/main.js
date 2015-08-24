@@ -12,10 +12,10 @@ $(function() {
 			$('#zona').html('');
 			$('#tipoTaquilla').html('');
 			if($('#campus').val() == 2){
-				$('#tipoTaquilla').html('<label>Simple 4€</label><input type="radio" name="tipo" value="simple"><br><label>Doble 6€</label><input type="radio" name="tipo" value="doble"><br>');
+				$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simple"><label>Simple 4€</label><br><input type="radio" name="tipo" value="doble"><label>Doble 6€</label><br>');
 			}
 			else if ($('#campus').val() == 1){
-				$('#tipoTaquilla').html('<label>Simple 6€</label><input type="radio" name="tipo" value="simpleccssjj"><br>');
+				$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simpleccssjj"><label>Simple 6€</label><br>');
 			}
 			$('#edificio').click(function(){
 				$('#planta').html(generarPlantas(edificios));

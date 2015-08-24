@@ -27,8 +27,11 @@
 		Universidad Carlos III de Madrid no se responsabilizan de los robos o
 		sustracciones que pudieran darse en las taquillas.</li>
 	</ol>
-	
-	<div id='botón'>
+
+	<h2>Solicitar taquilla</h2>
+	<p>Haz click en el siguiente botón para comenzar con el proceso de solicitud.</p>
+
+	<div id='button'>
 		<a href='/taquillas/taquilla/panel'> Acepto </a>
 	</div>
 </div>

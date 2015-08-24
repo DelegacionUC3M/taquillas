@@ -31,7 +31,7 @@
                         <a id='entrar' href="/taquillas/inicio/login">Entrar</a>
                     <?php } ?>
                 </div>
-                <a href="/taquillas/taquilla/panel"> <h1>Taquillas</h1> </a>
+                <a href="/taquillas/"> <h1>Taquillas</h1> </a>
                 <a href="http://delegacion.uc3m.es" target="_blank"> <img src="/taquillas/assets/img/delegacion.png"> </a>
 
             </div>
