@@ -32,6 +32,10 @@
 	<p>Haz click en el siguiente botón para comenzar con el proceso de solicitud.</p>
 
 	<div id='button'>
+		<?php if ($user->rol < 50) { ?>
+		<a href='/taquillas/taquilla/reservar'> Acepto </a>
+		<?php } else { ?>
 		<a href='/taquillas/taquilla/panel'> Acepto </a>
+		<?php } ?>
 	</div>
 </div>
