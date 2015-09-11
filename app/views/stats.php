@@ -1,7 +1,7 @@
 
-	<p id='eps1'> EPS </p>
+	<h3 id='eps1'> EPS </h3>
 
-	<ul id='eps2'>
+	<ul class='stat' id='eps2'>
 		<li id='totalEPS'>Total EPS</li>
 		<li id='ed1eps'>1 - Agustin de Betancourt</li>
 		<li id='ed2eps'>2 - Sabatini</li>
@@ -9,8 +9,8 @@
 		<li id='ed7eps'>7 - Juan Benet</li>
 	</ul> 
 
-	<p id='csj1'> CCSSJJ</p>
-	<ul id='csj2'>
+	<h3 id='csj1'> CCSSJJ</h3>
+	<ul class='stat' id='csj2'>
 		<li id='totalCSJ'>Total CCSSJJ</li>
 		<li id='ed4csj'>4 - Gómez de la Serna</li>
 		<li id='ed5csj'>5 - Giner de los Ríos</li>

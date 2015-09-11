@@ -9,7 +9,7 @@
 		<ul id='intercambiar'>
 			<li> <b>Usuario 1:</b> <input name='user1'></li>
 			<li> <b>Usuario 2:</b> <input name='user2'></li>
-		<div>
+		<div id='intercambios'>
 		<?php if (!empty($usuario1)) { ?>
 				<ul id='usuario1'> 
 				<?php foreach ($usuario1 as $taq) { ?>

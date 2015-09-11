@@ -1,19 +1,17 @@
 
-	<ul id='menuHorizontal'>
-		<li> <b>Id</b> </li>
-		<li> <b>App_id</b> </li>
-		<li> <b>Rol</b> </li>
+	<ul class='menuHorizontal'>
+		<li class='numero'> <b>Id</b> </li>
+		<li class='numero'> <b>App_id</b> </li>
+		<li class='numero'> <b>Rol</b> </li>
 	</ul>
-	<ul id='Vertical'>
+	<ul class='menuHorizontal2'>
 		<?php if (!empty($lista)) {
 			foreach ($lista as $usuario){
 		?>
-		<ul id='listaUsuario'>
-			<li> <?php echo $usuario['id'] ?></li> 
-			<li> <?php echo $usuario['app_id'] ?> </li>
-			<li> <?php echo $usuario['rol'] ?></li>
-			<li> <a href='/taquillas/manager/modificarUsuario/<?php echo $usuario["id"]?>'> Modificar </a></li> 
-		</ul>
+		<li class='numero'> <?php echo $usuario['id'] ?></li> 
+		<li class='numero'> <?php echo $usuario['app_id'] ?> </li>
+		<li class='numero'> <?php echo $usuario['rol'] ?></li>
+		<li class='numero'> <a href='/taquillas/manager/modificarUsuario/<?php echo $usuario["id"]?>'> Modificar </a></li> 
 		<?php } }
 	?>
 	</ul>

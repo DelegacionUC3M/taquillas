@@ -247,6 +247,12 @@ button:before {
 .main .menuHorizontal2 .modificar {
   width: 105px;
 }
+.main .formulario #buttons {
+  text-align: center;
+}
+.main .formulario #buttons button {
+  display: inline;
+}
 .main ul #eps2 {
   display: none;
 }
@@ -262,6 +268,17 @@ button:before {
 .main ul li input {
   margin: 3px 5px 0 1em;
 }
+.main #intercambios {
+  display: flex;
+}
+.main #intercambios #usuario1 {
+  float: left;
+  width: 50%;
+}
+.main #intercambios #usuario2 {
+  float: right;
+  width: 50%;
+}
 .main ol li {
   margin: 0px 0px 10px;
   padding: 0px 0px 0px 5px;
@@ -274,6 +291,9 @@ button:before {
 }
 .main .confirmar {
   margin: 20px auto 20px;
+}
+.main .stat {
+  display: none;
 }
 .main form {
   margin-left: 5%;

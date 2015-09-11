@@ -5,6 +5,7 @@
 		<p class="correcto"> <?php echo $confirm; ?> </p>
 	<?php } ?>
 
+	<h2> Confirmación </h2>
 	<ul class='formulario'>
 		
 		<li> <b>Nombre: </b><?php echo $reserva->user_id ?></li>

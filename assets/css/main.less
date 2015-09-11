@@ -277,6 +277,14 @@ button {
 		}
  	}
 
+ 	.formulario {
+ 		#buttons {
+ 			button {
+ 				display: inline;
+ 			}
+ 			text-align: center;
+ 		}
+ 	}
 	ul {
 		#eps2 { 
 			display: none;
@@ -296,8 +304,22 @@ button {
 				margin: 3px 5px 0 1em;
 			}
 		}
-	}
 
+		
+	}
+	#intercambios {
+		display: flex;
+
+		#usuario1 {
+			float: left;
+			width: 50%;
+		}
+
+		#usuario2 {
+			float: right;
+			width: 50%;
+		}
+	}
 
 	ol {
 		li {
@@ -317,6 +339,10 @@ button {
 		margin: 20px auto 20px;
 	}
 
+	.stat {
+		display: none;
+	}
+	
 	form {
 		margin-left: 5%;
 		text-align: block;
