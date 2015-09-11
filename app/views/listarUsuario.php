@@ -1,4 +1,4 @@
-
+	<h2> Usuarios </h2>
 	<ul class='menuHorizontal'>
 		<li class='numero'> <b>Id</b> </li>
 		<li class='numero'> <b>App_id</b> </li>
