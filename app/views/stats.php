@@ -1,4 +1,4 @@
-<div id='cuerpo'>
+
 	<p id='eps1'> EPS </p>
 
 	<ul id='eps2'>
@@ -21,4 +21,4 @@
 		<li id='ed12csj'>12 - María Moliner</li>
 		<li id='ed15csj'>15 - López Aranguren</li>
 	</ul> 
-</div>
+

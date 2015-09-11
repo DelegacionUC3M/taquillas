@@ -1,4 +1,4 @@
-<div id='cuerpo'>
+
 	<h2>Instrucciones</h2>
 	<p>Una vez se abra el plazo de petici&oacute;n de taquillas podrás
 	navegar por los edificios para encontrar la taquilla que mejor se adapte
@@ -31,11 +31,8 @@
 	<h2>Solicitar taquilla</h2>
 	<p>Haz click en el siguiente botón para comenzar con el proceso de solicitud.</p>
 
-	<div id='button'>
-		<?php if ($user->rol < 50) { ?>
-		<a href='/taquillas/taquilla/reservar'> Acepto </a>
-		<?php } else { ?>
-		<a href='/taquillas/taquilla/panel'> Acepto </a>
-		<?php } ?>
-	</div>
-</div>
+	<?php if ($user->rol < 50) : ?>
+	<a id='button' href='/taquillas/taquilla/reservar'> Acepto </a>
+	<?php else : ?>
+	<a id='button' href='/taquillas/taquilla/panel'> Acepto </a>
+	<?php endif; ?>

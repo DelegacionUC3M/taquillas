@@ -1,5 +1,3 @@
-<div id='cuerpo'>
-
 	<ul id='opciones'>
 
 		<h2>Usuarios</h2>
@@ -23,5 +21,3 @@
 		<?php } ?>
 
 	</ul>
-
-</div>

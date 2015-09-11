@@ -1,5 +1,3 @@
-<div id='cuerpo'>
-
 	<?php if (!empty($error)) { ?>
 		<p class="error"> <?php echo $error; ?> </p>
 	<?php } if (!empty($datos)){ 
@@ -7,7 +5,7 @@
 					<p class="correcto"> <?php echo $cambio; ?> </p>
 			<?php }  ?>
 	<form action='?' method='post'>
-		<ul id='formulario'>
+		<ul class='formulario'>
 			<b>Campus:</b> <li> <?php if ($datos->campus == 1){
 								echo "Getafe";
 							} else if ($datos->campus == 2){
@@ -25,9 +23,8 @@
 			<b>Dueño:</b> <li> <input name='user_id' value=<?php if (!is_null($datos->user_id)){ echo $datos->user_id; } ?>> </li>
 			<b>Fecha:</b> <li> <input type='date' name='fecha' value=<?php if (!is_null($datos->fecha)){ echo $datos->fecha; } ?>> </li>
 
-			<li> <button id='modificar' type="submit" value="gestion" name='gestion'> Modificar </button>
+			<li> <button class='confirmar' type="submit" value="gestion" name='gestion'> Modificar </button>
 				<a href='/taquillas/admin/gestionTaq'> Atrás </a><li>
 		</ul>
 	</form>
 	<?php } ?>
-</div>

@@ -1,4 +1,1 @@
-<div id='cuerpo'>
-	inicio
-
-</div>
+inicio

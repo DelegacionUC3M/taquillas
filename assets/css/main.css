@@ -193,8 +193,6 @@ button:before {
   min-height: 500px;
   min-height: 60vh;
   min-height: calc(100% - 93px - 194px);
-}
-.main #cuerpo {
   width: 80%;
   position: relative;
   top: 0;
@@ -203,27 +201,79 @@ button:before {
   bottom: 0;
   margin: 2% auto 4%;
 }
-.main #cuerpo ul #eps2 {
+.main #opciones li {
+  padding-left: 15px;
+}
+.main .menuHorizontal li {
+  display: inline-block;
+  margin: 0 10px 0;
+  text-align: center;
+  font-weight: bold;
+}
+.main .menuHorizontal2 li {
+  display: inline-block;
+  margin: 0 10px 0;
+  text-align: center;
+}
+.main .menuHorizontal .numero,
+.main .menuHorizontal2 .numero {
+  width: 50px;
+}
+.main .menuHorizontal .planta,
+.main .menuHorizontal2 .planta {
+  width: 50px;
+}
+.main .menuHorizontal .zona,
+.main .menuHorizontal2 .zona {
+  width: 50px;
+}
+.main .menuHorizontal .tipo,
+.main .menuHorizontal2 .tipo {
+  width: 105px;
+}
+.main .menuHorizontal .estado,
+.main .menuHorizontal2 .estado {
+  width: 50px;
+}
+.main .menuHorizontal .user_id,
+.main .menuHorizontal2 .user_id {
+  width: 105px;
+}
+.main .menuHorizontal .fecha,
+.main .menuHorizontal2 .fecha {
+  width: 105px;
+}
+.main .menuHorizontal .modificar,
+.main .menuHorizontal2 .modificar {
+  width: 105px;
+}
+.main ul #eps2 {
   display: none;
 }
-.main #cuerpo ul li p {
+.main ul li {
+  display: block;
+}
+.main ul li p {
   margin: 0;
 }
-.main #cuerpo ul li select {
+.main ul li select {
   margin: 3px 0px 0 1em;
 }
-.main #cuerpo ul li input {
+.main ul li input {
   margin: 3px 5px 0 1em;
 }
-.main #cuerpo ol li {
+.main ol li {
   margin: 0px 0px 10px;
   padding: 0px 0px 0px 5px;
   line-height: 1.3;
 }
-.main #cuerpo #button {
+.main #button {
   margin: 2em auto;
   width: 100px;
   text-align: center;
+}
+.main .confirmar {
+  margin: 20px auto 20px;
 }
 .main form {
   margin-left: 5%;

@@ -1,4 +1,4 @@
-<div id='cuerpo'>
+
 	<?php if (!empty($confirm)) { ?>
 		<p class="correcto"> <?php echo $confirm; ?> </p>
 	<?php } if (!empty($error)) { ?>
@@ -42,6 +42,5 @@
 		<?php } ?>
 		</div>
 
-		<button id='intercambiar' type="submit" value="confirmar" name='intercambiar'>Asignar</button>
+		<button class='confirmar' type="submit" value="confirmar" name='intercambiar'>Asignar</button>
 	</form>
-</div>

@@ -1,4 +1,4 @@
-<div id='cuerpo'>
+
 	<h2>Entrar a Taquillas</h2>
 	<p>
 		Está intentando acceder a un área protegida.
@@ -16,4 +16,3 @@
 
 		<button type="submit" value="Entrar">Entrar</button>
 	</form>
-</div>

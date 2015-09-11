@@ -37,4 +37,4 @@
             </div>
         </header>
 
-        <div class="main <?php echo isset($section) ? $section : '' ?> ">
+        <div class="main <?php echo isset($section) ? $section : '' ?> cuerpo">

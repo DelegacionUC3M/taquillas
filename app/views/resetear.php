@@ -1,5 +1,3 @@
-<div id='cuerpo'>
-
 	<?php if (!empty($mensaje)) { ?>
 		<p class="correcto"> <?php echo $mensaje; ?> </p>
 	<?php } ?>
@@ -11,4 +9,3 @@
 	ESCONDER CON CSS
 	<form action='/taquillas/manager/resetear' method='post'>
 	<button id='confirmar_reseteo' type='submit' name='confirmar_reseteo'> CONFIRMAR </button>
-</div>

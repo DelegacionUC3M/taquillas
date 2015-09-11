@@ -12,9 +12,7 @@ class DBDelegados {
 	 */
 	public static function getRol ($nia){
 		$db = new DB(SQL_DB_DELEGADOS);
-		print_r("Crea db en DBDelegados");
 		$db->run('SELECT permisos.rol FROM permisos LEFT JOIN personas ON permisos.id = personas.id WHERE personas.nia =? AND permisos.app_id='.APPID, array($nia));
-		print_r("Ejecuta el run");
 		$data = $db->data();
 		if (!empty($data)){
 			return $data[0]['rol'];		
@@ -36,7 +34,6 @@ class DBDelegados {
 
 		$data = $db->data();
 		$id = $data[0]['id'];
-		var_dump($id);
 		$db->run('INSERT INTO permisos (id, app_id, rol) VALUES (?, 3, ?)',array($id, $rol));
 	}
 

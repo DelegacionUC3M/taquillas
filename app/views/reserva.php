@@ -1,5 +1,4 @@
-<div id='cuerpo'>
-	
+
 	<h2>Reserva tu taquilla</h2>
 
 	<?php if (!empty($error)) { ?>
@@ -7,7 +6,7 @@
 	<?php } ?>
 	
 	<form action='/taquillas/taquilla/reservar' method='post'>
-		<ul id='formulario'>
+		<ul class='formulario'>
 			<li>
 				<p>Campus:</p>
 				<select id='campus' name='campus'>
@@ -36,7 +35,6 @@
 				<p>Num. Taquilla (Opcional):</p>
 				<input name='num_taquilla' value=>
 			</li>
-			<button class='icon-signin' id='reserva' type='submit' value='reserva' name='formulario'>Reservar taquilla</button>
+			<button class='icon-signin confirmar' id='reserva' type='submit' value='reserva' name='formulario'>Reservar taquilla</button>
 
 	</form>
-</div>

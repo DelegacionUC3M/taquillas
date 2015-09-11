@@ -1,4 +1,4 @@
-<div id='cuerpo'>
+
 	<ul id='menuHorizontal'>
 		<li> <b>Id</b> </li>
 		<li> <b>App_id</b> </li>
@@ -17,4 +17,3 @@
 		<?php } }
 	?>
 	</ul>
-</div>
