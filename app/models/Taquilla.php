@@ -34,7 +34,7 @@ class Taquilla {
 			7 => '7 - Juan Benet',
 			),
 		);
-	
+
 	public function __construct($id=NULL, $num_taquilla=NULL, $campus=NULL, $edificio=NULL, $planta=NULL, $zona=NULL, $tipo=NULL, $estado=NULL, $user_id=NULL, $fecha=NULL){
 		$this->id = $id;
 		$this->num_taquilla = $num_taquilla;
@@ -69,12 +69,12 @@ class Taquilla {
 						$search .= ' '.$key.'='.$value;
 					}
 				} else {
-					if (is_null($value) || $value == "'null'") { 
+					if (is_null($value) || $value == "'null'") {
 						$search .= ' '.$key.' IS NULL AND';
 					} else {
 						$search .= ' '.$key.'='.$value.' AND';
 					}
-					
+
 				}
 				$cont++;
 			}
@@ -101,11 +101,11 @@ class Taquilla {
 		$db = new DB(SQL_DB);
 		$db->run('UPDATE taquillas SET estado=?, user_id=?, fecha=? WHERE id=?', array($this->estado,$this->user_id, $this->fecha, $this->id));
 	}
-	
+
 
 	/**
 	 * Resetea la taquilla. La prepara para el curso siguiente
-	 * 
+	 *
 	 * @return void
 	 */
 	public function resetearTaquilla() {
@@ -113,7 +113,7 @@ class Taquilla {
 		$year = date ('Y');
 		$nombreTabla = 'taquillas'.$year;
 
-		$db->run('CREATE TABLE '.$nombreTabla.' ( 
+		$db->run('CREATE TABLE '.$nombreTabla.' (
 			id serial PRIMARY KEY,
 			num_taquilla integer,
 			campus smallint,
@@ -127,12 +127,12 @@ class Taquilla {
 			UNIQUE (num_taquilla, campus, edificio))');
 
 		$db->run('INSERT INTO '.$nombreTabla.' SELECT * FROM taquillas');
-		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3');
+		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3' OR estado = 0);
 	}
 
 	/**
 	 * Bloquea la App de forma que no se pueda acceder
-	 * 
+	 *
 	 * @return void
 	 */
 	public function bloquearApp() {
@@ -141,14 +141,14 @@ class Taquilla {
 		$conf = fopen('config.php', 'r+');
 		$contenido = fread($conf,filesize('config.php'));
 		fclose($conf);
-		 
+
 		// Separar linea por linea
 		$contenido = explode(';',$contenido);
 		// Modificar linea de BLOQUEAR, que es la última
 		$contenido[count($contenido)-2] = "\ndefine('BLOQUEAR',1)";
 		// Se deja como estaba
 		$contenido = implode(';',$contenido);
-		 
+
 		// Guardar Archivo
 		$conf = fopen('config.php','w');
 		fwrite($conf,$contenido);
@@ -157,7 +157,7 @@ class Taquilla {
 
 	/**
 	 * Desbloquea la App para que la gente pueda volver a acceder.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function desbloquearApp() {
@@ -166,14 +166,14 @@ class Taquilla {
 		$conf = fopen('config.php', 'r+');
 		$contenido = fread($conf,filesize('config.php'));
 		fclose($conf);
-		 
+
 		// Separar linea por linea
 		$contenido = explode(';',$contenido);
 		// Modificar linea de BLOQUEAR, que es la última
 		$contenido[count($contenido)-2] = "\ndefine('BLOQUEAR',0)";
 		// Se deja como estaba
 		$contenido = implode(';',$contenido);
-		 
+
 		// Guardar Archivo
 		$conf = fopen('config.php','w');
 		fwrite($conf,$contenido);
@@ -182,7 +182,7 @@ class Taquilla {
 
 	/**
 	 * Genera un array con toda la jerarquía de los campus
-	 * 
+	 *
 	 * @return array $list array con la jerarquía generada.
 	 */
 	public function attrBusqueda() {
@@ -217,7 +217,7 @@ class Taquilla {
 				unset($list[$key][$key2]);
 			}
 		}
-		
+
 		return $list;
 
 	}
@@ -225,7 +225,7 @@ class Taquilla {
 	/**
 	 * Genera un array con las taquillas agrupadas según su estado.
 	 * Es posible filtrar por campus y estado
-	 * 
+	 *
 	 * @return array $list array con el nº de taquillas encontradas
 	 */
 	public function stats($campus = NULL, $edificio = NULL){
@@ -262,7 +262,7 @@ class Taquilla {
 			array('Abonadas',0),
 			array('Incidencia',0)
 		);
-		
+
         foreach ($taq as $value) {
             switch ($value['estado']) {
             	//Libre
