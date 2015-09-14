@@ -127,7 +127,7 @@ class Taquilla {
 			UNIQUE (num_taquilla, campus, edificio))');
 
 		$db->run('INSERT INTO '.$nombreTabla.' SELECT * FROM taquillas');
-		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3' OR estado = 0);
+		$db->run('UPDATE taquillas SET estado=1, user_id=NULL, fecha = NULL WHERE estado = 2 OR estado = 3 OR estado = 0');
 	}
 
 	/**
