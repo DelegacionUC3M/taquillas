@@ -13,7 +13,7 @@
 			if ($this->security(false)) {
 				header('Location: /taquillas/inicio/condiciones');
 			} else {
-				header('Location: /taqullas/inicio/login');
+				header('Location: /taquillas/inicio/login');
 				$this->render('inicio', array('section' => 'inicio'));
 			}
 		}
