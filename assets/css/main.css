@@ -340,6 +340,7 @@ button:before {
   display: table;
   width: 100%;
   border-collapse: separate;
+  margin: 0;
 }
 .main.inicio > div,
 .main.login > div {
