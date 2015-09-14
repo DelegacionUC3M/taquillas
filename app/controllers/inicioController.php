@@ -6,13 +6,14 @@
 		 *Comprueba la identidad del usuario y si es correcta realiza una llamada
 		 * a la función reserva.
 		 * En caso de no validarse se redirige al inicio.
-		 * 
+		 *
 		 * @return void
 		 */
 		function indexAction(){
 			if ($this->security(false)) {
 				header('Location: /taquillas/inicio/condiciones');
 			} else {
+				header('Location: /taqullas/inicio/login');
 				$this->render('inicio', array('section' => 'inicio'));
 			}
 		}
@@ -20,7 +21,7 @@
 		/**
 		 * Comprueba la existencia de una sesión de usuario, de no existir
 		 * redirecciona al login.
-		 * 
+		 *
 		 * @return void
 		 */
 		function loginAction() {
@@ -33,12 +34,12 @@
 						$ldap = new LDAP;
 						$ldap->run('uid=' . $_POST['nia']);
 						$user = $ldap->data()[0];
-						$ldapUser = $ldap->login($user['dn'],$_POST['password']);					
-						
+						$ldapUser = $ldap->login($user['dn'],$_POST['password']);
+
 						print_r($ldapUser);
 						if($ldapUser) {
 							$user = new User($user['uid'][0], $user['cn'][0],$user['mail'][0], $user['dn']);
-							$_SESSION['user'] = $user;					
+							$_SESSION['user'] = $user;
 
 							if (isset($_GET['url'])) {
 								header('Location: /taquillas/inicio'. $_GET['url']);
@@ -66,7 +67,7 @@
 
 		/**
 		 * Cierra la sesión del usuario
-		 * 
+		 *
 		 * @return void
 		 */
 		function logoutAction() {
