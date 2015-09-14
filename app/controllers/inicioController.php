@@ -13,7 +13,7 @@
 			if ($this->security(false)) {
 				if($_SESSION['user']->rol < 50)
 					header('Location: /taquillas/inicio/condiciones');
-				else {
+				else
 					$this->render('panel');
 			} else {
 				header('Location: /taquillas/inicio/login');
