@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 /**
- * 
+ *
  */
 class DBDelegados {
 
@@ -14,8 +14,8 @@ class DBDelegados {
 		$db = new DB(SQL_DB_DELEGADOS);
 		$db->run('SELECT permisos.rol FROM permisos LEFT JOIN personas ON permisos.id = personas.id WHERE personas.nia =? AND permisos.app_id='.APPID, array($nia));
 		$data = $db->data();
-		if (!empty($data)){
-			return $data[0]['rol'];		
+		if (!empty($data)) {
+			return $data[0]['rol'];
 		}
 		else{
 			return null;
@@ -34,7 +34,7 @@ class DBDelegados {
 
 		$data = $db->data();
 		$id = $data[0]['id'];
-		$db->run('INSERT INTO permisos (id, app_id, rol) VALUES (?, 3, ?)',array($id, $rol));
+		$db->run('INSERT INTO permisos (id, app_id, rol) VALUES (?, ' . APPID .', ?)',array($id, $rol));
 	}
 
 	/**
@@ -57,28 +57,28 @@ class DBDelegados {
 		$db = new DB(SQL_DB_DELEGADOS);
 		$db->run('DELETE from permisos where id=?',array($id));
 	}
-	
+
 	/**
 	 * Encuentra a todos los delegados de la tabla permisos.
-	 * 
+	 *
 	 * @return array $data array con todos los elementos de la tabla.
 	 */
 	public function findAll (){
 		$db = new DB(SQL_DB_DELEGADOS);
-		$db->run('SELECT * FROM permisos WHERE app_id=4');
+		$db->run('SELECT * FROM permisos WHERE app_id=' . APPID);
 
 		$data = $db->data();
-		return $data;	
+		return $data;
 	}
 
 	/**
 	 * Encuentra un delegado por id.
-	 * 
+	 *
 	 * @return array $data delegado buscado / null si no existe
 	 */
 	public function findById($id){
 		$db = new DB(SQL_DB_DELEGADOS);
-		$db->run('SELECT * FROM permisos WHERE id =? AND app_id=4', array($id));
+		$db->run('SELECT * FROM permisos WHERE id =? AND app_id=' . APPID, array($id));
 
 		$data = $db->data();
 		if (empty($data)){
@@ -90,7 +90,7 @@ class DBDelegados {
 
 	/**
 	 * Comprueba si el nia introducido existe.
-	 * 
+	 *
 	 * @return nia encontrado / null si no existe
 	 */
 	public function existsNIA($nia) {
@@ -99,7 +99,7 @@ class DBDelegados {
 
 		$data = $db->data();
 		if (!empty($data[0]['nia'])) {
-			return $data[0]['nia'];	
+			return $data[0]['nia'];
 		} else {
 			return null;
 		}
@@ -107,7 +107,7 @@ class DBDelegados {
 
 	/**
 	 * Obtiene el id del delegado en la tabla permisos mediante el NIA
-	 * 
+	 *
 	 * @return id encontrado / null si no existe
 	 */
 	public function getIdByNIA($nia) {
@@ -120,7 +120,7 @@ class DBDelegados {
 		$db->run('SELECT id FROM permisos WHERE id=?', array($id));
 		$data = $db->data();
 		if (!empty($data[0]['id'])) {
-			return $data[0]['id'];	
+			return $data[0]['id'];
 		} else {
 			return null;
 		}

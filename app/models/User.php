@@ -6,29 +6,29 @@
 class User {
 
 	/** User identifier. **/
-	public $uid; 
+	public $uid;
     /** User full name. **/
-    public $cn; 
+    public $cn;
     /** User email account.**/
-    public $mail; 
+    public $mail;
     /** User LDAP path.**/
     public $dn;
     /** User rol (10 student, 100 admin) **/
     public $rol;
 
 	public function __construct($nia = NULL, $cn = NULL, $mail = NULL,$dn = NULL) {
-    	$this->uid = $nia;
-    	$this->cn = $cn;
-    	$this->mail = $mail;
-    	$this->dn = $dn;
+  	$this->uid = $nia;
+  	$this->cn = $cn;
+  	$this->mail = $mail;
+  	$this->dn = $dn;
 		$rol = DBDelegados::getRol($nia);
 		$this->rol = !empty($rol) ? $rol : 10;
-    }
+  }
 
 	/**
 	 * Encuentra una persona por NIA
 	 * @param  string $nia 	NIA por el que buscar persona
-	 * @return User 
+	 * @return User
 	 */
 	public static function findByNIA($nia) {
 		$ldap = new LDAP;
