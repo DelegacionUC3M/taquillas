@@ -11,7 +11,10 @@
 		 */
 		function indexAction(){
 			if ($this->security(false)) {
-				header('Location: /taquillas/inicio/condiciones');
+				if($_SESSION['user']->rol < 50)
+					header('Location: /taquillas/inicio/condiciones');
+				else {
+					$this->render('panel');
 			} else {
 				header('Location: /taquillas/inicio/login');
 				$this->render('inicio', array('section' => 'inicio'));
@@ -44,7 +47,7 @@
 								header('Location: /taquillas/inicio'. $_GET['url']);
 							}
 							else{
-								header('Location: /taquillas/inicio/condiciones');
+								header('Location: /taquillas/inicio');
 							}
 						}
 						else {

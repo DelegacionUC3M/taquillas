@@ -31,8 +31,4 @@
 	<h2>Solicitar taquilla</h2>
 	<p>Haz click en el siguiente botón para comenzar con el proceso de solicitud.</p>
 
-	<?php if ($user->rol < 50) : ?>
 	<a id='button' href='/taquillas/taquilla/reservar'> Acepto </a>
-	<?php else : ?>
-	<a id='button' href='/taquillas/taquilla/panel'> Acepto </a>
-	<?php endif; ?>

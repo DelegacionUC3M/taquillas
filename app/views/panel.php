@@ -1,7 +1,7 @@
 	<ul id='opciones'>
 
 		<h2>Usuarios</h2>
-		<li> <a href='/taquillas/taquilla/reservar'> Reserva taquilla </a></li>
+		<li> <a href='/taquillas/inicio/condiciones'> Reserva taquilla </a></li>
 
 		<?php if ($user->rol >=50) { ?>
 		<h2>Funciones de Administrador</h2>
@@ -11,7 +11,7 @@
 		<li> <a href='/taquillas/admin/intercambiar'> Intercambiar Taquillas </a></li>
 		<li> <a href='/taquillas/admin/stats'> Estadísticas </a></li>
 		<li> <a href='/taquillas/admin/firma'> Comprobación de firmas </a></li>
-		<?php } 
+		<?php }
 
 		if ($user->rol >= 100) { ?>
 		<h2>Funciones de Manager</h2>
