@@ -26,7 +26,8 @@
 			<li> <b>Fecha: </b><input type='date' name='fecha' value=<?php if (!is_null($datos->fecha)){ echo $datos->fecha; } ?>> </li>
 
 			<li id='buttons'> <button class='confirmar' type="submit" value="gestion" name='gestion'> Modificar </button>
-				<a href='/taquillas/taquilla/panel'><button class='confirmar' type='button'>Atrás</button></a></li>
+				<a href='/taquillas/taquilla/panel'><button class='confirmar' type='button'>Atrás</button></a>
+				<button class='confirmar' type="submit" value="cobrar" name='cobrar' formtarget='_blank' >Asignar y Cobrar</button></li>
 		</ul>
 	</form>
 			<?php } ?>

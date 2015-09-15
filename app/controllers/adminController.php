@@ -61,6 +61,16 @@
 				$nombre;
 				$cambio = "";
 				$error = "";
+
+				if (isset($_POST['cobrar'])) {
+					if (!empty($_POST['user_id'])) {
+						$_SESSION['cobrar'] = 'cobrar';
+						$_SESSION['user_id'] = $_POST['user_id'];
+						header('Location: /taquillas/admin/cobrar/'.$_GET['id']);
+					} else {
+						$error = 'NIA necesario';	
+					}					
+				}
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
 					$search = array('id'=>$_GET['id']);
@@ -68,8 +78,8 @@
 					$datos = $taquilla[0];
 					$nombre = User::findByNIA($datos->user_id);
 					$nombre = $nombre->cn;
-					var_dump($nombre);
 				}
+
 				if (isset($_POST['gestion'])) {
 					//Comprobación del dueño
 					if (!empty($_POST['user_id'])) {
@@ -321,16 +331,21 @@
 				$error = '';
 				$confirm = '';
 				$taq;
-				if (isset($_POST['cobrar'])) {
+				if (isset($_POST['cobrar']) || isset($_SESSION['cobrar'])) {
 					if (isset($_GET['id'])) {
 						$busq = array(
 							'id' => $_GET['id']
 							);
+						
 						$taq = Taquilla::findByAttributes($busq)[0];
 						$taq->estado = 3;
-						$taq->user_id = $_POST['user_id'];
+						$taq->user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : $_SESSION['user_id']);
 						if (empty($taq->fecha)){
 							$taq->fecha = date("d-m-Y");
+						}
+						if (isset($_SESSION['cobrar'])) {
+							unset($_SESSION['cobrar']);
+							unset($_SESSION['user_id']);
 						}
 						//se ha guardado la taquilla, ahora se pasa a generar el PDF
 						$taq->save();
