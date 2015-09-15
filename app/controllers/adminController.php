@@ -35,7 +35,7 @@
 					} if (!empty($_POST['estado'])){
 						$search['estado'] = $_POST['estado'];
 					}
-		
+
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
 					
@@ -274,7 +274,8 @@
 									$reserva->user_id = $_POST['user_id'];
 								}
 								$email = User::findByNIA($_POST['user_id'])->mail;
-								$this->render('confirmarAsig',array('reserva'=>$reserva, 'email'=>$email));
+								$nombre = User::findByNIA($_POST['user_id'])->cn;
+								$this->render('confirmarAsig',array('reserva'=>$reserva, 'email'=>$email, 'nombre'=>$nombre));
 							} else {
 								//No hay taquillas libres
 								$error = 'No hay taquillas libres';
@@ -285,7 +286,8 @@
 						else if ($taqDisponibles[0]->estado == 2) {
 							$reserva = $taqDisponibles[0];
 							$email = User::findByNIA($_POST['user_id'])->mail;
-							$this->render('confirmarAsig',array('reserva'=>$reserva, 'email'=>$email));
+							$nombre = User::findByNIA($_POST['user_id'])->cn;
+							$this->render('confirmarAsig',array('reserva'=>$reserva, 'email'=>$email, 'nombre'=>$nombre));
 						}
 						else{
 							$error = 'Ha ocurrido un error';
@@ -340,6 +342,7 @@
 			            $tipo = $taq->tipo;
 			            $fecha = $taq->fecha;
 
+
 			            // Renderiza el PDF
 						$pdf = new PDF();
 			            $pdf->SetTitle('Comprobante de Pago',true);
@@ -366,34 +369,48 @@
 			            $pdf->WriteHTML($html2);
 			            $pdf->Ln(10);
 			            $pdf->SetFont('Times', '', 8);
-			            $normas = utf8_decode(
-			            "
+			            $normas="";
+			            if ($campus == '1'){
+			            	$normas = utf8_decode(
+							"
 
-			Art. 1: La cesión del uso y disfrute de una taquilla implica el conocimiento y la aceptación incondicional de las condiciones generales que a continuación se detallan.
+							Art. 1: La cesión del uso y disfrute de una taquilla implica el conocimiento y la aceptación incondicional de las condiciones generales que a continuación se detallan.
 
-			Art. 2: La titularidad de todas las taquillas corresponde a la Universidad Carlos III de Madrid, que encomienda en exclusiva a la Delegación de Estudiantes de la Facultad de Ciencias Sociales y Jurídicas la gestión de todas las existentes en el Campus de dicha Facultad.
+							Art. 2: La titularidad de todas las taquillas corresponde a la Universidad Carlos III de Madrid, que encomienda en exclusiva a la Delegación de Estudiantes de la Facultad de Ciencias Sociales y Jurídicas la gestión de todas las existentes en el Campus de dicha Facultad.
 
-			Art. 3: Por Aplicación del artículo anterior, nunca se podrá otorgar a ningún solicitante más que el mero uso y disfrute de la taquilla, siendo obligación de éste el debido mantenimiento de la misma mientras conste como usuario. Tanto la Delegación de Estudiantes, como la UC3M no es responsable en ningún caso de los objetos depositados dentro de una taquilla.
+							Art. 3: Por Aplicación del artículo anterior, nunca se podrá otorgar a ningún solicitante más que el mero uso y disfrute de la taquilla, siendo obligación de éste el debido mantenimiento de la misma mientras conste como usuario. Tanto la Delegación de Estudiantes, como la UC3M no es responsable en ningún caso de los objetos depositados dentro de una taquilla.
 
-			Art. 4: Será necesario identificarse mediante el Número de Identificación Académica que aparece en el carné de estudiantes para solicitar una taquilla.
+							Art. 4: Será necesario identificarse mediante el Número de Identificación Académica que aparece en el carné de estudiantes para solicitar una taquilla.
 
-			Art. 5: 1o.- Se abrirá un proceso de asignación de taquillas durante el mes de octubre de cada curso académico mediante el procedimiento de la Delegación de Estudiantes estime en cada momento según las necesidades del momento. Así mismo, es potestad de la Delegación la fijación de un precio por el uso de las taquillas.
-			        2o.- En este proceso se designará al usuario o usuarios de la taquilla, que sólo podrán variar previa notificación a la Delegación de Estudiantes.
+							Art. 5: 1o.- Se abrirá un proceso de asignación de taquillas durante el mes de octubre de cada curso académico mediante el procedimiento de la Delegación de Estudiantes estime en cada momento según las necesidades del momento. Así mismo, es potestad de la Delegación la fijación de un precio por el uso de las taquillas.
+							        2o.- En este proceso se designará al usuario o usuarios de la taquilla, que sólo podrán variar previa notificación a la Delegación de Estudiantes.
 
-			Art. 6: 1o.- Una taquilla puede asignarse a una sola persona o a un grupo de ellas, según las condiciones que cada año se establezcan.
-			        2o.- Una persona sólo puede aparecer como usuario de una taquilla, sin importar el número de personas que figuren como usuarios de la misma, aunque dependiendo del caso en particular podrá haber alguna excepción, valorando cada caso la Delegación de Estudiantes.
+							Art. 6: 1o.- Una taquilla puede asignarse a una sola persona o a un grupo de ellas, según las condiciones que cada año se establezcan.
+							        2o.- Una persona sólo puede aparecer como usuario de una taquilla, sin importar el número de personas que figuren como usuarios de la misma, aunque dependiendo del caso en particular podrá haber alguna excepción, valorando cada caso la Delegación de Estudiantes.
 
-			Art. 7: Con independencia del momento de asignación de la taquilla, el periodo de uso de la misma finalizará en el mes de octubre del curso académico siguiente al de la asignación, sin posibilidad de prórroga.
+							Art. 7: Con independencia del momento de asignación de la taquilla, el periodo de uso de la misma finalizará en el mes de octubre del curso académico siguiente al de la asignación, sin posibilidad de prórroga.
 
-			Art. 8: Finalizado el periodo de uso, las taquillas podrán ser abiertas por la Delegación de Estudiantes sin previo aviso al titular, quedando los efectos que estuvieran en las mismas a cargo de la Delegación durante un periodo de dos meses. Transcurrido ese plazo, la Delegación de Estudiantes se deshará de dichos objetos requisados.
+							Art. 8: Finalizado el periodo de uso, las taquillas podrán ser abiertas por la Delegación de Estudiantes sin previo aviso al titular, quedando los efectos que estuvieran en las mismas a cargo de la Delegación durante un periodo de dos meses. Transcurrido ese plazo, la Delegación de Estudiantes se deshará de dichos objetos requisados.
 
-			Art. 9: 1o.- Para efectuar la retirada de los efectos retirados de las taquillas, mientras estén en posesión de la Delegación, será necesario presentar el carné de estudiante u otro documento de identificación y rellenar un formulario declarando que es propietario de los objetos que se retiran.
-			        2o.- Tanto la Delegación de Estudiantes no se hace responsable del deterioro que pudieran haber sufrido los objetos durante su depósito en sus instalaciones.
+							Art. 9: 1o.- Para efectuar la retirada de los efectos retirados de las taquillas, mientras estén en posesión de la Delegación, será necesario presentar el carné de estudiante u otro documento de identificación y rellenar un formulario declarando que es propietario de los objetos que se retiran.
+							        2o.- Tanto la Delegación de Estudiantes no se hace responsable del deterioro que pudieran haber sufrido los objetos durante su depósito en sus instalaciones.
 
-			Art. 10: 1o.- Las taquillas ocupadas sin haber sido solicitadas a la Delegación podrán ser desalojadas por ésta sin previo aviso, quedando lo contenido en ellas sujeto a lo expuesto en los artículos 8 y 9 de la presente norma.
-			         2o.- El usuario que encuentre la taquilla que le ha sido asignada ocupada en el momento de hacer uso de ella deberá ponerse en contacto con la Delegación de Estudiantes para su desalojo.
+							Art. 10: 1o.- Las taquillas ocupadas sin haber sido solicitadas a la Delegación podrán ser desalojadas por ésta sin previo aviso, quedando lo contenido en ellas sujeto a lo expuesto en los artículos 8 y 9 de la presente norma.
+							         2o.- El usuario que encuentre la taquilla que le ha sido asignada ocupada en el momento de hacer uso de ella deberá ponerse en contacto con la Delegación de Estudiantes para su desalojo.
 
-			LOS ABAJO FIRMANTES DECLARAN HABER LEÍDO LAS NORMAS DE USO DE LAS TAQUILLAS Y ACEPTARLAS.");
+							LOS ABAJO FIRMANTES DECLARAN HABER LEÍDO LAS NORMAS DE USO DE LAS TAQUILLAS Y ACEPTARLAS.");
+			            } else {
+			            	$normas = utf8_decode(
+			            		"1) El pago de alquiler comprende todo el curso académico y permite su uso desde el día de su pago hasta el 15 de Septiembre del año siguiente.
+			            	2) Las taquillas deberán quedar libres de candado después de esa fecha, a partir de la Delegación de Estudiantes procederá a la apertura de las que aún continuaran cerradas, para permitir la entrada de los nuevos adjudicatarios. Aquellas personas que no desalojen en los plazos establecidos serán penalizados. Todos los enseres retirados de las taquillas serán almacenados durante 30 dias naturales, siendo destruidos a partir de esa fecha si no son reclamados por el anterior usuario de la taquilla.
+			            	3) Los adjudicatarios se comprometen al cuidado permanente de la taquilla que les ha correspondido, y a no depositar en la misma elementos o sustancias peligrosas o molestas, ni que puedan dañar los muebles ni a los usuarios de las demás taquillas.
+			            	4) Cualquier desperfecto no causado por el usuario deberá ser reportado a la Delegación de Estudiantes, a fin de que sea subsanándolo antes posible.
+			            	5) Delegación de Estudiantes y la Universidad Carlos III de Madrid no se responsabilizan de los robos o sustracciones que pudieran darse en las taquillas.
+
+							Firma:"
+			            	);
+			            }
+			            
 
 			            $pdf->MultiCell(0, 4, $normas, 0, 'J');
 			            //Por seguriad calculo una especie de firma
@@ -423,34 +440,46 @@
 			            $pdf->WriteHTML($html2);
 			            $pdf->Ln(10);
 			            $pdf->SetFont('Times', '', 8);
-			            $normas = utf8_decode(
-			            "
+			            if ($campus == '1'){
+			            	$normas = utf8_decode(
+							"
 
-			Art. 1: La cesión del uso y disfrute de una taquilla implica el conocimiento y la aceptación incondicional de las condiciones generales que a continuación se detallan.
+							Art. 1: La cesión del uso y disfrute de una taquilla implica el conocimiento y la aceptación incondicional de las condiciones generales que a continuación se detallan.
 
-			Art. 2: La titularidad de todas las taquillas corresponde a la Universidad Carlos III de Madrid, que encomienda en exclusiva a la Delegación de Estudiantes de la Facultad de Ciencias Sociales y Jurídicas la gestión de todas las existentes en el Campus de dicha Facultad.
+							Art. 2: La titularidad de todas las taquillas corresponde a la Universidad Carlos III de Madrid, que encomienda en exclusiva a la Delegación de Estudiantes de la Facultad de Ciencias Sociales y Jurídicas la gestión de todas las existentes en el Campus de dicha Facultad.
 
-			Art. 3: Por Aplicación del artículo anterior, nunca se podrá otorgar a ningún solicitante más que el mero uso y disfrute de la taquilla, siendo obligación de éste el debido mantenimiento de la misma mientras conste como usuario. Tanto la Delegación de Estudiantes, como la UC3M no es responsable en ningún caso de los objetos depositados dentro de una taquilla.
+							Art. 3: Por Aplicación del artículo anterior, nunca se podrá otorgar a ningún solicitante más que el mero uso y disfrute de la taquilla, siendo obligación de éste el debido mantenimiento de la misma mientras conste como usuario. Tanto la Delegación de Estudiantes, como la UC3M no es responsable en ningún caso de los objetos depositados dentro de una taquilla.
 
-			Art. 4: Será necesario identificarse mediante el Número de Identificación Académica que aparece en el carné de estudiantes para solicitar una taquilla.
+							Art. 4: Será necesario identificarse mediante el Número de Identificación Académica que aparece en el carné de estudiantes para solicitar una taquilla.
 
-			Art. 5: 1o.- Se abrirá un proceso de asignación de taquillas durante el mes de octubre de cada curso académico mediante el procedimiento de la Delegación de Estudiantes estime en cada momento según las necesidades del momento. Así mismo, es potestad de la Delegación la fijación de un precio por el uso de las taquillas.
-			        2o.- En este proceso se designará al usuario o usuarios de la taquilla, que sólo podrán variar previa notificación a la Delegación de Estudiantes.
+							Art. 5: 1o.- Se abrirá un proceso de asignación de taquillas durante el mes de octubre de cada curso académico mediante el procedimiento de la Delegación de Estudiantes estime en cada momento según las necesidades del momento. Así mismo, es potestad de la Delegación la fijación de un precio por el uso de las taquillas.
+							        2o.- En este proceso se designará al usuario o usuarios de la taquilla, que sólo podrán variar previa notificación a la Delegación de Estudiantes.
 
-			Art. 6: 1o.- Una taquilla puede asignarse a una sola persona o a un grupo de ellas, según las condiciones que cada año se establezcan.
-			        2o.- Una persona sólo puede aparecer como usuario de una taquilla, sin importar el número de personas que figuren como usuarios de la misma, aunque dependiendo del caso en particular podrá haber alguna excepción, valorando cada caso la Delegación de Estudiantes.
+							Art. 6: 1o.- Una taquilla puede asignarse a una sola persona o a un grupo de ellas, según las condiciones que cada año se establezcan.
+							        2o.- Una persona sólo puede aparecer como usuario de una taquilla, sin importar el número de personas que figuren como usuarios de la misma, aunque dependiendo del caso en particular podrá haber alguna excepción, valorando cada caso la Delegación de Estudiantes.
 
-			Art. 7: Con independencia del momento de asignación de la taquilla, el periodo de uso de la misma finalizará en el mes de octubre del curso académico siguiente al de la asignación, sin posibilidad de prórroga.
+							Art. 7: Con independencia del momento de asignación de la taquilla, el periodo de uso de la misma finalizará en el mes de octubre del curso académico siguiente al de la asignación, sin posibilidad de prórroga.
 
-			Art. 8: Finalizado el periodo de uso, las taquillas podrán ser abiertas por la Delegación de Estudiantes sin previo aviso al titular, quedando los efectos que estuvieran en las mismas a cargo de la Delegación durante un periodo de dos meses. Transcurrido ese plazo, la Delegación de Estudiantes se deshará de dichos objetos requisados.
+							Art. 8: Finalizado el periodo de uso, las taquillas podrán ser abiertas por la Delegación de Estudiantes sin previo aviso al titular, quedando los efectos que estuvieran en las mismas a cargo de la Delegación durante un periodo de dos meses. Transcurrido ese plazo, la Delegación de Estudiantes se deshará de dichos objetos requisados.
 
-			Art. 9: 1o.- Para efectuar la retirada de los efectos retirados de las taquillas, mientras estén en posesión de la Delegación, será necesario presentar el carné de estudiante u otro documento de identificación y rellenar un formulario declarando que es propietario de los objetos que se retiran.
-			        2o.- Tanto la Delegación de Estudiantes no se hace responsable del deterioro que pudieran haber sufrido los objetos durante su depósito en sus instalaciones.
+							Art. 9: 1o.- Para efectuar la retirada de los efectos retirados de las taquillas, mientras estén en posesión de la Delegación, será necesario presentar el carné de estudiante u otro documento de identificación y rellenar un formulario declarando que es propietario de los objetos que se retiran.
+							        2o.- Tanto la Delegación de Estudiantes no se hace responsable del deterioro que pudieran haber sufrido los objetos durante su depósito en sus instalaciones.
 
-			Art. 10: 1o.- Las taquillas ocupadas sin haber sido solicitadas a la Delegación podrán ser desalojadas por ésta sin previo aviso, quedando lo contenido en ellas sujeto a lo expuesto en los artículos 8 y 9 de la presente norma.
-			         2o.- El usuario que encuentre la taquilla que le ha sido asignada ocupada en el momento de hacer uso de ella deberá ponerse en contacto con la Delegación de Estudiantes para su desalojo.
+							Art. 10: 1o.- Las taquillas ocupadas sin haber sido solicitadas a la Delegación podrán ser desalojadas por ésta sin previo aviso, quedando lo contenido en ellas sujeto a lo expuesto en los artículos 8 y 9 de la presente norma.
+							         2o.- El usuario que encuentre la taquilla que le ha sido asignada ocupada en el momento de hacer uso de ella deberá ponerse en contacto con la Delegación de Estudiantes para su desalojo.
 
-			LOS ABAJO FIRMANTES DECLARAN HABER LEÍDO LAS NORMAS DE USO DE LAS TAQUILLAS Y ACEPTARLAS.");
+							LOS ABAJO FIRMANTES DECLARAN HABER LEÍDO LAS NORMAS DE USO DE LAS TAQUILLAS Y ACEPTARLAS.");
+			            } else {
+			            	$normas = utf8_decode(
+			            		"1) El pago de alquiler comprende todo el curso académico y permite su uso desde el día de su pago hasta el 15 de Septiembre del año siguiente.
+			            	2) Las taquillas deberán quedar libres de candado después de esa fecha, a partir de la Delegación de Estudiantes procederá a la apertura de las que aún continuaran cerradas, para permitir la entrada de los nuevos adjudicatarios. Aquellas personas que no desalojen en los plazos establecidos serán penalizados. Todos los enseres retirados de las taquillas serán almacenados durante 30 dias naturales, siendo destruidos a partir de esa fecha si no son reclamados por el anterior usuario de la taquilla.
+			            	3) Los adjudicatarios se comprometen al cuidado permanente de la taquilla que les ha correspondido, y a no depositar en la misma elementos o sustancias peligrosas o molestas, ni que puedan dañar los muebles ni a los usuarios de las demás taquillas.
+			            	4) Cualquier desperfecto no causado por el usuario deberá ser reportado a la Delegación de Estudiantes, a fin de que sea subsanándolo antes posible.
+			            	5) Delegación de Estudiantes y la Universidad Carlos III de Madrid no se responsabilizan de los robos o sustracciones que pudieran darse en las taquillas.
+
+							Firma:"
+			            	);
+			            }
 
 			            $pdf->MultiCell(0, 4, $normas, 0, 'J');
 			            //Por seguriad calculo una especie de firma

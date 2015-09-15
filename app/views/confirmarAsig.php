@@ -8,7 +8,7 @@
 	<h2> Confirmación </h2>
 	<ul class='formulario'>
 		
-		<li> <b>Nombre: </b><?php echo $reserva->user_id ?></li>
+		<li> <b>Nombre: </b><?php echo ucwords(strtolower($nombre)) ?></li>
 		
 		<li> <b>NIA: </b><?php echo $reserva->user_id ?></li>
 		
