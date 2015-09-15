@@ -117,8 +117,9 @@ class DBDelegados {
 		$data = $db->data();
 		$id = $data[0]['id'];
 
-		$db->run('SELECT id FROM permisos WHERE id=?', array($id));
+		$db->run('SELECT id FROM permisos WHERE id=? AND app_id=4', array($id));
 		$data = $db->data();
+		
 		if (!empty($data[0]['id'])) {
 			return $data[0]['id'];
 		} else {

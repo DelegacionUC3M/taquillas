@@ -4,8 +4,4 @@
 
 	<div>Al hacer click limpiarás la base de datos y la prepararás para el año siguiente</div>
 	
-	<button id='resetear'> RESETEAR </button>
-
-	ESCONDER CON CSS
-	<form action='/taquillas/manager/resetear' method='post'>
-	<button id='confirmar_reseteo' type='submit' name='confirmar_reseteo'> CONFIRMAR </button>
+	<div id='resetearDiv'> <button id='resetear' type='button'> RESETEAR </button></div>

@@ -42,6 +42,7 @@
 				$error = "";
 				$correcto = "";
 				if (isset($_POST['anadirUsuario'])) {
+				
 					if(is_null(DBDelegados::existsNIA($_POST['nia']))) {
 						$error = 'Usuario no encontrado';
 					} else if (!is_null(DBDelegados::getIdByNIA($_POST['nia']))) {

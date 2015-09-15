@@ -1,6 +1,14 @@
 
 $(function() {
 
+	$('#resetear').click(function () {
+		var bool = confirm('¿Estas seguro de querer resetear?');
+		if(bool == true) {
+			$('#resetearDiv').html(
+				'<form id="resetear" action="/taquillas/manager/resetear" method="post"> <button type="submit" name="confirmar_reseteo"> CONFIRMAR </button> </form>');
+		}
+	});
+
 	var edificios;
 	$.get('/taquillas/taquilla/getEdificios', function(data){
 

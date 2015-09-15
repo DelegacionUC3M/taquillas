@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 @font-face {
   font-family: 'icons';
   src: url('fonts/icons.eot?-xuph9k');
@@ -297,7 +297,6 @@ button:before {
 }
 .main form {
   margin-left: 5%;
-  text-align: block;
 }
 .main form ul li {
   margin: 5px 0px 15px;
@@ -459,4 +458,3 @@ footer span {
   max-width: 500px;
   text-align: left;
 }
-
