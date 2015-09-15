@@ -22,7 +22,7 @@
 			<li> <b>Tipo Taquilla: </b><?php echo $datos->tipo ?></li>
 			<li> <b>Estado: </b>
 				<select id="estado" name="estado">
-					<option name='<? (!is_null($datos->estado)) ? echo $datos->estado : echo "vacio"; ?>'></option>
+					<option name='<? if(!is_null($datos->estado)) { echo $datos->estado } else { echo "vacio" }?>'></option>
 					<option value='1'> Libre</option>
 					<option value='2'> Reservada </option>
 					<option value='3'> Ocupada </option>
