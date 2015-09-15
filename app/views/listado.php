@@ -18,8 +18,16 @@
 			<li> <select id='zona' name='zona'></select></li>
 			Tipo Taquilla:
 			<li><div id='tipoTaquilla'></div></li>
-			Estado: 
-			<li> <input type='number' min='0' max='4' name='estado' value=> </li>
+			Estado:
+			<li> 
+				<select id='estado' name='estado'> 
+					<option name='vacio'></option>
+					<option value='1'> Libre</option>
+					<option value='2'> Reservada </option>
+					<option value='3'> Ocupada </option>
+					<option value='4'> Incidencia </option>
+				</select>
+			</li>
 			Dueño: 
 			<li> <input name='user_id' value=> </li>
 			Fecha: 

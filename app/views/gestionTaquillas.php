@@ -28,7 +28,15 @@
 			<li> <p> Tipo Taquilla: </p>
 					<div id='tipoTaquilla'></div>
 			</li>
-			<li> <p> Estado: </p> <input type='number' min='0' max='4' name='estado' value=> </li>
+			<li> <p> Estado: </p> <li> 
+				<select id='estado' name='estado'> 
+					<option name='vacio'></option>
+					<option value='1'> Libre</option>
+					<option value='2'> Reservada </option>
+					<option value='3'> Ocupada </option>
+					<option value='4'> Incidencia </option>
+				</select>
+			</li></li>
 			<li> <p> Dueño: </p> <input name='user_id' value=> </li>
 			<li> <p> Fecha: </p> <input type='date' name='fecha' value=> </li>
 			<li> <p> Num. Taquilla: </p> <input name='num_taquilla' value=> </li>
