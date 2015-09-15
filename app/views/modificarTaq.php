@@ -21,13 +21,13 @@
 			<li> <b>Núm. Taquilla: </b><?php echo $datos->num_taquilla?></li>
 			<li> <b>Tipo Taquilla: </b><?php echo $datos->tipo ?></li>
 			<li> <b>Estado: </b>
-				<select id="estado" name="estado">
+				<!--<select id="estado" name="estado">
 					<option name='<? if(!is_null($datos->estado)) { echo $datos->estado; } else { echo "vacio"; }?>'></option>
 					<option value='1'> Libre</option>
 					<option value='2'> Reservada </option>
 					<option value='3'> Ocupada </option>
 					<option value='4'> Incidencia </option>
-				</select>
+				</select>-->
 				<input type='number' min='1' max='4' name='estado' value=<?php if (!is_null($datos->estado)){ echo $datos->estado; } ?>> </li>
 			<li> <b>Dueño: </b> <?php echo ucwords(strtolower($nombre)) ?> </li>
 			<li> <b>NIA: </b><input name='user_id' value=<?php if (!is_null($datos->user_id)){ echo $datos->user_id; } ?>> </li>
