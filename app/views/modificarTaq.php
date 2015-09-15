@@ -15,14 +15,14 @@
 							echo $datos->campus;
 						} ?> 
 			</li>
-			<li> <b>Edificio: </b><?php $nombre = new Taquilla;
-							echo Taquilla::$nombreEdificios[$datos->campus][$datos->edificio]; ?></li>
+			<li> <b>Edificio: </b><?php echo Taquilla::$nombreEdificios[$datos->campus][$datos->edificio]; ?></li>
 			<li> <b>Planta: </b><?php echo $datos->planta ?></li>
 			<li> <b>Zona: </b><?php echo $datos->zona ?></li>
 			<li> <b>Núm. Taquilla: </b><?php echo $datos->num_taquilla?></li>
 			<li> <b>Tipo Taquilla: </b><?php echo $datos->tipo ?></li>
 			<li> <b>Estado: </b><input type='number' min='1' max='4' name='estado' value=<?php if (!is_null($datos->estado)){ echo $datos->estado; } ?>> </li>
-			<li> <b>Dueño: </b><input name='user_id' value=<?php if (!is_null($datos->user_id)){ echo $datos->user_id; } ?>> </li>
+			<li> <b>Dueño: </b> <?php echo ucwords(strtolower($nombre)) ?> </li>
+			<li> <b>NIA: </b><input name='user_id' value=<?php if (!is_null($datos->user_id)){ echo $datos->user_id; } ?>> </li>
 			<li> <b>Fecha: </b><input type='date' name='fecha' value=<?php if (!is_null($datos->fecha)){ echo $datos->fecha; } ?>> </li>
 
 			<li id='buttons'> <button class='confirmar' type="submit" value="gestion" name='gestion'> Modificar </button>

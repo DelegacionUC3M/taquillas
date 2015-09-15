@@ -58,6 +58,7 @@
 			} else if ($this->security(true) && $_SESSION['user']->rol>=50) {
 				$id;
 				$datos;
+				$nombre;
 				$cambio = "";
 				$error = "";
 				if (isset($_GET['id'])) {
@@ -65,6 +66,9 @@
 					$search = array('id'=>$_GET['id']);
 					$taquilla = Taquilla::findByAttributes($search);
 					$datos = $taquilla[0];
+					$nombre = User::findByNIA($datos->user_id);
+					$nombre = $nombre->cn;
+					var_dump($nombre);
 				}
 				if (isset($_POST['gestion'])) {
 					//Comprobación del dueño
@@ -79,7 +83,7 @@
 
 					//Comprobación del estado
 					if (!empty($_POST['estado'])) {
-						if (($_POST['estado'] != 1) && ($_POST['estado'] != 2) && ($_POST['estado'] != 3) && ($_POST['estado'] != 4) && ($_POST['estado'] != 5)) {
+						if (($_POST['estado'] != 1) && ($_POST['estado'] != 2) && ($_POST['estado'] != 3) && ($_POST['estado'] != 4)) {
 							$error .= 'Estado no válido';
 						}
 						if ($_POST['estado'] == 1 && (!empty($_POST['user_id']) || !empty($_POST['fecha'])) ) {
@@ -99,7 +103,7 @@
 						}
 					}
 					//ejecución correcta. Se comprueba que el mensaje de cambio no se ha modificado.
-					if (strcmp($cambio,"") == 0) {
+					if (strcmp($error,"") == 0) {
 						$taquilla = Taquilla::findByAttributes(array('id' => $id));
 						$datos = $taquilla[0];
 						$usr = $_POST['user_id'];
@@ -117,7 +121,7 @@
 						$cambio .= 'Cambios realizados correctamente';
 					}					
 				}
-				$this->render('modificarTaq',array('datos'=>$datos, 'cambio' => $cambio, 'error' => $error));
+				$this->render('modificarTaq',array('datos'=>$datos, 'nombre'=>$nombre, 'cambio' => $cambio, 'error' => $error));
 			}
 		}
 
@@ -401,7 +405,8 @@
 							LOS ABAJO FIRMANTES DECLARAN HABER LEÍDO LAS NORMAS DE USO DE LAS TAQUILLAS Y ACEPTARLAS.");
 			            } else {
 			            	$normas = utf8_decode(
-			            		"1) El pago de alquiler comprende todo el curso académico y permite su uso desde el día de su pago hasta el 15 de Septiembre del año siguiente.
+			            		"
+			            	1) El pago de alquiler comprende todo el curso académico y permite su uso desde el día de su pago hasta el 15 de Septiembre del año siguiente.
 			            	2) Las taquillas deberán quedar libres de candado después de esa fecha, a partir de la Delegación de Estudiantes procederá a la apertura de las que aún continuaran cerradas, para permitir la entrada de los nuevos adjudicatarios. Aquellas personas que no desalojen en los plazos establecidos serán penalizados. Todos los enseres retirados de las taquillas serán almacenados durante 30 dias naturales, siendo destruidos a partir de esa fecha si no son reclamados por el anterior usuario de la taquilla.
 			            	3) Los adjudicatarios se comprometen al cuidado permanente de la taquilla que les ha correspondido, y a no depositar en la misma elementos o sustancias peligrosas o molestas, ni que puedan dañar los muebles ni a los usuarios de las demás taquillas.
 			            	4) Cualquier desperfecto no causado por el usuario deberá ser reportado a la Delegación de Estudiantes, a fin de que sea subsanándolo antes posible.
@@ -471,7 +476,8 @@
 							LOS ABAJO FIRMANTES DECLARAN HABER LEÍDO LAS NORMAS DE USO DE LAS TAQUILLAS Y ACEPTARLAS.");
 			            } else {
 			            	$normas = utf8_decode(
-			            		"1) El pago de alquiler comprende todo el curso académico y permite su uso desde el día de su pago hasta el 15 de Septiembre del año siguiente.
+			            		"
+			            	1) El pago de alquiler comprende todo el curso académico y permite su uso desde el día de su pago hasta el 15 de Septiembre del año siguiente.
 			            	2) Las taquillas deberán quedar libres de candado después de esa fecha, a partir de la Delegación de Estudiantes procederá a la apertura de las que aún continuaran cerradas, para permitir la entrada de los nuevos adjudicatarios. Aquellas personas que no desalojen en los plazos establecidos serán penalizados. Todos los enseres retirados de las taquillas serán almacenados durante 30 dias naturales, siendo destruidos a partir de esa fecha si no son reclamados por el anterior usuario de la taquilla.
 			            	3) Los adjudicatarios se comprometen al cuidado permanente de la taquilla que les ha correspondido, y a no depositar en la misma elementos o sustancias peligrosas o molestas, ni que puedan dañar los muebles ni a los usuarios de las demás taquillas.
 			            	4) Cualquier desperfecto no causado por el usuario deberá ser reportado a la Delegación de Estudiantes, a fin de que sea subsanándolo antes posible.

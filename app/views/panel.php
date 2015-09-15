@@ -7,7 +7,7 @@
 		<h2>Funciones de Administrador</h2>
 		<li> <a href='/taquillas/admin/listar'> Listar taquillas </a> <i>(Buscar, filtrar o modificar)</i></li>
 		<li> <a href='/taquillas/admin/asignar'> Asignar y cobrar taquillas</a> <i>(Reservar, cobrar y recibos)</i></li>
-		<li> <a href='/taquillas/admin/gestionTaq'> Gestionar Taquillas </a> <i>(Búsqueda de una única taquilla) </i></li>
+		<!--<li> <a href='/taquillas/admin/gestionTaq'> Gestionar Taquillas </a> <i>(Búsqueda de una única taquilla) </i></li> -->
 		<li> <a href='/taquillas/admin/intercambiar'> Intercambiar Taquillas </a></li>
 		<li> <a href='/taquillas/admin/stats'> Estadísticas </a></li>
 		<li> <a href='/taquillas/admin/firma'> Comprobación de firmas </a></li>
