@@ -33,7 +33,7 @@
 					<option name='vacio'></option>
 					<option value='1'> Libre</option>
 					<option value='2'> Reservada </option>
-					<option value='3'> Ocupada </option>
+					<option value='3'> Abonada </option>
 					<option value='4'> Incidencia </option>
 				</select>
 			</li></li>
