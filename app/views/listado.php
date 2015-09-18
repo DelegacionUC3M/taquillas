@@ -71,7 +71,13 @@
 			<li class='planta'> <?php echo $taquilla->planta?> </li>
 			<li class='zona'> <?php echo $taquilla->zona?> </li>
 			<li class='tipo'> <?php echo $taquilla->tipo?> </li>
-			<li class='estado'> <?php echo $taquilla->estado?> </li>
+			<li class='estado'> <?php switch($taquilla->estado) {
+											case 1: echo 'Libre'; break;
+											case 2: echo 'Reservada'; break;
+											case 3: echo 'Ocupada'; break;
+											case 4: echo 'Incidencia'; break;
+										}
+											?> </li>
 			<li class='user_id'> <?php echo $taquilla->user_id?> </li>
 			<li class='fecha'> <?php echo $taquilla->fecha?> </li>
 			<li class='modificar'> <a href='/taquillas/admin/gestion/<?php echo $taquilla->id?>'> Modificar </a></li> 

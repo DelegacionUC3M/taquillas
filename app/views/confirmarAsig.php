@@ -33,7 +33,15 @@
 		
 		<li> <b>Num.Taquilla: </b><?php echo $reserva->num_taquilla ?></li>
 		
-		<li> <b>Estado: </b><?php echo $reserva->estado ?></li>
+		<li> <b>Estado: </b>
+					<?php switch($reserva->estado) {
+								case 1: echo 'Libre'; break;
+								case 2: echo 'Reservada'; break;
+								case 3: echo 'Ocupada'; break;
+								case 4: echo 'Incidencia'; break;
+						} ?>
+			</select>
+		</li>
 	</ul>
 	<form action='/taquillas/taquilla/confirmar/<?php echo $reserva->id?>' method='post'>
 		<button class='confirmar' type="submit" value="confirmar" name='confirmar'>Asignar </button>
