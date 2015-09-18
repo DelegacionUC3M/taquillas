@@ -74,7 +74,7 @@
 			<li class='estado'> <?php switch($taquilla->estado) {
 											case 1: echo 'Libre'; break;
 											case 2: echo 'Reservada'; break;
-											case 3: echo 'Ocupada'; break;
+											case 3: echo 'Abonada'; break;
 											case 4: echo 'Incidencia'; break;
 										}
 											?> </li>

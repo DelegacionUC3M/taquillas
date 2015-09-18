@@ -24,7 +24,7 @@
 				<select id='estado' name='estado'>
 					<option value='1' <?php if ($datos->estado == 1) { echo 'selected'; } ?> > Libre </option>
 					<option value='2' <?php if ($datos->estado == 2) { echo 'selected'; } ?> > Reservada </option>
-					<option value='3' <?php if ($datos->estado == 3) { echo 'selected'; } ?> > Ocupada </option>
+					<option value='3' <?php if ($datos->estado == 3) { echo 'selected'; } ?> > Abonada </option>
 					<option value='4' <?php if ($datos->estado == 4) { echo 'selected'; } ?> > Incidencia </option>
 				</select>
 			</li>
