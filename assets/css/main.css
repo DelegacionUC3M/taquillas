@@ -219,6 +219,10 @@ button:before {
 .main .menuHorizontal2 .nombre {
   width: 300px;
 }
+.main .menuHorizontal .nia,
+.main .menuHorizontal2 .nia {
+  width: 80px;
+}
 .main .menuHorizontal .numero,
 .main .menuHorizontal2 .numero {
   width: 50px;
