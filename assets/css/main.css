@@ -215,6 +215,10 @@ button:before {
   margin: 0 10px 0;
   text-align: center;
 }
+.main .menuHorizontal .nombre,
+.main .menuHorizontal2 .nombre {
+  width: 300px;
+}
 .main .menuHorizontal .numero,
 .main .menuHorizontal2 .numero {
   width: 50px;
