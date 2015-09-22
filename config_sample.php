@@ -7,12 +7,12 @@ define('ROL_USUARIO', 10);
 define('ROL_ADMIN', 50);
 define('ROL_MANAGER', 100);
 // LDAP Parameters
-define('LDAP_HOST', 'ldaps://ldap.uc3m.es');
-define('LDAP_BASE_DN', 'ou=Gente,o=Universidad Carlos III,c=es');
-define('LDAP_IDFIELD', 'uid');
-define('LDAP_NAMEFIELD', 'cn');
-define('LDAP_MAILFIELD', 'mail');
-define('LDAP_MAILALIASFIELD', 'uc3mcorreoalias');
+define('LDAP_HOST', '');
+define('LDAP_BASE_DN', ');
+define('LDAP_IDFIELD', '');
+define('LDAP_NAMEFIELD', '');
+define('LDAP_MAILFIELD', '');
+define('LDAP_MAILALIASFIELD', '');
 date_default_timezone_set('Europe/Madrid');
 /* SQL Parameters */
 define('SQL_HOST', 'localhost');
