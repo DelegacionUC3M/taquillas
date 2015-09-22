@@ -8,7 +8,7 @@ define('ROL_ADMIN', 50);
 define('ROL_MANAGER', 100);
 // LDAP Parameters
 define('LDAP_HOST', '');
-define('LDAP_BASE_DN', ');
+define('LDAP_BASE_DN', '');
 define('LDAP_IDFIELD', '');
 define('LDAP_NAMEFIELD', '');
 define('LDAP_MAILFIELD', '');
