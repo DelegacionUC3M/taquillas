@@ -218,6 +218,7 @@ button:before {
 .main .menuHorizontal .nombre,
 .main .menuHorizontal2 .nombre {
   width: 300px;
+  text-align: left;
 }
 .main .menuHorizontal .nia,
 .main .menuHorizontal2 .nia {
