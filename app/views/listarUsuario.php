@@ -9,9 +9,9 @@
 			foreach ($lista as $usuario){
 		?>
 		<ul class='menuHorizontal2'>
-			<li class='numero'> <?php echo $usuario['id'] ?></li> 
-			<li class='numero'> <?php echo $usuario['app_id'] ?> </li>
-			<li class='numero'> <?php echo $usuario['rol'] ?></li>
+			<li class='numero'> <?php echo $usuario['id'] //echo $usuario['cn']  ?></li> 
+			<li class='numero'> <?php echo $usuario['app_id'] //echo $usuario['nia'] ?> </li>
+			<li class='numero'> <?php echo $usuario['rol'] //cho $usuario['rol']  ?></li>
 			<li class='numero'> <a href='/taquillas/manager/modificarUsuario/<?php echo $usuario["id"]?>'> Modificar </a></li> 
 		</ul>
 		<?php } 

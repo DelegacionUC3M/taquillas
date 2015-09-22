@@ -66,7 +66,7 @@ class DBDelegados {
 	public function findAll (){
 		$db = new DB(SQL_DB_DELEGADOS);
 		$db->run('SELECT * FROM permisos WHERE app_id=' . APPID);
-
+		//$db->run('SELECT * FROM permisos RIGHT JOIN personas on permisos.id = personas.id WHERE app_id=' . APPID);
 		$data = $db->data();
 		return $data;
 	}
