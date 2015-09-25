@@ -15,13 +15,13 @@
 					$error = '';
 					$search = array();
 					$listado;
-					var_dump("POST".$_POST);
+					var_dump($_POST);
 					if (!empty($_POST['campus'])) {
 						$search['campus'] = $_POST['campus'];
 					} if (!empty($_POST['edificio'])) {
 						$edificio = explode(' ', $_POST['edificio']);
 						$search['edificio'] = $edificio[0];
-					} if (!is_null($_POST['planta'])) {
+					} if (!empty($_POST['planta'])) {
 						var_dump("ENTRO EN PLANTA");
 						$search['planta'] = $_POST['planta'];
 					} if (!empty($_POST['zona'])) {
