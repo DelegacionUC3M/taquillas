@@ -21,7 +21,7 @@
 					} if (!empty($_POST['edificio'])) {
 						$edificio = explode(' ', $_POST['edificio']);
 						$search['edificio'] = $edificio[0];
-					} if (!is_null($_POST['planta'])) {
+					} if (!empty($_POST['planta']) || $_POST['planta'] == '0') {
 						var_dump("ENTRO EN PLANTA");
 						$search['planta'] = $_POST['planta'];
 					} if (!empty($_POST['zona'])) {
