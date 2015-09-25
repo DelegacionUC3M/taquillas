@@ -15,14 +15,12 @@
 					$error = '';
 					$search = array();
 					$listado;
-					var_dump($_POST);
 					if (!empty($_POST['campus'])) {
 						$search['campus'] = $_POST['campus'];
 					} if (!empty($_POST['edificio'])) {
 						$edificio = explode(' ', $_POST['edificio']);
 						$search['edificio'] = $edificio[0];
 					} if (!empty($_POST['planta']) || $_POST['planta'] == '0') {
-						var_dump("ENTRO EN PLANTA");
 						$search['planta'] = $_POST['planta'];
 					} if (!empty($_POST['zona'])) {
 						$search['zona'] = "'".$_POST['zona']."'";
@@ -37,7 +35,6 @@
 					} if (!empty($_POST['estado'])) {
 						$search['estado'] = $_POST['estado'];
 					}
-					var_dump($search);
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
 					
