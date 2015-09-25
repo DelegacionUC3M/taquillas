@@ -15,6 +15,7 @@
 					$error = '';
 					$search = array();
 					$listado;
+					var_dump($_POST);
 					if (!empty($_POST['campus'])) {
 						$search['campus'] = $_POST['campus'];
 					} if (!empty($_POST['edificio'])) {
