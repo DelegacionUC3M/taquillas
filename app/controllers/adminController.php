@@ -16,25 +16,25 @@
 					$search = array();
 					$listado;
 					var_dump($_POST);
-					if (!empty($_POST['campus'])) {
+					if (isset($_POST['campus'])) {
 						$search['campus'] = $_POST['campus'];
-					} if (!empty($_POST['edificio'])) {
+					} if (isset($_POST['edificio'])) {
 						$edificio = explode(' ', $_POST['edificio']);
 						$search['edificio'] = $edificio[0];
 					} if (isset($_POST['planta'])) {
 						var_dump("ENTRO EN PLANTA");
 						$search['planta'] = $_POST['planta'];
-					} if (!empty($_POST['zona'])) {
+					} if (isset($_POST['zona'])) {
 						$search['zona'] = "'".$_POST['zona']."'";
-					} if (!empty($_POST['tipo'])) {
+					} if (isset($_POST['tipo'])) {
 						$search['tipo'] = "'".$_POST['tipo']."'";
-					} if (!empty($_POST['user_id'])) {
+					} if (isset($_POST['user_id'])) {
 						$search['user_id'] = $_POST['user_id'];
-					} if (!empty($_POST['num_taquilla'])) {
+					} if (isset($_POST['num_taquilla'])) {
 						$search['num_taquilla'] = $_POST['num_taquilla'];
-					} if (!empty($_POST['fecha'])) {
+					} if (isset($_POST['fecha'])) {
 						$search['fecha'] = "'".$_POST['fecha']."'";
-					} if (!empty($_POST['estado'])) {
+					} if (isset($_POST['estado'])) {
 						$search['estado'] = $_POST['estado'];
 					}
 					var_dump($search);
