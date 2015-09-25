@@ -76,6 +76,7 @@
 											case 2: echo 'Reservada'; break;
 											case 3: echo 'Abonada'; break;
 											case 4: echo 'Incidencia'; break;
+											default: echo 'Error';
 										}
 											?> </li>
 			<li class='user_id'> <?php echo $taquilla->user_id?> </li>

@@ -35,7 +35,7 @@
 					} if (!empty($_POST['estado'])){
 						$search['estado'] = $_POST['estado'];
 					}
-
+					var_dump($search);
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
 					
