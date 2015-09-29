@@ -1,5 +1,76 @@
-
 $(function() {
+
+	var edificios;
+	var formulario = [];
+
+	if (sessionStorage.getItem('form') != null) {
+		$.get('/taquillas/taquilla/getEdificios', function(data){
+			edificios = data;
+			formulario = sessionStorage.getItem('form').split(',');
+			
+			$('#campus').click(function(){
+				sessionStorage.clear();
+				formulario = [];
+				formulario.push($('#campus option:selected').val());
+				sessionStorage.setItem('form', formulario);
+				console.log(formulario);
+				$('#edificio').html(generarEdificios(edificios, false));
+				$('#planta').html('');
+				$('#zona').html('');
+				$('#tipoTaquilla').html('');
+				if($('#campus').val() == 2){
+					$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simple"><label>Simple 4€</label><br><input type="radio" name="tipo" value="doble"><label>Doble 6€</label><br>');
+				}
+				else if ($('#campus').val() == 1){
+					$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simpleccssjj"><label>Simple 6€</label><br>');
+				}
+			});
+
+			$('#edificio').click(function(){
+				while(formulario.length>1) {
+					formulario.pop();
+				}
+				formulario.push($('#edificio option:selected').val());	
+				sessionStorage.setItem('form', formulario);
+				console.log(formulario);
+				$('#planta').html(generarPlantas(edificios, false));
+				$('#zona').html('');
+			});
+
+
+			$('#planta').click(function(){
+				while(formulario.length>2) {
+					formulario.pop();
+				}
+				formulario.push($('#planta option:selected').val());
+				sessionStorage.setItem('form', formulario);
+				console.log(formulario);	
+				$('#zona').html(generarZonas(edificios, false));
+			});
+
+			$('#zona').click(function() {
+				while(formulario.length>3) {
+					formulario.pop();
+				}
+				formulario.push($('#zona option:selected').val());
+				sessionStorage.setItem('form', formulario);
+				console.log(formulario);
+			});
+
+			if($('#edificio').html(generarEdificios(edificios, true))) {
+				if($('#campus').val() == 2){
+					$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simple"><label>Simple 4€</label><br><input type="radio" name="tipo" value="doble"><label>Doble 6€</label><br>');
+				}
+				else if ($('#campus').val() == 1){
+					$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simpleccssjj"><label>Simple 6€</label><br>');
+				}
+				if ($('#planta').html(generarPlantas(edificios, true))) {
+					$('#zona').html(generarZonas(edificios, true));
+				}
+				
+			}			
+		});
+	}
 
 	$('#resetear').click(function () {
 		var bool = confirm('¿Estas seguro de querer resetear?');
@@ -9,13 +80,39 @@ $(function() {
 		}
 	});
 
-	var edificios;
-	$.get('/taquillas/taquilla/getEdificios', function(data){
+	$('#campus').click(function() {
+		sessionStorage.clear();
+		formulario = [];
+		formulario.push($('#campus option:selected').val());
+		sessionStorage.setItem('form', formulario);
+		$('#edificio').click(function() {
+			while(formulario.length>1) {
+				formulario.pop();
+			}
+			formulario.push($('#edificio option:selected').val());	
+			sessionStorage.setItem('form', formulario);
+			$('#planta').click(function() {
+				while(formulario.length>2) {
+					formulario.pop();
+				}
+				formulario.push($('#planta option:selected').val());
+				sessionStorage.setItem('form', formulario);	
+				$('#zona').click(function() {
+					while(formulario.length>3) {
+						formulario.pop();
+					}
+					formulario.push($('#zona option:selected').val());
+					sessionStorage.setItem('form', formulario);
+				});
+			});
+		});
+	});
 
+	$.get('/taquillas/taquilla/getEdificios', function(data){
 		edificios = data;
 
 		$('#campus').click(function(){
-			$('#edificio').html(generarEdificios(edificios));
+			$('#edificio').html(generarEdificios(edificios, false));
 			$('#planta').html('');
 			$('#zona').html('');
 			$('#tipoTaquilla').html('');
@@ -26,11 +123,11 @@ $(function() {
 				$('#tipoTaquilla').html('<input type="radio" name="tipo" value="simpleccssjj"><label>Simple 6€</label><br>');
 			}
 			$('#edificio').click(function(){
-				$('#planta').html(generarPlantas(edificios));
+				$('#planta').html(generarPlantas(edificios, false));
 				$('#zona').html('');
 
 				$('#planta').click(function(){
-					$('#zona').html(generarZonas(edificios));
+					$('#zona').html(generarZonas(edificios, false));
 				})
 			})
 		});
@@ -40,7 +137,6 @@ $(function() {
 	$('#eps1').on('click', function(){
 		$('#eps2').slideToggle('slow',function() {
 			$.get('/taquillas/taquilla/getStatsTotalEPS', function(datos){
-console.log(datos);
 				//Dibujar graficas
 			    $('#totalEPS').highcharts({
 			        chart: {
@@ -590,39 +686,78 @@ console.log(datos);
 	});
 });
 
-function generarEdificios(edificios) {
-	var campus = $('#campus').val();
+function generarEdificios(edificios, autocompletar) {
+	var campus;
+	var formulario = [];
+	if (sessionStorage.getItem('form') != null && autocompletar == true) {
+		formulario = sessionStorage.getItem('form').split(',');	
+	}
+
+	(formulario[0] != null) ? campus = formulario[0] : campus = $('#campus').val();
+
 	var resultado = "<option name='vacio'></option>\n";
-	for (key in edificios[campus]){
+	for (key in edificios[campus]) {
 		var guion = key.search(" - ");
 		var nombre = key.substr(guion+3,key.length);
-		resultado += '<option name="'+nombre+'" value="'+key+'"> '+key+' </option>\n';
-	}
-	return resultado;
-}
-
-function generarPlantas(edificios) {
-	var campus = $('#campus').val();
-	var edf = $('#edificio').val();
-	var resultado = "<option name='vacio'></option>\n";
-	for (key in edificios[campus][edf]){
-		resultado += '<option name="planta '+key+'" value="'+key+'"> Planta '+key+' </option>\n';
-	}
-	return resultado;
-
-}
-
-function generarZonas(edificios) {
-	var campus = $('#campus').val();
-	var edf = $('#edificio').val();
-	var planta = $('#planta').val();
-	var resultado = "<option name='vacio'></option>\n";
-	for (key in edificios[campus][edf][planta]){
-		console.log(key);
-		if (key == '') {
-			resultado += "<option name='sin zonas ' value='null'> Sin zonas </option>\n";
+		if ((formulario != null) && (key == formulario[1])) {
+			resultado += '<option name="'+nombre+'" value="'+key+'" selected> '+key+' </option>\n';
 		} else {
-			resultado += "<option name='zona "+key+"' value="+key+"> Zona "+key+" </option>\n";
+			resultado += '<option name="'+nombre+'" value="'+key+'"> '+key+' </option>\n';
+		}
+	}
+	return resultado;
+}
+
+function generarPlantas(edificios, autocompletar) {
+	var campus;
+	var edf;
+	var formulario = [];
+
+	if (sessionStorage.getItem('form') != null && autocompletar == true) {
+		formulario = sessionStorage.getItem('form').split(',');	
+	} 
+
+	(formulario[0] != null) ? campus = formulario[0] : campus = $('#campus').val();
+	(formulario[1] != null) ? edf = formulario[1] : edf = $('#edificio').val();
+	
+	var resultado = "<option name='vacio'></option>\n";
+	
+	for (key in edificios[campus][edf]) {
+		if ((formulario != null) && (key == formulario[2])) {
+			resultado += '<option name="planta '+key+'" value="'+key+'" selected> Planta '+key+' </option>\n';
+		} else {
+			resultado += '<option name="planta '+key+'" value="'+key+'"> Planta '+key+' </option>\n';
+		}
+	}
+	return resultado;
+
+}
+
+function generarZonas(edificios, autocompletar) {
+	var campus;
+	var edf;
+	var planta;
+	var formulario = [];
+
+	if (sessionStorage.getItem('form') != null && autocompletar == true) {
+		formulario = sessionStorage.getItem('form').split(',');	
+	} 
+
+	(formulario[0] != null) ? campus = formulario[0] : campus = $('#campus').val();
+	(formulario[1] != null) ? edf = formulario[1] : edf = $('#edificio').val();
+	(formulario[2] != null) ? planta = formulario[2] : planta = $('#planta').val();
+
+	var resultado = "<option name='vacio'></option>\n";
+
+	for (key in edificios[campus][edf][planta]) {
+		if (key == '') {
+			resultado += "<option name='sin zonas ' value='null' > Sin zonas </option>\n";
+		} else {
+			if ((formulario != null) && (key == formulario[3])) { 
+				resultado += '<option name="zona '+key+'" value="'+key+'" selected> Zona '+key+' </option>\n';
+			} else {
+				resultado += '<option name="zona '+key+'" value="'+key+'"> Zona '+key+' </option>\n';
+			}
 		}
 	}
 	return resultado;

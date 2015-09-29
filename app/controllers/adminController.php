@@ -37,8 +37,8 @@
 					}
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
-					
-					$this->render('listado',array('lista'=>$listado, 'error'=>$error));
+					var_dump($_POST);
+					$this->render('listado',array('lista'=>$listado, 'error'=>$error, 'busqueda'=>$search));
 				}
 				else{
 					$this->render('listado');
@@ -81,7 +81,7 @@
 
 				if (isset($_POST['gestion'])) {
 					//Comprobación del dueño
-					if (!empty($_POST['user_id'])) {
+					if (!empty($_POST['user_id']) && $_POST['estado'] != 1) {
 						if(is_null(User::findByNIA($_POST['user_id']))) {
 							$error = 'Usuario no encontrado';
 						}
@@ -95,18 +95,12 @@
 						if (($_POST['estado'] != 1) && ($_POST['estado'] != 2) && ($_POST['estado'] != 3) && ($_POST['estado'] != 4)) {
 							$error .= 'Estado no válido';
 						}
-						if ($_POST['estado'] == 1 && (!empty($_POST['user_id']) || !empty($_POST['fecha'])) ) {
-							$error .= 'Si el estado es libre, no puede tener dueño';
-						}
 						if (empty($_POST['user_id']) && ($_POST['estado'] == 2 || $_POST['estado'] == 3)) {
 							$error .= 'Es necesario que la taquilla tenga un dueño';
 						}
 					}
 					//Comprobación de la fecha
-					if (!empty($_POST['fecha'])) {
-						if (($_POST['estado'] != 2) && ($_POST['estado'] != 3)) {
-							$error .= 'Para que tenga fecha la taquilla debe estar ocupada/reservada';
-						}
+					if (!empty($_POST['fecha']) && $_POST['estado'] != 1) {
 						if (empty($_POST['user_id'])) {
 							$error .= 'Si la taquilla está ocupada/reservada debe tener la fecha de ésta';
 						}
@@ -117,6 +111,10 @@
 						$datos = $taquilla[0];
 						$usr = $_POST['user_id'];
 						$fecha = $_POST['fecha'];
+						if ($_POST['estado'] == 1) {
+							$usr = NULL;
+							$fecha = NULL;
+						}
 						if (empty($usr)){
 							$usr = NULL;
 						}
