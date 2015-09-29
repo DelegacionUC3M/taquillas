@@ -37,7 +37,6 @@
 					}
 					//Taquillas resultantes de la busqueda
 					$listado = Taquilla::findByAttributes($search);
-					var_dump($_POST);
 					$this->render('listado',array('lista'=>$listado, 'error'=>$error, 'busqueda'=>$search));
 				}
 				else{
