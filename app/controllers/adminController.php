@@ -336,9 +336,7 @@
 						$taq = Taquilla::findByAttributes($busq)[0];
 						$taq->estado = 3;
 						$taq->user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : $_SESSION['user_id']);
-						if (empty($taq->fecha)){
-							$taq->fecha = date("d-m-Y");
-						}
+						$taq->fecha = date("d-m-Y");
 						if (isset($_SESSION['cobrar'])) {
 							unset($_SESSION['cobrar']);
 							unset($_SESSION['user_id']);
