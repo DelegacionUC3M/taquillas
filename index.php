@@ -1,5 +1,5 @@
 <?php
-
+//["REQUEST_URI"]=> string(23) "/taquillas/inicio/login"
 require_once('config.php');
 session_start();
 
@@ -22,9 +22,9 @@ function __autoload($class) {
 		Controller::error(404);
 	}
 }
-
-$controller = (isset($_GET['c']) && !empty($_GET['c'])) ? $_GET['c'] . 'Controller' : 'inicioController';
-$action 	= (isset($_GET['a']) && !empty($_GET['a'])) ? $_GET['a'] . 'Action' : 'indexAction';
+$url = explode('/', $_SERVER["REQUEST_URI"]);
+$controller = (isset($url[2]) && !empty($url[2])) ? $url[2] . 'Controller' : 'inicioController';
+$action 	= (isset($url[3]) && !empty($url[3])) ? $url[3] . 'Action' : 'indexAction';
 
 if (method_exists($controller, $action)) {
 	$load = new $controller();
