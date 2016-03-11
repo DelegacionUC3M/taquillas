@@ -1,5 +1,5 @@
 <?php
-//["REQUEST_URI"]=> string(23) "/taquillas/inicio/login"
+
 require_once('config.php');
 session_start();
 
