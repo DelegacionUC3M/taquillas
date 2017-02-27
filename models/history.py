@@ -5,11 +5,11 @@ class History(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     number = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
-    qr = db.Column(db.Integer, nullable=False) #Pendiente de confirmar si es Int o String
+    qr = db.Column(db.Integer, nullable=False)
     type_name = db.Column(db.String(20), nullable=False)
     type_price = db.Column(db.Integer, nullable=False)
     place_building = db.Column(db.String(50), nullable=False)
-    place_zone = db.Column(db.String(10), nullable=False)
+    place_zone = db.Column(db.String(50), nullable=False)
     place_floor = db.Column(db.Integer, nullable=False)
     place_school = db.Column(db.Integer, nullable=False)
     user = db.Column(db.Integer, nullable=True)
@@ -31,7 +31,7 @@ class History(db.Model):
         self.date = date
 
     def __repr__(self):
-        return {
+        return str({
             'id': self.id,
             'number': self.number,
             'status': self.status,
@@ -44,4 +44,4 @@ class History(db.Model):
             'place_school': self.place_school,
             'user': self.user,
             'date': self.date
-        }
+        })
