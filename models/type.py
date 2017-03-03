@@ -1,13 +1,12 @@
 from .connection import db
 
 
-class Type(db.model):  # hereda del objeto model
+class Type(db.Model):  # hereda del objeto model
     """docstring for ClassName"""
-    id = db.Column(db.Integer, primary_key=True, autoincrement=1)
-    name = db.Column(db.String, primary_key=True, nullable=False)
-    price = db.Column(db.Double, primary_key=True, nullable=False)
-
-    locker_id = db.Column(db.Integer, db.ForeignKey('locker.id'))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    lockers = db.relationship('Locker', lazy='dynamic')
 
 
     # si tiene cursiva puede ser null
@@ -19,9 +18,9 @@ class Type(db.model):  # hereda del objeto model
 
 
     def __repr__(self):
-        return {
+        return str({
             'id': self.id,
             'name': self.name,
-            'price': self.price
-
-        }
+            'price': self.price,
+            'lockers': self.lockers
+        })

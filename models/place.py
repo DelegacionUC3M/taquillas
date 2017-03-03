@@ -1,15 +1,14 @@
 from .connection import db
 
 
-class Place(db.model):
+class Place(db.Model):
     """docstring for ClassName"""
-    id = db.Column(db.Integer, primary_key=True, autoincrement=1)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     building = db.Column(db.String(50), nullable=False)
     zone = db.Column(db.String(50), nullable=False)
     floor = db.Column(db.Integer, nullable=False)
     school = db.Column(db.Integer, nullable=False)
-
-    locker_id = db.Column(db.Integer, db.ForeignKey('locker.id'))
+    lockers = db.relationship('Locker', lazy='dynamic')
 
 
     def __init__(self, building, zone, floor, school):
@@ -19,11 +18,11 @@ class Place(db.model):
          self.school = school
 
     def __repr__(self):
-        return{
+        return str({
             'id': self.id,
             'building': self.building,
             'zone': self.zone,
             'floor': self.floor,
-            'school':self.school
-
-        }
+            'school':self.school,
+            'lockers': self.lockers
+        })

@@ -1,14 +1,13 @@
 from .connection import db
-from .type import *
-from .place import *
+
 
 class Locker(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     number = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
     qr = db.Column(db.Integer, nullable=True)
-    type = db.Column(db.Type, nullable=False)
-    place = db.Column(db.Place, nullable=False)
+    type = db.Column(db.Integer, db.ForeignKey('type.id'), nullable=False)
+    place = db.Column(db.Integer, db.ForeignKey('place.id'), nullable=False)
     user = db.Column(db.Integer, nullable=True)
     date = db.Column(db.Date, nullable=True)
 
@@ -23,13 +22,13 @@ class Locker(db.Model):
         self.date = date
 
     def __repr__(self):
-        return {
+        return str({
             'id': self.id,
             'number': self.number,
             'status': self.status,
             'qr': self.qr,
-            'type': self.type
+            'type': self.type,
             'place': self.place,
             'user': self.user,
             'date': self.date
-        }
+        })
