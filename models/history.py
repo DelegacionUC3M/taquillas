@@ -17,7 +17,6 @@ class History(db.Model):
 
     def __init__(self, number, status, qr, type_name, type_price, place_building,
                  place_zone, place_floor, place_school, user, date):
-        self.id = id
         self.number = number
         self.status = status
         self.qr = qr

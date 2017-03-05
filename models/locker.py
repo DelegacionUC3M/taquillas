@@ -12,7 +12,6 @@ class Locker(db.Model):
     date = db.Column(db.Date, nullable=True)
 
     def __init__(self, number, status, qr, type, place, user, date):
-        self.id = id
         self.number = number
         self.status = status
         self.qr = qr
