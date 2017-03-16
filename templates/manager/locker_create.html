@@ -8,45 +8,68 @@
 
 
 <form action="?" method="post">
-
-    Numero taquilla:
-    <input type="text" name="number" value="" />
-
-  <br/>
-    Tipo taquilla:
-    <select>
-        <option value="Simple">Simple</option>
-        <option value="Doble">Doble</option>
-    </select>
-
-  <br/>
-
-    Edificio:
-    <input type="text" name="building" value="" />
-
-  <br/>
-
-    Planta:
-    <input type="text" name="floor" value="" />
-
-  <br/>
-
-    Zona:
-    <input type="text" name="zone" value="" />
-
-  <br/>
-
-    Campus:
-    <input type="text" name="school" value="" />
-
-  <br/>
-
-  <input type="submit" value="Enviar" />
+    <table>
+        <tr>
+            <td>Numero taquilla:</td>
+            <td><input type="text" name="number" value="" style="width:10em"/></td>
+        </tr>
+        <tr>
+            <td>Tipo taquilla:</td>
+            <td>
+                <select name="type" style="width:10em">
+                    {% for type in types %}
+                    <option value="{{ type.id }}">{{ type.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Campus:</td>
+            <td>
+                <select name="school" style="width:10em">
+                    {% for school in list_school  %}
+                    <option value="{{ school }}">{{ school }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Edificio:</td>
+            <td>
+                <select name="building" style="width:10em">
+                    {% for building in list_building  %}
+                    <option value="{{ building }}">{{ building }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Planta:</td>
+            <td>
+                <select name="floor" style="width:10em">
+                    {% for floor in list_floor  %}
+                    <option value="{{ floor }}">{{ floor }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Zona:</td>
+            <td>
+                <select name="zone" style="width:10em">
+                    {% for zone in list_zone  %}
+                    <option value="{{ zone }}">{{ zone }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Enviar" style="width:10em"/></td>
+        </tr>
+    </table>
 </form>
 
-{% for p in places %}
-{{ p }}
-{% endfor %}
 
 </body>
 </html>
