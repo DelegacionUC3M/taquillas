@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form action="?" method="post">
+
+    Numero taquilla:
+    <input type="text" name="number" value="" />
+
+  <br/>
+    Tipo taquilla:
+    <select>
+        <option value="Simple">Simple</option>
+        <option value="Doble">Doble</option>
+    </select>
+
+  <br/>
+
+    Edificio:
+    <input type="text" name="building" value="" />
+
+  <br/>
+
+    Planta:
+    <input type="text" name="floor" value="" />
+
+  <br/>
+
+    Zona:
+    <input type="text" name="zone" value="" />
+
+  <br/>
+
+    Campus:
+    <input type="text" name="school" value="" />
+
+  <br/>
+
+  <input type="submit" value="Enviar" />
+</form>
+
+{% for p in places %}
+{{ p }}
+{% endfor %}
+
+</body>
+</html>
