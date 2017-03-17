@@ -5,6 +5,9 @@ from models.locker import Locker
 from models.place import Place
 from models.type import Type
 
+import requests
+import json
+
 
 # Inicializacion del objeto Flask
 app = Flask(__name__)
@@ -23,6 +26,7 @@ def index():
 
 @app.route('/manager/taquillas/crear', methods=['GET', 'POST'])
 def locker_create():
+    #print(requests.get('https://delegacion.uc3m.es/deleapi/school/1').content)
     if request.method == 'POST':
         place = Place.query.filter_by(school=request.form['school'])\
                                 .filter_by(building=request.form['building'])\
@@ -35,12 +39,15 @@ def locker_create():
         else:
             print('Localización no válida')
 
-
     schools = Place.query.with_entities(Place.school).all()
     list_school = []
     for school in schools:
         if school.school not in list_school:
             list_school.append(school.school)
+    dict_school = {}
+    for school in list_school:
+        json_school = requests.get('https://delegacion.uc3m.es/deleapi/school/' + str(school)).content
+        dict_school[school] = json.loads(json_school)['name']
 
     buildings = Place.query.with_entities(Place.building).all()
     list_building = []
@@ -62,10 +69,9 @@ def locker_create():
 
     types = Type.query.all()
 
-    return render_template('manager/locker_create.html',list_school=list_school,
+    return render_template('manager/locker_create.html',list_school=dict_school,
                            list_building=list_building, list_floor=list_floor,
                            list_zone=list_zone, types=types)
-
 
 if __name__ == '__main__':
     app.run()

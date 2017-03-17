@@ -5,18 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-
-
 <form action="?" method="post">
     <table>
         <tr>
             <td>Numero taquilla:</td>
-            <td><input type="text" name="number" value="" style="width:10em"/></td>
+            <td><input type="text" name="number" value="" style="width:20em"/></td>
         </tr>
         <tr>
             <td>Tipo taquilla:</td>
             <td>
-                <select name="type" style="width:10em">
+                <select name="type" style="width:20em">
                     {% for type in types %}
                     <option value="{{ type.id }}">{{ type.name }}</option>
                     {% endfor %}
@@ -26,9 +24,9 @@
         <tr>
             <td>Campus:</td>
             <td>
-                <select name="school" style="width:10em">
+                <select name="school" style="width:20em">
                     {% for school in list_school  %}
-                    <option value="{{ school }}">{{ school }}</option>
+                    <option value="{{ school }}">{{ list_school[school] }}</option>
                     {% endfor %}
                 </select>
             </td>
@@ -36,7 +34,7 @@
         <tr>
             <td>Edificio:</td>
             <td>
-                <select name="building" style="width:10em">
+                <select name="building" style="width:20em">
                     {% for building in list_building  %}
                     <option value="{{ building }}">{{ building }}</option>
                     {% endfor %}
@@ -46,7 +44,7 @@
         <tr>
             <td>Planta:</td>
             <td>
-                <select name="floor" style="width:10em">
+                <select name="floor" style="width:20em">
                     {% for floor in list_floor  %}
                     <option value="{{ floor }}">{{ floor }}</option>
                     {% endfor %}
@@ -56,7 +54,7 @@
         <tr>
             <td>Zona:</td>
             <td>
-                <select name="zone" style="width:10em">
+                <select name="zone" style="width:20em">
                     {% for zone in list_zone  %}
                     <option value="{{ zone }}">{{ zone }}</option>
                     {% endfor %}
@@ -69,7 +67,5 @@
         </tr>
     </table>
 </form>
-
-
 </body>
 </html>
