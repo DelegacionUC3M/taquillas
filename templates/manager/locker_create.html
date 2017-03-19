@@ -1,71 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='locker_create_style.css') }}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form action="?" method="post">
-    <table>
-        <tr>
-            <td>Numero taquilla:</td>
-            <td><input type="text" name="number" value="" style="width:20em"/></td>
-        </tr>
-        <tr>
-            <td>Tipo taquilla:</td>
-            <td>
-                <select name="type" style="width:20em">
-                    {% for type in types %}
-                    <option value="{{ type.id }}">{{ type.name }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Campus:</td>
-            <td>
-                <select name="school" style="width:20em">
-                    {% for school in list_school  %}
-                    <option value="{{ school }}">{{ list_school[school] }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Edificio:</td>
-            <td>
-                <select name="building" style="width:20em">
-                    {% for building in list_building  %}
-                    <option value="{{ building }}">{{ building }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Planta:</td>
-            <td>
-                <select name="floor" style="width:20em">
-                    {% for floor in list_floor  %}
-                    <option value="{{ floor }}">{{ floor }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Zona:</td>
-            <td>
-                <select name="zone" style="width:20em">
-                    {% for zone in list_zone  %}
-                    <option value="{{ zone }}">{{ zone }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Enviar" style="width:10em"/></td>
-        </tr>
-    </table>
-</form>
+    <form action="?" method="post">
+      <div class="col-3">
+        <label>
+          Número
+          <input name="number" placeholder="Introduce el número de la taquilla" tabindex="1" />
+        </label>
+      </div>
+      <div class="col-3">
+        <label>
+          Tipo
+          <select name="type" tabindex="5">
+            {% for type in types %}
+            <option value="{{ type.id }}">{{ type.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="col-3">
+        <label>
+          Campus
+          <select name="school" tabindex="5">
+            {% for school in list_school  %}
+            <option value="{{ school }}">{{ list_school[school] }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="col-3">
+        <label>
+          Edificio
+          <select name="building" tabindex="5">
+            {% for building in list_building  %}
+            <option value="{{ building }}">{{ building }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="col-3">
+        <label>
+          Planta
+          <select name="floor" tabindex="5">
+            {% for floor in list_floor  %}
+            <option value="{{ floor }}">{{ floor }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="col-3">
+        <label>
+          Zona
+          <select name="zone" tabindex="5">
+            {% for zone in list_zone  %}
+            <option value="{{ zone }}">{{ zone }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      <div class="col-submit">
+        <button type="submit">Guardar</button>
+      </div>
+    </form>
 </body>
 </html>

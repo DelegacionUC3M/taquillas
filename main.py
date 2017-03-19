@@ -26,7 +26,6 @@ def index():
 
 @app.route('/manager/taquillas/crear', methods=['GET', 'POST'])
 def locker_create():
-    #print(requests.get('https://delegacion.uc3m.es/deleapi/school/1').content)
     if request.method == 'POST':
         place = Place.query.filter_by(school=request.form['school'])\
                                 .filter_by(building=request.form['building'])\
