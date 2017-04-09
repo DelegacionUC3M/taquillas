@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from models.connection import db
 
 from models.locker import Locker
@@ -32,11 +32,16 @@ def locker_create():
                                 .filter_by(floor=request.form['floor'])\
                                 .filter_by(zone=request.form['zone']).all()
         if len(place) != 0:
+            try:
                 locker = Locker(request.form['number'], 1, None, request.form['type'], place[0].id, None, None)
                 db.session.add(locker)
                 db.session.commit()
+                return jsonify({'success': 'Taquilla ' + str(request.form['number']) + ' guardada correctamente'});
+            except:
+                return jsonify({'error': 'Error al guardar la taquilla'});
+
         else:
-            print('Localización no válida')
+            return jsonify({'error': 'Localización no válida'});
 
     schools = Place.query.with_entities(Place.school).all()
     list_school = []

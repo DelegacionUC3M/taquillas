@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='locker_create_style.css') }}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/locker_create_style.css') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/locker_create.js') }}"></script>
 </head>
 <body>
-    <form action="?" method="post">
+    <form id="send">
       <div class="col-3">
         <label>
           Número
@@ -16,7 +18,7 @@
       <div class="col-3">
         <label>
           Tipo
-          <select name="type" tabindex="5">
+          <select name="type" tabindex="2">
             {% for type in types %}
             <option value="{{ type.id }}">{{ type.name }}</option>
             {% endfor %}
@@ -26,7 +28,7 @@
       <div class="col-3">
         <label>
           Campus
-          <select name="school" tabindex="5">
+          <select name="school" tabindex="3">
             {% for school in list_school  %}
             <option value="{{ school }}">{{ list_school[school] }}</option>
             {% endfor %}
@@ -36,7 +38,7 @@
       <div class="col-3">
         <label>
           Edificio
-          <select name="building" tabindex="5">
+          <select name="building" tabindex="4">
             {% for building in list_building  %}
             <option value="{{ building }}">{{ building }}</option>
             {% endfor %}
@@ -56,7 +58,7 @@
       <div class="col-3">
         <label>
           Zona
-          <select name="zone" tabindex="5">
+          <select name="zone" tabindex="6">
             {% for zone in list_zone  %}
             <option value="{{ zone }}">{{ zone }}</option>
             {% endfor %}
@@ -66,6 +68,13 @@
       <div class="col-submit">
         <button type="submit">Guardar</button>
       </div>
+        <div class="col-1" id="succesAlert" role="alert" style="display:none; background-color: greenyellow">
+            <label id="lblSuccesAlert"></label>
+        </div>
+        <div class="col-1" id="errorAlert" role="alert" style="display:none; background-color: red">
+            <label id="lblErrorAlert"></label>
+        </div>
     </form>
+
 </body>
 </html>
