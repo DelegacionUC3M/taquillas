@@ -1,11 +1,5 @@
 $(function() {
              $('#send').on('submit', function(event) {
-                var number = $('#number').val();
-                var type = $('#type').val();
-                var school = $('#school').val();
-                var building = $('#building').val();
-                var floor = $('#floor').val();
-                var zone = $('#zone').val();
                 $.ajax({
                     url: '/manager/taquillas/crear',
                     data: $('form').serialize(),
@@ -24,7 +18,7 @@ $(function() {
                     }
                 });
                 event.preventDefault();
-            });
+            })
         });
 
 $(document).ready(function(){
@@ -33,3 +27,66 @@ $(document).ready(function(){
 			$('#errorAlert').hide(1500);
 		 });
 	});
+
+$(document).ready(function(){
+	$("#selSchool").change(function(){
+	            $.ajax({
+                    url: '/manager/taquillas/filtrar_campus',
+                    data: $('form').serialize(),
+                    type: 'POST'
+                })
+                .done(function(data){
+                    $('#selBuilding').empty();
+                    $('#selFloor').empty();
+                    $('#selZone').empty();
+                    for(var building in data.buildings) {
+                        $('#selBuilding').append('<option value="' + data.buildings[building] + '">' + data.buildings[building] +'</option>');
+                    }
+                    for(var floor in data.floors) {
+                        $('#selFloor').append('<option value="' + data.floors[floor] + '">' + data.floors[floor] +'</option>');
+                    }
+                    for(var zone in data.zones) {
+                        $('#selZone').append('<option value="' + data.zones[zone] + '">' + data.zones[zone] +'</option>');
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+
+$(document).ready(function(){
+	$("#selBuilding").change(function(){
+	            $.ajax({
+                    url: '/manager/taquillas/filtrar_edificio',
+                    data: $('form').serialize(),
+                    type: 'POST'
+                })
+                .done(function(data){
+                    $('#selFloor').empty();
+                    $('#selZone').empty();
+                    for(var floor in data.floors) {
+                        $('#selFloor').append('<option value="' + data.floors[floor] + '">' + data.floors[floor] +'</option>');
+                    }
+                    for(var zone in data.zones) {
+                        $('#selZone').append('<option value="' + data.zones[zone] + '">' + data.zones[zone] +'</option>');
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+
+$(document).ready(function(){
+	$("#selFloor").change(function(){
+	            $.ajax({
+                    url: '/manager/taquillas/filtrar_planta',
+                    data: $('form').serialize(),
+                    type: 'POST'
+                })
+                .done(function(data){
+                    $('#selZone').empty();
+                    for(var zone in data.zones ) {
+                        $('#selZone').append('<option value="' + data.zones[zone] + '">' + data.zones[zone] +'</option>');
+                    }
+                });
+                event.preventDefault();
+            });
+        });

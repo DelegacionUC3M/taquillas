@@ -28,7 +28,7 @@
       <div class="col-3">
         <label>
           Campus
-          <select name="school" tabindex="3">
+          <select name="school" id="selSchool" tabindex="3">
             {% for school in list_school  %}
             <option value="{{ school }}">{{ list_school[school] }}</option>
             {% endfor %}
@@ -38,7 +38,7 @@
       <div class="col-3">
         <label>
           Edificio
-          <select name="building" tabindex="4">
+          <select name="building" id="selBuilding" tabindex="4">
             {% for building in list_building  %}
             <option value="{{ building }}">{{ building }}</option>
             {% endfor %}
@@ -48,7 +48,7 @@
       <div class="col-3">
         <label>
           Planta
-          <select name="floor" tabindex="5">
+          <select name="floor" id="selFloor" tabindex="5">
             {% for floor in list_floor  %}
             <option value="{{ floor }}">{{ floor }}</option>
             {% endfor %}
@@ -58,7 +58,7 @@
       <div class="col-3">
         <label>
           Zona
-          <select name="zone" tabindex="6">
+          <select name="zone" id="selZone" tabindex="6">
             {% for zone in list_zone  %}
             <option value="{{ zone }}">{{ zone }}</option>
             {% endfor %}

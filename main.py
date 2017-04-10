@@ -77,5 +77,71 @@ def locker_create():
                            list_building=list_building, list_floor=list_floor,
                            list_zone=list_zone, types=types)
 
+@app.route('/manager/taquillas/filtrar_campus', methods=['POST'])
+def campus_filter():
+    buildings = Place.query.filter_by(school=request.form['school'])\
+                .order_by(Place.building)\
+                .with_entities(Place.building).all()
+    list_building = []
+    for building in buildings:
+        if building.building not in list_building:
+            list_building.append(building.building)
+
+    floors = Place.query.filter_by(school=request.form['school']) \
+                        .order_by(Place.floor) \
+                        .with_entities(Place.floor).all()
+    list_floor = []
+    for floor in floors:
+        if floor.floor not in list_floor:
+            list_floor.append(floor.floor)
+
+    zones = Place.query.filter_by(school=request.form['school'])\
+                .order_by(Place.zone)\
+                .with_entities(Place.zone).all()
+    list_zone = []
+    for zone in zones:
+        if zone.zone not in list_zone:
+            list_zone.append(zone.zone)
+
+    return jsonify({ 'buildings' : list_building,
+                     'floors' : list_floor,
+                     'zones' : list_zone})
+
+@app.route('/manager/taquillas/filtrar_edificio', methods=['POST'])
+def building_filter():
+    floors = Place.query.filter_by(school=request.form['school'])\
+                    .filter_by(building=request.form['building'])\
+                    .order_by(Place.floor)\
+                    .with_entities(Place.floor).all()
+    list_floor = []
+    for floor in floors:
+        if floor.floor not in list_floor:
+            list_floor.append(floor.floor)
+
+    zones = Place.query.filter_by(school=request.form['school']) \
+                    .filter_by(building=request.form['building'])\
+                    .order_by(Place.zone)\
+                    .with_entities(Place.zone).all()
+    list_zone = []
+    for zone in zones:
+        if zone.zone not in list_zone:
+            list_zone.append(zone.zone)
+
+    return jsonify({ 'floors' : list_floor,
+                     'zones' : list_zone})
+
+@app.route('/manager/taquillas/filtrar_planta', methods=['POST'])
+def floor_filter():
+    zones = Place.query.filter_by(school=request.form['school'])\
+                    .filter_by(building=request.form['building'])\
+                    .filter_by(floor=request.form['floor'])\
+                    .order_by(Place.zone)\
+                    .with_entities(Place.zone).all()
+    list_zone = []
+    for zone in zones:
+        if zone.zone not in list_zone:
+            list_zone.append(zone.zone)
+    return jsonify({'zones' : list_zone})
+
 if __name__ == '__main__':
     app.run()
