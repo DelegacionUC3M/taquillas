@@ -33,17 +33,19 @@ def admin_locker():
     if request.method == 'POST':
         try:
             if request.args.get('create') == 'locker':
-                return manager.locker_creator()
+                return manager.locker_create()
             elif request.args.get('create') == 'place':
-                return manager.place_creator()
+                return manager.place_create()
             elif request.args.get('create') == 'type':
-                return manager.type_creator()
+                return manager.type_create()
             else:
                 return jsonify({'error': 'No se ha especificado un objeto válido'}), 400
         except Exception:
             return jsonify({'error': 'Se debe especificar en la url qué objeto se quiere crear'}), 400
     elif request.method == 'GET':
-        return manager.lockers_lister()
+        return manager.lockers_list()
+    elif request.method == 'DELETE':
+        return manager.locker_delete()
 
 
 
