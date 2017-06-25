@@ -35,14 +35,18 @@ class Manager:
 
     @staticmethod
     def lockers_lister():
-        query = Locker.query.all()
-        if len(request.args.copy()) > 0:
-            for key in request.args.values():
-                try:
-                    query.filter(key=request.args.values()[key])
-                except Exception:
-                    return 'Error' # TODO especificar error y poner codigo http
-        return jsonify([locker.__repr__() for locker in query])
+        params_multidic = request.args.copy()
+        if len(params_multidic) > 0:
+            params_dic = {}
+            for e in params_multidic:
+                params_dic[e] = params_multidic[e]
+            try:
+                query_result = Locker.query.filter_by(**params_dic).all()
+            except Exception:
+                return 'Error' # TODO especificar error y poner codigo http
+        else:
+            query_result = Locker.query.all()
+        return jsonify([locker.__repr__() for locker in query_result])
 
 
 from main import *
