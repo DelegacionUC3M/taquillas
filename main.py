@@ -26,28 +26,59 @@ db.create_all()
 def index():
     return 'La api de taquillas está levantada'
 
-@app.route('/manager/locker', methods=['GET', 'POST', 'PUT', 'DELETE'])
-def admin_locker():
+@app.route('/manager/locker', methods=['GET', 'POST'])
+def manager_locker():
     # TODO comprobar que el usuario está autenticado como manager
     manager = Manager
     if request.method == 'POST':
-        try:
-            if request.args.get('create') == 'locker':
-                return manager.locker_create()
-            elif request.args.get('create') == 'place':
-                return manager.place_create()
-            elif request.args.get('create') == 'type':
-                return manager.type_create()
-            else:
-                return jsonify({'error': 'No se ha especificado un objeto válido'}), 400
-        except Exception:
-            return jsonify({'error': 'Se debe especificar en la url qué objeto se quiere crear'}), 400
+        return manager.locker_create()
     elif request.method == 'GET':
         return manager.lockers_list()
-    elif request.method == 'DELETE':
-        return manager.locker_delete()
 
+@app.route('/manager/locker/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def manager_locker_id(id):
+    # TODO comprobar que el usuario está autenticado como manager
+    manager = Manager
+    if request.method == 'DELETE':
+        return manager.locker_delete(id)
+    elif request.method == 'GET':
+        return manager.locker_list(id)
 
+@app.route('/manager/place', methods=['GET', 'POST'])
+def manager_place():
+    # TODO comprobar que el usuario está autenticado como manager
+    manager = Manager
+    if request.method == 'POST':
+        return manager.place_create()
+    elif request.method == 'GET':
+        return manager.places_list()
+
+@app.route('/manager/place/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def manager_place_id(id):
+    # TODO comprobar que el usuario está autenticado como manager
+    manager = Manager
+    if request.method == 'DELETE':
+        return manager.place_delete(id)
+    elif request.method == 'GET':
+        return manager.place_list(id)
+
+@app.route('/manager/type', methods=['GET', 'POST'])
+def manager_type():
+    # TODO comprobar que el usuario está autenticado como manager
+    manager = Manager
+    if request.method == 'POST':
+        return manager.type_create()
+    elif request.method == 'GET':
+        return manager.types_list()
+
+@app.route('/manager/type/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def manager_type_id(id):
+    # TODO comprobar que el usuario está autenticado como manager
+    manager = Manager
+    if request.method == 'DELETE':
+        return manager.type_delete(id)
+    elif request.method == 'GET':
+        return manager.type_list(id)
 
 if __name__ == '__main__':
     app.run()

@@ -21,6 +21,5 @@ class Type(db.Model):  # hereda del objeto model
         return str({
             'id': self.id,
             'name': self.name,
-            'price': self.price,
-            'lockers': self.lockers
+            'price': self.price
         })

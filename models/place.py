@@ -23,6 +23,5 @@ class Place(db.Model):
             'building': self.building,
             'zone': self.zone,
             'floor': self.floor,
-            'school':self.school,
-            'lockers': self.lockers
+            'school':self.school
         })
