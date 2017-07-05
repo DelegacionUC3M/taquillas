@@ -24,6 +24,15 @@ class Manager:
             return jsonify({'error': 'Error al eliminar'}), 500
 
     @staticmethod
+    def locker_modify(locker_id):
+        try:
+            Locker.query.filter_by(id=locker_id).update(request.get_json())
+            db.session.commit()
+            return jsonify({'success': 'Taquilla modificada'}), 200
+        except Exception:
+            return jsonify({'error': 'Error al modificar'}), 500
+
+    @staticmethod
     def locker_list(locker_id):
         try:
             locker_db = Locker.query.filter_by(id=locker_id)
@@ -68,6 +77,15 @@ class Manager:
             return jsonify({'error': 'Error al eliminar'}), 500
 
     @staticmethod
+    def place_modify(place_id):
+        try:
+            Place.query.filter_by(id=place_id).update(request.get_json())
+            db.session.commit()
+            return jsonify({'success': 'Lugar modificado'}), 200
+        except Exception:
+            return jsonify({'error': 'Error al modificar'}), 500
+
+    @staticmethod
     def place_list(place_id):
         try:
             place_db = Place.query.filter_by(id=place_id)
@@ -110,6 +128,15 @@ class Manager:
             return jsonify({'success': 'Tipo eliminado' }), 200
         except Exception:
             return jsonify({'error': 'Error al eliminar'}), 500
+
+    @staticmethod
+    def type_modify(type_id):
+        try:
+            Type.query.filter_by(id=type_id).update(request.get_json())
+            db.session.commit()
+            return jsonify({'success': 'Tipo modificado'}), 200
+        except Exception:
+            return jsonify({'error': 'Error al modificar'}), 500
 
     @staticmethod
     def type_list(type_id):

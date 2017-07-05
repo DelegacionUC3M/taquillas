@@ -43,6 +43,8 @@ def manager_locker_id(id):
         return manager.locker_delete(id)
     elif request.method == 'GET':
         return manager.locker_list(id)
+    elif request.method == 'PUT':
+        return manager.locker_modify(id)
 
 @app.route('/manager/place', methods=['GET', 'POST'])
 def manager_place():
@@ -61,6 +63,8 @@ def manager_place_id(id):
         return manager.place_delete(id)
     elif request.method == 'GET':
         return manager.place_list(id)
+    elif request.method == 'PUT':
+        return manager.place_modify(id)
 
 @app.route('/manager/type', methods=['GET', 'POST'])
 def manager_type():
@@ -79,6 +83,8 @@ def manager_type_id(id):
         return manager.type_delete(id)
     elif request.method == 'GET':
         return manager.type_list(id)
+    elif request.method == 'PUT':
+        return manager.type_modify(id)
 
 if __name__ == '__main__':
     app.run()
