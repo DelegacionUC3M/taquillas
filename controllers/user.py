@@ -21,6 +21,11 @@ class User:
                     locker.date = None
                     db.session.commit()
                     return jsonify({'success': 'Reserva cancelada'}), 200
+            elif 'incidence' in locker_data:
+                if locker_data['incidence'] == 1:
+                    locker.incidence = 1
+                    db.session.commit()
+                    return jsonify({'success': 'Incidencia notificada'}), 200
             else:
                 return jsonify({'error': 'Parametros no validos'}), 500
         except Exception:
