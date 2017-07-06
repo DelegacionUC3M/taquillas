@@ -6,7 +6,7 @@ class Manager:
     def locker_create():
         try:
             locker_data = request.get_json()
-            locker = Locker(locker_data['number'], 0, None, locker_data['type'], locker_data['place'], None, None)
+            locker = Locker(locker_data['number'], locker_data['type'], locker_data['place'])
             db.session.add(locker)
             db.session.commit()
             return jsonify({'success': 'Taquilla ' + str(locker_data['number']) + ' creada correctamente'}), 201

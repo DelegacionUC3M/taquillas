@@ -8,17 +8,19 @@ class Locker(db.Model):
     qr = db.Column(db.Integer, nullable=True)
     type = db.Column(db.Integer, db.ForeignKey('type.id'), nullable=False)
     place = db.Column(db.Integer, db.ForeignKey('place.id'), nullable=False)
+    incidence = db.Column(db.Integer, nullable=False)
     user = db.Column(db.Integer, nullable=True)
     date = db.Column(db.Date, nullable=True)
 
-    def __init__(self, number, status, qr, type, place, user, date):
+    def __init__(self, number, type, place):
         self.number = number
-        self.status = status
-        self.qr = qr
+        self.status = 0
+        self.qr = None
         self.type = type
-        self.place= place
-        self.user = user
-        self.date = date
+        self.place = place
+        self.incidence = 0
+        self.user = None
+        self.date = None
 
     def __repr__(self):
         return str({
@@ -28,6 +30,7 @@ class Locker(db.Model):
             'qr': self.qr,
             'type': self.type,
             'place': self.place,
+            'incidence': self.incidence,
             'user': self.user,
             'date': self.date
         })
