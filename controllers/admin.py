@@ -31,26 +31,27 @@ class Admin:
             locker_data = request.get_json()
             locker = Locker.query.filter_by(id=locker_id)[0]
 
-            if locker_data['status'] == '2' and locker_data['user']:
-                locker.status = 2
-                locker.user = locker_data['user']
-                if locker.date is None:
-                    locker.date = time.strftime("%Y/%m/%d")
+            if 'status' in locker_data and 'user' in locker_data:
+                if locker_data['status'] == '2':
+                    locker.status = 2
+                    locker.user = locker_data['user']
+                    if locker.date is None:
+                        locker.date = time.strftime("%Y/%m/%d")
+                    db.session.commit()
+                    return jsonify({'success': 'Taquilla cobrada'}), 200
+            elif 'status' in locker_data:
+                if locker_data['status'] == '0':
+                    locker.status = 0
+                    locker.user = None
+                    locker.date = None
+                    db.session.commit()
+                    return jsonify({'success': 'Taquilla liberada'}), 200
+            elif 'incidence' in locker_data:
+                locker.incidence = locker_data['incidence']
                 db.session.commit()
-                return jsonify({'success': 'Taquilla cobrada'}), 200
-            elif locker_data['status'] == '0':
-                locker.status = 0
-                locker.user = None
-                locker.date = None
-                db.session.commit()
-                return jsonify({'success': 'Taquilla liberada'}), 200
-            #TODO crear columna para incidencia
-            #elif locker_data['incidencia']:
-            #    locker.incidencia = locker_data['incidencia']
-            #    db.session.commit()
-            #    return jsonify({'success': 'Incidencia modificada'}), 200
+                return jsonify({'success': 'Incidencia modificada'}), 200
             #TODO admin puede cambiar QR?
-            elif locker_data['qr']:
+            elif 'qr' in locker_data:
                 locker.qr = locker_data['qr']
                 db.session.commit()
                 return jsonify({'success': 'QR modificado'}), 200
