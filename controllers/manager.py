@@ -91,7 +91,7 @@ class Manager:
             place_db = Place.query.filter_by(id=place_id)
             return jsonify(place_db[0].__repr__()), 200
         except Exception:
-            return jsonify({'error': 'Lugar no valido'}), 500
+            return jsonify({'error': 'Lugar no válido'}), 500
 
     @staticmethod
     def places_list():

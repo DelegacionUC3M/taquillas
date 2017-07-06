@@ -6,6 +6,7 @@ from models.place import Place
 from models.type import Type
 
 from controllers.manager import Manager
+from controllers.admin import Admin
 
 import requests
 import json
@@ -85,6 +86,51 @@ def manager_type_id(id):
         return manager.type_list(id)
     elif request.method == 'PUT':
         return manager.type_modify(id)
+
+@app.route('/admin/locker', methods=['GET'])
+def admin_locker():
+    # TODO comprobar que el usuario está autenticado como admin
+    admin = Admin
+    if request.method == 'GET':
+        return admin.lockers_list()
+
+@app.route('/admin/locker/<int:id>', methods=['GET', 'PUT'])
+def admin_locker_id(id):
+    # TODO comprobar que el usuario está autenticado como admin
+    admin = Admin
+    if request.method == 'GET':
+        return admin.locker_list(id)
+    elif request.method == 'PUT':
+        return admin.locker_modify(id)
+
+@app.route('/admin/place', methods=['GET'])
+def admin_place():
+    # TODO comprobar que el usuario está autenticado como admin
+    admin = Admin
+    if request.method == 'GET':
+        return admin.places_list()
+
+@app.route('/admin/place/<int:id>', methods=['GET'])
+def admin_place_id(id):
+    # TODO comprobar que el usuario está autenticado como admin
+    admin = Admin
+    if request.method == 'GET':
+        return admin.place_list(id)
+
+@app.route('/admin/type', methods=['GET'])
+def admin_type():
+    # TODO comprobar que el usuario está autenticado como admin
+    admin = Admin
+    if request.method == 'GET':
+        return admin.type_list()
+
+@app.route('/admin/type/<int:id>', methods=['GET'])
+def admin_type_id(id):
+    # TODO comprobar que el usuario está autenticado como admin
+    admin = Admin
+    if request.method == 'GET':
+        return admin.type_list(id)
+
 
 if __name__ == '__main__':
     app.run()
