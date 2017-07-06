@@ -3,14 +3,6 @@ import time
 class User:
 
     @staticmethod
-    def locker_list(locker_id):
-        try:
-            locker_db = Locker.query.filter_by(id=locker_id)[0]
-            return jsonify({'status': locker_db.status, 'type': locker_db.type}), 200
-        except Exception:
-            return jsonify({'error': 'Taquilla no valida'}), 500
-
-    @staticmethod
     def locker_modify(locker_id):
         try:
             locker_data = request.get_json()
@@ -32,13 +24,5 @@ class User:
                 return jsonify({'error': 'Parametros no validos'}), 500
         except Exception:
             return jsonify({'error': 'Error al reservar la taquilla'}), 500
-
-    @staticmethod
-    def type_list(type_id):
-        try:
-            type_db = Type.query.filter_by(id=type_id)
-            return jsonify(type_db[0].__repr__()), 200
-        except Exception:
-            return jsonify({'error': 'Tipo no valido'}), 500
 
 from main import *

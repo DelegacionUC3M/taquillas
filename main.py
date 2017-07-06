@@ -8,6 +8,7 @@ from models.type import Type
 from controllers.manager import Manager
 from controllers.admin import Admin
 from controllers.user import User
+from controllers.public import Public
 
 import requests
 import json
@@ -48,43 +49,35 @@ def manager_locker_id(id):
     elif request.method == 'PUT':
         return manager.locker_modify(id)
 
-@app.route('/manager/place', methods=['GET', 'POST'])
+@app.route('/manager/place', methods=['GET'])
 def manager_place():
     # TODO comprobar que el usuario está autenticado como manager
     manager = Manager
     if request.method == 'POST':
         return manager.place_create()
-    elif request.method == 'GET':
-        return manager.places_list()
 
-@app.route('/manager/place/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/manager/place/<int:id>', methods=['PUT', 'DELETE'])
 def manager_place_id(id):
     # TODO comprobar que el usuario está autenticado como manager
     manager = Manager
     if request.method == 'DELETE':
         return manager.place_delete(id)
-    elif request.method == 'GET':
-        return manager.place_list(id)
     elif request.method == 'PUT':
         return manager.place_modify(id)
 
-@app.route('/manager/type', methods=['GET', 'POST'])
+@app.route('/manager/type', methods=['POST'])
 def manager_type():
     # TODO comprobar que el usuario está autenticado como manager
     manager = Manager
     if request.method == 'POST':
         return manager.type_create()
-    elif request.method == 'GET':
-        return manager.types_list()
 
-@app.route('/manager/type/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/manager/type/<int:id>', methods=['PUT', 'DELETE'])
 def manager_type_id(id):
     # TODO comprobar que el usuario está autenticado como manager
     manager = Manager
     if request.method == 'DELETE':
         return manager.type_delete(id)
-    elif request.method == 'GET':
-        return manager.type_list(id)
     elif request.method == 'PUT':
         return manager.type_modify(id)
 
@@ -104,47 +97,42 @@ def admin_locker_id(id):
     elif request.method == 'PUT':
         return admin.locker_modify(id)
 
-@app.route('/admin/place', methods=['GET'])
-def admin_place():
-    # TODO comprobar que el usuario está autenticado como admin
-    admin = Admin
-    if request.method == 'GET':
-        return admin.places_list()
-
-@app.route('/admin/place/<int:id>', methods=['GET'])
-def admin_place_id(id):
-    # TODO comprobar que el usuario está autenticado como admin
-    admin = Admin
-    if request.method == 'GET':
-        return admin.place_list(id)
-
-@app.route('/admin/type', methods=['GET'])
-def admin_type():
-    # TODO comprobar que el usuario está autenticado como admin
-    admin = Admin
-    if request.method == 'GET':
-        return admin.type_list()
-
-@app.route('/admin/type/<int:id>', methods=['GET'])
-def admin_type_id(id):
-    # TODO comprobar que el usuario está autenticado como admin
-    admin = Admin
-    if request.method == 'GET':
-        return admin.type_list(id)
-
-@app.route('/taquilla/<int:id>', methods=['GET', 'PUT'])
+@app.route('/taquilla/<int:id>', methods=['PUT'])
 def user_locker_id(id):
+    #TODO comprobar que el usuario está autentucado
     user = User
-    if request.method == 'GET':
-        return user.locker_list(id)
-    elif request.method == 'PUT':
+    if request.method == 'PUT':
         return user.locker_modify(id)
 
-@app.route('/tipo/<int:id>', methods=['GET'])
-def user_type_id(id):
-    user = User
+@app.route('/taquilla/<int:id>', methods=['GET'])
+def public_locker_id(id):
+    public = Public
     if request.method == 'GET':
-        return user.type_list(id)
+        return public.locker_list(id)
+
+@app.route('/place', methods=['GET'])
+def public_place():
+    public = Public
+    if request.method == 'GET':
+        return public.places_list()
+
+@app.route('/place/<int:id>', methods=['GET'])
+def public_place_id(id):
+    public = Public
+    if request.method == 'GET':
+        return public.place_list(id)
+
+@app.route('/type', methods=['GET'])
+def public_type():
+    public = Public
+    if request.method == 'GET':
+        return public.type_list()
+
+@app.route('/type/<int:id>', methods=['GET'])
+def public_type_id(id):
+    public = Public
+    if request.method == 'GET':
+        return public.type_list(id)
 
 if __name__ == '__main__':
     app.run()
