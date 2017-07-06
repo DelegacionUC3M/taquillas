@@ -7,6 +7,7 @@ from models.type import Type
 
 from controllers.manager import Manager
 from controllers.admin import Admin
+from controllers.user import User
 
 import requests
 import json
@@ -131,6 +132,19 @@ def admin_type_id(id):
     if request.method == 'GET':
         return admin.type_list(id)
 
+@app.route('/taquilla/<int:id>', methods=['GET', 'PUT'])
+def user_locker_id(id):
+    user = User
+    if request.method == 'GET':
+        return user.locker_list(id)
+    elif request.method == 'PUT':
+        return user.locker_modify(id)
+
+@app.route('/tipo/<int:id>', methods=['GET'])
+def user_type_id(id):
+    user = User
+    if request.method == 'GET':
+        return user.type_list(id)
 
 if __name__ == '__main__':
     app.run()
