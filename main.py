@@ -110,7 +110,7 @@ def public_locker_id(id):
     if request.method == 'GET':
         return public.locker_list(id)
 
-@app.route('/taquilla/<int:qr>', methods=['GET'])
+@app.route('/taquilla/qr/<int:qr>', methods=['GET'])
 def public_locker_id(qr):
     public = Public
     if request.method == 'GET':

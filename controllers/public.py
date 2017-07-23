@@ -14,7 +14,7 @@ class Public:
             locker_db = Locker.query.filter_by(qr=locker_qr)[0]
             return jsonify({'id': locker_db.id,'status': locker_db.status, 'type': locker_db.type}), 200
         except Exception:
-            return jsonify({'error': 'Taquilla no valida'}), 500
+            return jsonify({'error': 'QR no valido'}), 500
 
     @staticmethod
     def place_list(place_id):
