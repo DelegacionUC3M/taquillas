@@ -49,7 +49,7 @@ def manager_locker_id(id):
     elif request.method == 'PUT':
         return manager.locker_modify(id)
 
-@app.route('/manager/place', methods=['GET'])
+@app.route('/manager/place', methods=['POST'])
 def manager_place():
     # TODO comprobar que el usuario está autenticado como manager
     manager = Manager
