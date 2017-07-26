@@ -34,7 +34,7 @@ class Public:
             try:
                 query_result = Place.query.filter_by(**params_dic).all()
             except Exception:
-                return jsonify({'error': 'Parámetros de la url no válidos'}), 400
+                return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Place.query.all()
         return jsonify([place.__repr__() for place in query_result])
@@ -57,7 +57,7 @@ class Public:
             try:
                 query_result = Type.query.filter_by(**params_dic).all()
             except Exception:
-                return jsonify({'error': 'Parámetros de la url no válidos'}), 400
+                return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Type.query.all()
         return jsonify([type.__repr__() for type in query_result])
