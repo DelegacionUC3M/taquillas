@@ -132,7 +132,7 @@ def public_place_id(id):
 def public_type():
     public = Public
     if request.method == 'GET':
-        return public.type_list()
+        return public.types_list()
 
 @app.route('/type/<int:id>', methods=['GET'])
 def public_type_id(id):
