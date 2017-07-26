@@ -6,7 +6,7 @@ class Public:
             locker_db = Locker.query.filter_by(id=locker_id)[0]
             return jsonify({'status': locker_db.status, 'type': locker_db.type}), 200
         except Exception:
-            return jsonify({'error': 'Taquilla no valida'}), 500
+            return jsonify({'error': 'Taquilla no válida'}), 404
 
     @staticmethod
     def locker_list_qr(locker_qr):
@@ -14,7 +14,7 @@ class Public:
             locker_db = Locker.query.filter_by(qr=locker_qr)[0]
             return jsonify({'id': locker_db.id,'status': locker_db.status, 'type': locker_db.type}), 200
         except Exception:
-            return jsonify({'error': 'QR no valido'}), 500
+            return jsonify({'error': 'QR no válido'}), 404
 
     @staticmethod
     def place_list(place_id):
@@ -22,7 +22,7 @@ class Public:
             place_db = Place.query.filter_by(id=place_id)
             return jsonify(place_db[0].__repr__()), 200
         except Exception:
-            return jsonify({'error': 'Lugar no válido'}), 500
+            return jsonify({'error': 'Lugar no válido'}), 404
 
     @staticmethod
     def places_list():
@@ -34,7 +34,7 @@ class Public:
             try:
                 query_result = Place.query.filter_by(**params_dic).all()
             except Exception:
-                return jsonify({'error': 'Parametros de la url no validos'}), 400
+                return jsonify({'error': 'Parámetros de la url no válidos'}), 400
         else:
             query_result = Place.query.all()
         return jsonify([place.__repr__() for place in query_result])
@@ -45,7 +45,7 @@ class Public:
             type_db = Type.query.filter_by(id=type_id)
             return jsonify(type_db[0].__repr__()), 200
         except Exception:
-            return jsonify({'error': 'Tipo no valido'}), 500
+            return jsonify({'error': 'Tipo no válido'}), 404
 
     @staticmethod
     def types_list():
@@ -57,7 +57,7 @@ class Public:
             try:
                 query_result = Type.query.filter_by(**params_dic).all()
             except Exception:
-                return jsonify({'error': 'Parametros de la url no validos'}), 400
+                return jsonify({'error': 'Parámetros de la url no válidos'}), 400
         else:
             query_result = Type.query.all()
         return jsonify([type.__repr__() for type in query_result])
