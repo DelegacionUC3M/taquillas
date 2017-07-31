@@ -8,7 +8,7 @@ class Admin:
             locker_db = Locker.query.filter_by(id=locker_id)
             return jsonify(locker_db[0].__repr__()), 200
         except Exception:
-            return jsonify({'error': 'Taquilla no valida'}), 500
+            return jsonify({'error': 'Taquilla no válida'}), 404
 
     @staticmethod
     def lockers_list():
@@ -20,7 +20,7 @@ class Admin:
             try:
                 query_result = Locker.query.order_by(Locker.place).filter_by(**params_dic).all()
             except Exception:
-                return jsonify({'error': 'Parametros de la url no validos'}), 400
+                return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.all()
         return jsonify([locker.__repr__() for locker in query_result])
