@@ -95,7 +95,7 @@ class Manager:
             db.session.commit()
             return jsonify({'success': 'Tipo '  + str(type_data['name']) + ' creado correctamente'}), 201
         except Exception:
-            return jsonify({'error': 'Error al crear el lugar'}), 500
+            return jsonify({'error': 'Error al crear el tipo'}), 500
 
     @staticmethod
     def type_delete(type_id):
