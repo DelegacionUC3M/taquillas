@@ -25,6 +25,7 @@ class Manager:
 
     @staticmethod
     def locker_modify(locker_id):
+        #TODO si se pasa un id no valido, sale el mensaje de success
         try:
             Locker.query.filter_by(id=locker_id).update(request.get_json())
             db.session.commit()
@@ -38,7 +39,7 @@ class Manager:
             locker_db = Locker.query.filter_by(id=locker_id)
             return jsonify(locker_db[0].__repr__()), 200
         except Exception:
-            return jsonify({'error': 'Taquilla no valida'}), 500
+            return jsonify({'error': 'Taquilla no válida'}), 500
 
     @staticmethod
     def lockers_list():
@@ -50,7 +51,7 @@ class Manager:
             try:
                 query_result = Locker.query.order_by(Locker.place).filter_by(**params_dic).all()
             except Exception:
-                return jsonify({'error': 'Parametros de la url no validos'}), 400
+                return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.all()
         return jsonify([locker.__repr__() for locker in query_result])
