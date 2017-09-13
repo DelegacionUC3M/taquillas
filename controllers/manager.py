@@ -1,6 +1,7 @@
 class Manager:
 
     # TODO faltan por comprobar muchos errores
+    # TODO falta hacer muchas pruebas
 
     @staticmethod
     def locker_create():
@@ -20,6 +21,8 @@ class Manager:
     def locker_delete(locker_id):
         try:
             locker_db = Locker.query.filter_by(id=locker_id)
+            if not locker_db[:]:
+                return jsonify({'error': 'La taquilla no existe'}), 500
             db.session.delete(locker_db[0])
             db.session.commit()
             return jsonify({'success': 'Taquilla eliminada'}), 200
@@ -28,9 +31,11 @@ class Manager:
 
     @staticmethod
     def locker_modify(locker_id):
-        #TODO si se pasa un id no valido, sale el mensaje de success
         try:
-            Locker.query.filter_by(id=locker_id).update(request.get_json())
+            locker_db = Locker.query.filter_by(id=locker_id)
+            if not locker_db[:]:
+                return jsonify({'error': 'La taquilla no existe'}), 500
+            locker_db.update(request.get_json())
             db.session.commit()
             return jsonify({'success': 'Taquilla modificada'}), 200
         except Exception:
@@ -70,8 +75,7 @@ class Manager:
             db.session.add(place)
             db.session.commit()
             return jsonify({'success': 'Lugar creado correctamente'}), 201
-        except Exception as e:
-            print (e)
+        except Exception:
             return jsonify({'error': 'Error al crear el lugar'}), 500
 
     @staticmethod
@@ -87,7 +91,10 @@ class Manager:
     @staticmethod
     def place_modify(place_id):
         try:
-            Place.query.filter_by(id=place_id).update(request.get_json())
+            place_db = Place.query.filter_by(id=place_id)
+            if not place_db[:]:
+                return jsonify({'error': 'El lugar no existe'}), 500
+            place_db.update(request.get_json())
             db.session.commit()
             return jsonify({'success': 'Lugar modificado'}), 200
         except Exception:
@@ -103,7 +110,7 @@ class Manager:
                 return jsonify({'error': 'El tipo ya existe'}), 500
             db.session.add(type_l)
             db.session.commit()
-            return jsonify({'success': 'Tipo '  + str(type_data['name']) + ' creado correctamente'}), 201
+            return jsonify({'success': 'Tipo ' + str(type_data['name']) + ' creado correctamente'}), 201
         except Exception:
             return jsonify({'error': 'Error al crear el tipo'}), 500
 
@@ -120,7 +127,10 @@ class Manager:
     @staticmethod
     def type_modify(type_id):
         try:
-            Type.query.filter_by(id=type_id).update(request.get_json())
+            type_db = Type.query.filter_by(id=type_id)
+            if not type_db[:]:
+                return jsonify({'error': 'El tipo no existe'}), 500
+            type_db.update(request.get_json())
             db.session.commit()
             return jsonify({'success': 'Tipo modificado'}), 200
         except Exception:
