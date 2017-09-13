@@ -38,6 +38,11 @@ class Admin:
                     locker.date = time.strftime("%Y/%m/%d")
                     db.session.commit()
                     return jsonify({'success': 'Taquilla reservada'}), 200
+
+                # TODO el admin debe poder modificar el usuario que ha reservado una taquilla?
+                # En todo caso deberíamos dar un error si se ponen los mismos datos?
+                elif locker_data['status'] == '1' and locker.status == 1:
+                    return jsonify({'error': 'Esta taquilla ya está reservada'}), 500
                 elif locker_data['status'] == '2':
                     locker.status = 2
                     locker.user = locker_data['user']
