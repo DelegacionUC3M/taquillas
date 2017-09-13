@@ -7,11 +7,14 @@ class Manager:
         try:
             locker_data = request.get_json()
             locker = Locker(locker_data['number'], locker_data['type'], locker_data['place'])
+            locker_check = Locker.query.filter_by(number=locker.number, type=locker.type, place=locker.place)
+            if locker_check[:]:
+                return jsonify({'error': 'La taquilla ya existe'}), 500
             db.session.add(locker)
             db.session.commit()
             return jsonify({'success': 'Taquilla ' + str(locker_data['number']) + ' creada correctamente'}), 201
         except Exception:
-            return jsonify({'error': 'Error al crear la taquilla.'}), 500
+            return jsonify({'error': 'Error al crear la taquilla'}), 500
 
     @staticmethod
     def locker_delete(locker_id):
@@ -61,10 +64,14 @@ class Manager:
         try:
             place_data = request.get_json()
             place = Place(place_data['building'], place_data['zone'], place_data['floor'], place_data['school'])
+            place_check = Place.query.filter_by(building=place.building, floor=place.floor, school=place.school, zone=place.zone)
+            if place_check[:]:
+                return jsonify({'error': 'El lugar ya existe'}), 500
             db.session.add(place)
             db.session.commit()
             return jsonify({'success': 'Lugar creado correctamente'}), 201
-        except Exception:
+        except Exception as e:
+            print (e)
             return jsonify({'error': 'Error al crear el lugar'}), 500
 
     @staticmethod
@@ -91,6 +98,9 @@ class Manager:
         try:
             type_data = request.get_json()
             type_l = Type(type_data['name'], type_data['price'])
+            type_check = Type.query.filter_by(name=type_l.name, price=type_l.price)
+            if type_check[:]:
+                return jsonify({'error': 'El tipo ya existe'}), 500
             db.session.add(type_l)
             db.session.commit()
             return jsonify({'success': 'Tipo '  + str(type_data['name']) + ' creado correctamente'}), 201
