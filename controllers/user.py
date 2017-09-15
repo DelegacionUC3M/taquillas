@@ -8,6 +8,8 @@ class User:
             locker_data = request.get_json()
             locker = Locker.query.filter_by(id=locker_id)[0]
 
+            #No está implementado que un usuario no pueda reservar una taquilla ya reservada, lo contemplamos en el front
+            #Lo mismo con que no pueda poner una incidencia y reservar a la vez
             if 'status' in locker_data and 'user' in locker_data:
                 if locker_data['status'] == '1' and locker.status == 0:
                     locker.status = 1

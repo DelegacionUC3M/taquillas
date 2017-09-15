@@ -99,10 +99,16 @@ def admin_locker_id(id):
 
 @app.route('/locker/<int:id>', methods=['PUT'])
 def user_locker_id(id):
-    #TODO comprobar que el usuario está autentucado
+    #TODO comprobar que el usuario está autenticado
     user = User
     if request.method == 'PUT':
         return user.locker_modify(id)
+
+@app.route('/locker', methods=['GET'])
+def public_locker_list():
+    public = Public
+    if request.method == 'GET':
+        return public.lockers_list()
 
 @app.route('/locker/<int:id>', methods=['GET'])
 def public_locker_id(id):

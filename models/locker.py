@@ -34,3 +34,12 @@ class Locker(db.Model):
             'user': self.user,
             'date': self.date
         })
+
+    def publicrepr(self):
+        return str({
+            'id': self.id,
+            'number': self.number,
+            'status': self.status,
+            'type': self.type,
+            'place': self.place,
+        })

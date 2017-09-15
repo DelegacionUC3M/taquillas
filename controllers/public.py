@@ -1,6 +1,21 @@
 class Public:
 
     @staticmethod
+    def lockers_list():
+        params_multidic = request.args.copy()
+        if len(params_multidic) > 0:
+            params_dic = {}
+            for e in params_multidic:
+                params_dic[e] = params_multidic[e]
+            try:
+                query_result = Locker.query.order_by(Locker.place).filter_by(**params_dic).all()
+            except Exception:
+                return jsonify({'error': 'Parámetros no válidos'}), 400
+        else:
+            query_result = Locker.query.all()
+        return jsonify([locker.publicrepr() for locker in query_result])
+
+    @staticmethod
     def locker_list(locker_id):
         try:
             locker_db = Locker.query.filter_by(id=locker_id)[0]

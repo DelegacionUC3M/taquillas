@@ -27,6 +27,7 @@ class Admin:
 
     @staticmethod
     def locker_modify(locker_id):
+        #Hay que controlar en el front que no se pueda modificar la taquilla para poner al mismo user que ya la ha reservado
         try:
             locker_data = request.get_json()
             locker = Locker.query.filter_by(id=locker_id)[0]
