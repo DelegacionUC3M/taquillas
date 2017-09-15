@@ -97,20 +97,20 @@ def admin_locker_id(id):
     elif request.method == 'PUT':
         return admin.locker_modify(id)
 
-@app.route('/taquilla/<int:id>', methods=['PUT'])
+@app.route('/locker/<int:id>', methods=['PUT'])
 def user_locker_id(id):
     #TODO comprobar que el usuario está autentucado
     user = User
     if request.method == 'PUT':
         return user.locker_modify(id)
 
-@app.route('/taquilla/<int:id>', methods=['GET'])
+@app.route('/locker/<int:id>', methods=['GET'])
 def public_locker_id(id):
     public = Public
     if request.method == 'GET':
         return public.locker_list(id)
 
-@app.route('/taquilla/qr/<int:qr>', methods=['GET'])
+@app.route('/locker/qr/<int:qr>', methods=['GET'])
 def public_locker_qr(qr):
     public = Public
     if request.method == 'GET':
