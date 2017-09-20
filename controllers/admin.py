@@ -23,7 +23,7 @@ class Admin:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.all()
-        return jsonify([locker.__repr__() for locker in query_result])
+        return jsonify([locker.__repr__() for locker in query_result]), 200
 
     @staticmethod
     def locker_modify(locker_id):

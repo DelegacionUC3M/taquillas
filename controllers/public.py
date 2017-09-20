@@ -13,7 +13,7 @@ class Public:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.all()
-        return jsonify([locker.publicrepr() for locker in query_result])
+        return jsonify([locker.publicrepr() for locker in query_result]), 200
 
     @staticmethod
     def locker_list(locker_id):
@@ -52,7 +52,7 @@ class Public:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Place.query.all()
-        return jsonify([place.__repr__() for place in query_result])
+        return jsonify([place.__repr__() for place in query_result]), 200
 
     @staticmethod
     def type_list(type_id):
@@ -75,6 +75,6 @@ class Public:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Type.query.all()
-        return jsonify([type.__repr__() for type in query_result])
+        return jsonify([type.__repr__() for type in query_result]), 200
 
 from main import *

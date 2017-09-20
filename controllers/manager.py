@@ -1,8 +1,5 @@
 class Manager:
 
-    # TODO faltan por comprobar muchos errores
-    # TODO falta hacer muchas pruebas
-
     @staticmethod
     def locker_create():
         try:
@@ -62,7 +59,7 @@ class Manager:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.all()
-        return jsonify([locker.__repr__() for locker in query_result])
+        return jsonify([locker.__repr__() for locker in query_result]), 200
 
     @staticmethod
     def place_create():

@@ -29,7 +29,7 @@ class User:
                     db.session.commit()
                     return jsonify({'success': 'Incidencia notificada'}), 200
             else:
-                return jsonify({'error': 'Parametros no validos'}), 500
+                return jsonify({'error': 'Parametros no validos'}), 400
         except Exception:
             return jsonify({'error': 'Error al reservar la taquilla'}), 500
 
