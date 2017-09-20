@@ -4,13 +4,25 @@ class Manager:
     def locker_create():
         try:
             locker_data = request.get_json()
-            locker = Locker(locker_data['number'], locker_data['type'], locker_data['place'])
-            locker_check = Locker.query.filter_by(number=locker.number, type=locker.type, place=locker.place)
-            if locker_check[:]:
-                return jsonify({'error': 'La taquilla ya existe'}), 500
-            db.session.add(locker)
-            db.session.commit()
-            return jsonify({'success': 'Taquilla ' + str(locker_data['number']) + ' creada correctamente'}), 201
+            #Creacion de multiples taquillas del mismo tipo en un mismo lugar, desde un numero de inicio hasta un numero final incluidos
+            #El campo endnumber seria opcional, unicamente si quisieramos crear multiples
+            if 'endnumber' in locker_data:
+                for i in range(int(locker_data['number']), int(locker_data['endnumber'])+1):
+                    locker = Locker(i, locker_data['type'], locker_data['place'])
+                    locker_check = Locker.query.filter_by(number=locker.number, type=locker.type, place=locker.place)
+                    if locker_check[:]:
+                        return jsonify({'error': 'La taquilla ' + str(i) + ' ya existe'}), 500
+                    db.session.add(locker)
+                db.session.commit()
+                return jsonify({'success': 'Conjunto de taquillas creadas correctamente'}), 201
+            else:
+                locker = Locker(locker_data['number'], locker_data['type'], locker_data['place'])
+                locker_check = Locker.query.filter_by(number=locker.number, type=locker.type, place=locker.place)
+                if locker_check[:]:
+                    return jsonify({'error': 'La taquilla ya existe'}), 500
+                db.session.add(locker)
+                db.session.commit()
+                return jsonify({'success': 'Taquilla ' + str(locker_data['number']) + ' creada correctamente'}), 201
         except Exception:
             return jsonify({'error': 'Error al crear la taquilla'}), 500
 
