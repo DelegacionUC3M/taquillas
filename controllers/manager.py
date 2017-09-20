@@ -6,6 +6,7 @@ class Manager:
             locker_data = request.get_json()
             #Creacion de multiples taquillas del mismo tipo en un mismo lugar, desde un numero de inicio hasta un numero final incluidos
             #El campo endnumber seria opcional, unicamente si quisieramos crear multiples
+            #Falta comprobar errores, e.g: si number es 9 y endnumber 7 no debería funcionar
             if 'endnumber' in locker_data:
                 for i in range(int(locker_data['number']), int(locker_data['endnumber'])+1):
                     locker = Locker(i, locker_data['type'], locker_data['place'])
