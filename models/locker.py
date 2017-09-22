@@ -1,6 +1,5 @@
 from .connection import db
 
-
 class Locker(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     number = db.Column(db.Integer, nullable=False)
@@ -41,5 +40,5 @@ class Locker(db.Model):
             'number': self.number,
             'status': self.status,
             'type': self.type,
-            'place': self.place,
+            'place': self.place
         })

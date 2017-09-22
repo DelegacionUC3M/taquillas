@@ -12,6 +12,7 @@ class Admin:
 
     @staticmethod
     def lockers_list():
+        #TODO Una vez listadas las taquillas y entregado el JSON deberíamos ver una forma de pasarlo a PDF
         params_multidic = request.args.copy()
         if len(params_multidic) > 0:
             params_dic = {}
