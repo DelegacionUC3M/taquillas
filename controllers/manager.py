@@ -72,11 +72,11 @@ class Manager:
             for e in params_multidic:
                 params_dic[e] = params_multidic[e]
             try:
-                query_result = Locker.query.order_by(Locker.place).filter_by(**params_dic).all()
+                query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).filter_by(**params_dic).all()
             except Exception:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
-            query_result = Locker.query.all()
+            query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
         return jsonify([locker.__repr__() for locker in query_result]), 200
 
     @staticmethod
