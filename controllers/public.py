@@ -13,7 +13,7 @@ class Public:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
-        return jsonify([locker.__repr__() for locker in query_result]), 200
+        return jsonify([locker.publicrepr() for locker in query_result]), 200
 
     @staticmethod
     def locker_list(locker_id):
