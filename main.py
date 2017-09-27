@@ -1,5 +1,7 @@
-from flask import Flask, request, Response, redirect, url_for, jsonify, render_template
+from flask import Flask, request, Response, redirect, url_for, jsonify, render_template, make_response
 from models.connection import db
+from fpdf import FPDF
+from models.PDF import *
 
 from models.locker import Locker
 from models.place import Place
@@ -32,6 +34,7 @@ def index():
 @app.route('/manager/locker', methods=['GET', 'POST'])
 def manager_locker():
     # TODO comprobar que el usuario está autenticado como manager
+    # TODO al manager le devolvemos un PDF con la lista también o un JSON?
     manager = Manager
     if request.method == 'POST':
         return manager.locker_create()

@@ -12,7 +12,6 @@ class Admin:
 
     @staticmethod
     def lockers_list():
-        #TODO Una vez listadas las taquillas y entregado el JSON deberíamos ver una forma de pasarlo a PDF
         params_multidic = request.args.copy()
         if len(params_multidic) > 0:
             params_dic = {}
@@ -24,7 +23,8 @@ class Admin:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
-        return jsonify([locker.__repr__() for locker in query_result]), 200
+        pdf = PDF.makepdf(query_result)
+        return pdf, 200
 
     @staticmethod
     def locker_modify(locker_id):

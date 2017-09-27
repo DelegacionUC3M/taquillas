@@ -42,3 +42,6 @@ class Locker(db.Model):
             'type': self.type,
             'place': self.place
         })
+
+    def pdfrepr(self):
+        return "-ID: " + str(self.id) + " , " + "Number: " + str(self.number) + " , " + "Status: " + str(self.status) + " , " + "QR: " + str(self.qr) + " , " + "Type: " + str(self.type) + " , " + "Place: " + str(self.place) + " , " + "Inc.: " + str(self.incidence) + " , " + "User: " + str(self.user) + " , " + "Date: " + str(self.date)
