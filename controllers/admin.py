@@ -17,13 +17,15 @@ class Admin:
             params_dic = {}
             for e in params_multidic:
                 params_dic[e] = params_multidic[e]
+                #TODO acabar esto
             try:
                 query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).filter_by(**params_dic).all()
             except Exception:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
-            query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
-        pdf = PDF.makepdf(query_result)
+            query_result = Locker.query.join(Place, Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
+            places = Place.query.join(Locker, Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
+        pdf = PDF.lockerlistpdf(query_result, places)
         return pdf, 200
 
     @staticmethod

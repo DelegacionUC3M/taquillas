@@ -25,3 +25,5 @@ class Place(db.Model):
             'floor': self.floor,
             'school':self.school
         })
+    def pdfrepr(self):
+        return "-Edificio: " + str(self.building) + " , " + "Planta: " + str(self.floor) + " , " + "Zona: " + str(self.zone)

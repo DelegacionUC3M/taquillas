@@ -1,4 +1,5 @@
 from .connection import db
+from .type import *
 
 class Locker(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -43,5 +44,16 @@ class Locker(db.Model):
             'place': self.place
         })
 
-    def pdfrepr(self):
-        return "-ID: " + str(self.id) + " , " + "Number: " + str(self.number) + " , " + "Status: " + str(self.status) + " , " + "QR: " + str(self.qr) + " , " + "Type: " + str(self.type) + " , " + "Place: " + str(self.place) + " , " + "Inc.: " + str(self.incidence) + " , " + "User: " + str(self.user) + " , " + "Date: " + str(self.date)
+    def getStatusFromStatusNumber(self):
+        if self.status == 0:
+            return "libre"
+        elif self.status == 1:
+            return "reservada"
+        else:
+            return "cobrada"
+
+    def getTypeFromTypeNumber(self):
+        if Type.query.join(Locker, self.type == Type.id).first().name == 'Simple':
+            return "simple"
+        else:
+            return "doble"
