@@ -2,7 +2,7 @@ from flask import Flask, request, Response, redirect, url_for, jsonify, render_t
 from models.connection import db
 from fpdf import FPDF
 from models.PDF import *
-
+from baimen.decorators import *
 
 from models.locker import Locker
 from models.place import Place
@@ -32,6 +32,7 @@ db.create_all()
 def index():
     return 'La api de taquillas está levantada'
 
+@authorization_required
 @app.route('/manager/locker', methods=['GET', 'POST'])
 def manager_locker():
     # TODO comprobar que el usuario está autenticado como manager
@@ -41,6 +42,7 @@ def manager_locker():
     elif request.method == 'GET':
         return manager.lockers_list()
 
+@authorization_required
 @app.route('/manager/locker/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def manager_locker_id(id):
     # TODO comprobar que el usuario está autenticado como manager
@@ -52,6 +54,7 @@ def manager_locker_id(id):
     elif request.method == 'PUT':
         return manager.locker_modify(id)
 
+@authorization_required
 @app.route('/manager/place', methods=['POST'])
 def manager_place():
     # TODO comprobar que el usuario está autenticado como manager
@@ -59,6 +62,7 @@ def manager_place():
     if request.method == 'POST':
         return manager.place_create()
 
+@authorization_required
 @app.route('/manager/place/<int:id>', methods=['PUT', 'DELETE'])
 def manager_place_id(id):
     # TODO comprobar que el usuario está autenticado como manager
@@ -68,6 +72,7 @@ def manager_place_id(id):
     elif request.method == 'PUT':
         return manager.place_modify(id)
 
+@authorization_required
 @app.route('/manager/type', methods=['POST'])
 def manager_type():
     # TODO comprobar que el usuario está autenticado como manager
@@ -75,6 +80,7 @@ def manager_type():
     if request.method == 'POST':
         return manager.type_create()
 
+@authorization_required
 @app.route('/manager/type/<int:id>', methods=['PUT', 'DELETE'])
 def manager_type_id(id):
     # TODO comprobar que el usuario está autenticado como manager
@@ -84,6 +90,7 @@ def manager_type_id(id):
     elif request.method == 'PUT':
         return manager.type_modify(id)
 
+@authorization_required
 @app.route('/admin/locker', methods=['GET'])
 def admin_locker():
     # TODO comprobar que el usuario está autenticado como admin
@@ -91,6 +98,7 @@ def admin_locker():
     if request.method == 'GET':
         return admin.lockers_list()
 
+@authorization_required
 @app.route('/admin/locker/<int:id>', methods=['GET', 'PUT'])
 def admin_locker_id(id):
     # TODO comprobar que el usuario está autenticado como admin
@@ -100,6 +108,7 @@ def admin_locker_id(id):
     elif request.method == 'PUT':
         return admin.locker_modify(id)
 
+@authorization_required
 @app.route('/locker/<int:id>', methods=['PUT'])
 def user_locker_id(id):
     #TODO comprobar que el usuario está autenticado
