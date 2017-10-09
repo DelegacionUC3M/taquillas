@@ -32,6 +32,7 @@ db.create_all()
 def index():
     return 'La api de taquillas está levantada'
 
+#TODO ¿que hay que pasarle aqui?
 @authorization_required
 @app.route('/manager/locker', methods=['GET', 'POST'])
 def manager_locker():
