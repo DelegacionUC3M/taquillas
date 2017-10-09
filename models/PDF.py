@@ -32,7 +32,7 @@ class PDF:
                     pdf.cell(60, 10, locker.getTypeFromTypeNumber(), 0, 0)
 
         response = make_response(pdf.output(dest='S').encode('latin-1'))
-        response.headers.set('Content-Disposition', 'attachment', filename="Hello" + '.pdf')
+        response.headers.set('Content-Disposition', 'attachment', filename="Listadotaquillas" + '.pdf')
         response.headers.set('Content-Type', 'application/pdf')
         return response
 
