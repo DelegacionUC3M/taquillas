@@ -17,9 +17,10 @@ class Admin:
             params_dic = {}
             for e in params_multidic:
                 params_dic[e] = params_multidic[e]
-                #TODO acabar esto
             try:
                 query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).filter_by(**params_dic).all()
+                places = Place.query.join(Locker, Locker.place == Place.id).order_by(Place.building, Place.floor,
+                                                                                     Place.zone, Locker.number).all()
             except Exception:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
