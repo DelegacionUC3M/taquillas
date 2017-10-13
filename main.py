@@ -35,9 +35,9 @@ def index():
 
 # TODO hacer pruebas sobre la autorizacion y la comprobacion de rol de usuario
 
+@app.route('/manager/locker', methods=['GET', 'POST'])
 @authorization_required
 @check_role('manager')
-@app.route('/manager/locker', methods=['GET', 'POST'])
 def manager_locker():
     manager = Manager
     if request.method == 'POST':
@@ -46,9 +46,9 @@ def manager_locker():
         return manager.lockers_list()
 
 
+@app.route('/manager/locker/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 @authorization_required
 @check_role('manager')
-@app.route('/manager/locker/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def manager_locker_id(id):
     manager = Manager
     if request.method == 'DELETE':
@@ -59,18 +59,18 @@ def manager_locker_id(id):
         return manager.locker_modify(id)
 
 
+@app.route('/manager/place', methods=['POST'])
 @authorization_required
 @check_role('manager')
-@app.route('/manager/place', methods=['POST'])
 def manager_place():
     manager = Manager
     if request.method == 'POST':
         return manager.place_create()
 
 
+@app.route('/manager/place/<int:id>', methods=['PUT', 'DELETE'])
 @authorization_required
 @check_role('manager')
-@app.route('/manager/place/<int:id>', methods=['PUT', 'DELETE'])
 def manager_place_id(id):
     manager = Manager
     if request.method == 'DELETE':
@@ -79,18 +79,18 @@ def manager_place_id(id):
         return manager.place_modify(id)
 
 
+@app.route('/manager/type', methods=['POST'])
 @authorization_required
 @check_role('manager')
-@app.route('/manager/type', methods=['POST'])
 def manager_type():
     manager = Manager
     if request.method == 'POST':
         return manager.type_create()
 
 
+@app.route('/manager/type/<int:id>', methods=['PUT', 'DELETE'])
 @authorization_required
 @check_role('manager')
-@app.route('/manager/type/<int:id>', methods=['PUT', 'DELETE'])
 def manager_type_id(id):
     manager = Manager
     if request.method == 'DELETE':
@@ -99,18 +99,18 @@ def manager_type_id(id):
         return manager.type_modify(id)
 
 
+@app.route('/admin/locker', methods=['GET'])
 @authorization_required
 @check_role('admin')
-@app.route('/admin/locker', methods=['GET'])
 def admin_locker():
     admin = Admin
     if request.method == 'GET':
         return admin.lockers_list()
 
 
+@app.route('/admin/locker/<int:id>', methods=['GET', 'PUT'])
 @authorization_required
 @check_role('admin')
-@app.route('/admin/locker/<int:id>', methods=['GET', 'PUT'])
 def admin_locker_id(id):
     admin = Admin
     if request.method == 'GET':
@@ -119,8 +119,8 @@ def admin_locker_id(id):
         return admin.locker_modify(id)
 
 
-@authorization_required
 @app.route('/locker/<int:id>', methods=['PUT'])
+@authorization_required
 def user_locker_id(id):
     user = User
     if request.method == 'PUT':
