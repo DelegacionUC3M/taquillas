@@ -61,7 +61,6 @@ class Admin:
                 locker.incidence = locker_data['incidence']
                 db.session.commit()
                 return jsonify({'success': 'Incidencia modificada'}), 200
-            #TODO admin puede cambiar QR?
             elif 'qr' in locker_data:
                 locker.qr = locker_data['qr']
                 db.session.commit()

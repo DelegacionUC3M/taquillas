@@ -14,14 +14,14 @@ class PDF:
             pdf.multi_cell(0, 10, place.pdfrepr(), 0, 1)
             pdf.ln(1)
             pdf.set_x(15)
-            pdf.cell(60, 10, 'Numero', 0, 0)
+            pdf.cell(60, 10, 'Número', 0, 0)
             pdf.cell(10, 10, '', 0, 0)
             pdf.cell(60, 10, 'Estado', 0, 0)
             pdf.cell(10, 10, '', 0, 0)
             pdf.cell(60, 10, 'Tipo', 0, 0)
             pdf.ln(1)
             for locker in query_result:
-                if locker.place == place.id:
+                if locker.place == place.id and locker.getStatusFromStatusNumber() == "libre":
                     pdf.set_font('Arial', '', 10)
                     pdf.ln(5)
                     pdf.set_x(15)
