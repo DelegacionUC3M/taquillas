@@ -52,7 +52,25 @@ class Public:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Place.query.all()
-        return jsonify([place.__repr__() for place in query_result]), 200
+        
+        datosJson = '['
+        bol = 0
+
+        for place in query_result:
+            if bol != 0:
+                datosJson += ','
+            else:
+                bol = 1
+
+            datosJson += json.dumps({"id": place.id, "building": place.building, "zone": place.zone, "floor":place.floor, "school":place.school}, ensure_ascii=False)
+             
+        datosJson = datosJson.replace("}{", ", ")
+        datosJson = datosJson.replace("},,{", "},{")
+        datosJson += ']'
+        datosJson = datosJson.replace("},]", "}]")
+        datosJson = datosJson.replace(",,]", "]")
+        
+        return Response(datosJson, mimetype='application/json'), 200
 
     @staticmethod
     def type_list(type_id):
