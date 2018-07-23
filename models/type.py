@@ -19,7 +19,7 @@ class Type(db.Model):  # hereda del objeto model
 
     def __repr__(self):
         return str({
-            'id': self.id,
+            'id':  self.id,
             'name': self.name,
             'price': self.price
         })

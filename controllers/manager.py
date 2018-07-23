@@ -120,7 +120,7 @@ class Manager:
         try:
             type_data = request.get_json()
             type_l = Type(type_data['name'], type_data['price'])
-            type_check = Type.query.filter_by(name=type_l.name)
+            type_check = Type.query.filter_by(name=type_l.name, price=type_l.price)
             if type_check[:]:
                 return jsonify({'error': 'El tipo ya existe'}), 500
             db.session.add(type_l)

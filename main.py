@@ -25,8 +25,6 @@ app.config.from_pyfile('config.cfg')
 # Enlaza la aplicacion y la base de datos
 db.app = app
 db.init_app(app)
-db.create_all()
-
 
 # Url /
 @app.route('/')
@@ -177,4 +175,4 @@ def public_type_id(id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

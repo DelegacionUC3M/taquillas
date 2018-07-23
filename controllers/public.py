@@ -75,6 +75,24 @@ class Public:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Type.query.all()
-        return jsonify([type.__repr__() for type in query_result]), 200
+
+        datosJson = '['
+        bol = 0
+
+        for type in query_result:
+            if bol != 0:
+                datosJson += ','
+            else:
+                bol = 1
+
+            datosJson += json.dumps({"id": type.id, "price": type.price, "name": type.name}, ensure_ascii=False)
+             
+        datosJson = datosJson.replace("}{", ", ")
+        datosJson = datosJson.replace("},,{", "},{")
+        datosJson += ']'
+        datosJson = datosJson.replace("},]", "}]")
+        datosJson = datosJson.replace(",,]", "]")
+        
+        return Response(datosJson, mimetype='application/json'), 200
 
 from main import *
