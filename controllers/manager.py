@@ -77,7 +77,36 @@ class Manager:
                 return jsonify({'error': 'Parámetros no válidos'}), 400
         else:
             query_result = Locker.query.join(Place).filter(Locker.place == Place.id).order_by(Place.building, Place.floor, Place.zone, Locker.number).all()
-        return jsonify([locker.__repr__() for locker in query_result]), 200
+        
+
+        datosJson = '['
+        bol = 0
+
+        for locker in query_result:
+            if bol != 0:
+                datosJson += ','
+            else:
+                bol = 1
+
+            datosJson += json.dumps({
+                "id": locker.id, 
+                "number": locker.number, 
+                "status": locker.status, 
+                "place": locker.place, 
+                "qr": locker.qr,
+                "type": locker.type,
+                "incidence": locker.incidence,
+                "user": locker.user,
+                "date": locker.date
+            }, ensure_ascii=False)
+             
+        datosJson = datosJson.replace("}{", ", ")
+        datosJson = datosJson.replace("},,{", "},{")
+        datosJson += ']'
+        datosJson = datosJson.replace("},]", "}]")
+        datosJson = datosJson.replace(",,]", "]")
+        
+        return Response(datosJson, mimetype='application/json'), 200
 
     @staticmethod
     def place_create():
